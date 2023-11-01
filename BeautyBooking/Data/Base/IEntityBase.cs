@@ -1,4 +1,4 @@
-﻿namespace eTickets.Data.Base
+﻿namespace BeautyBooking.Data.Base
 {
 	public interface IEntityBase
 	{

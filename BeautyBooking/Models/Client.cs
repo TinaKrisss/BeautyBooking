@@ -1,5 +1,5 @@
-﻿using BeautyBooking.Data.Enums;
-using eTickets.Data.Base;
+﻿using BeautyBooking.Data.Base;
+using BeautyBooking.Data.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 

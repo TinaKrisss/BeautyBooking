@@ -1,4 +1,4 @@
-﻿using eTickets.Data.Base;
+﻿using BeautyBooking.Data.Base;
 using System.ComponentModel.DataAnnotations;
 
 namespace BeautyBooking.Models
