@@ -5,7 +5,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BeautyBooking.Data
 {
-	public class AppDbContext ://IdentityDbContext<ApplicationUser>
+	public class AppDbContext :DbContext
 	{
 		//public AppDbContext()
 		//{

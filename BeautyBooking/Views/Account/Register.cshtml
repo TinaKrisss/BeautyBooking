@@ -1,5 +1,5 @@
 ﻿﻿@using BeautyBooking.Data.ViewModels; 
-@model RegisterVM;
+@model Client;
 
 @{
     ViewData["Title"] = "Реєстрація";
@@ -19,8 +19,8 @@
             <form class="form">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <p class="fieldset avatar">
-                    <label for="avatar">Оберіть фото профілю:</label>
-                    <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
+                    <label asp-for="ProfilePhotoURL" for="avatar">Оберіть фото профілю:</label>
+                    <input asp-for="ProfilePhotoURL" type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
                 </p>
                 <p class="fieldset">
                     <label asp-for="Surname" class="image-replace username" for="signup-surname">Прізвище</label>
@@ -78,10 +78,10 @@
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </p>
                 <p class="fieldset">
-                    <label asp-for="ConfirmPassword" class="image-replace password" for="signup-passwordRepeat">Повторіть пароль</label>
-                    <input asp-for="ConfirmPassword" class="full-width has-padding has-border" id="signup-password" type="password"
+                    <label class="image-replace password" for="signup-passwordRepeat">Повторіть пароль</label>
+                    <input class="full-width has-padding has-border" id="signup-password" type="password"
                            placeholder="Повторіть пароль">
-                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    <span class="text-danger"></span>
                 </p>
 
                 <p class="fieldset">
