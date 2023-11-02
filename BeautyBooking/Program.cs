@@ -10,19 +10,6 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(buil
 
 //Services configuration
 builder.Services.AddScoped<IClientsService, ClientsService>();
-//builder.Services.AddScoped<IProducersService, ProducersService>();
-//builder.Services.AddScoped<ICinemasService, CinemasService>();
-//builder.Services.AddScoped<IMoviesService, MoviesService>();
-
-//Authentication and authorization
-//builder.Services.AddIdentity<ApplicationUser, IdentityRole>();
-//builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddUserStore<AppDbContext>();
-//builder.Services.AddMemoryCache();
-//builder.Services.AddSession();
-//builder.Services.AddAuthentication(options =>
-//{
-//	options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-//});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();

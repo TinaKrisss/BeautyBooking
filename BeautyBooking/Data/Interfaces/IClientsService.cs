@@ -5,6 +5,6 @@ namespace BeautyBooking.Data.Interfaces
 {
     public interface IClientsService : IEntityBaseRepository<Client>
 	{
-        Task<Client> GetByEmail(string email);
+        Task<Client> GetByEmailAsync(string email);
     }
 }

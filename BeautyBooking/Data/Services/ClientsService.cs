@@ -1,8 +1,8 @@
 ﻿using BeautyBooking.Data.Base;
 using BeautyBooking.Data.Interfaces;
 using BeautyBooking.Models;
-using Microsoft.AspNetCore.Cors.Infrastructure;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace BeautyBooking.Data.Services
 {
@@ -15,10 +15,9 @@ namespace BeautyBooking.Data.Services
 			_context = context;
 		}
 
-		public async Task<Client> GetByEmail(string email)
+		public async Task<Client> GetByEmailAsync(string email)
 		{
-			IQueryable<Client> query = _context.Set<Client>();
-			return await query.FirstOrDefaultAsync(c => c.Email.Equals(email));
+			return await _context.Set<Client>().FirstOrDefaultAsync(c => c.Email == email);
 		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using BeautyBooking.Data.Base;
 using BeautyBooking.Data.Enums;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -32,7 +33,7 @@ namespace BeautyBooking.Models
 
 		[Display(Name = "Номер телефону")]
 		[Required(ErrorMessage = "Введіть номер телефону!")]
-		[RegularExpression("^\\+380\\d{10}$", ErrorMessage = "Номер телефону повинен мати 13 символів та починатися з +380")]
+		//[RegularExpression("^\\+380\\d{9}$", ErrorMessage = "Номер телефону повинен мати 13 символів та починатися з +380")]
 		public string PhoneNumber { get; set; }
 
 		[Display(Name = "Ел. пошта")]
@@ -47,6 +48,7 @@ namespace BeautyBooking.Models
 
 		//Relationships
 		//Records
+		[BindNever]
 		public List<Record> Records { get; set; }
 
 	}

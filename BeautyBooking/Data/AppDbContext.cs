@@ -1,7 +1,6 @@
 ﻿using BeautyBooking.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNet.Identity.EntityFramework;
-//using System.Data.Entity;
 
 namespace BeautyBooking.Data
 {

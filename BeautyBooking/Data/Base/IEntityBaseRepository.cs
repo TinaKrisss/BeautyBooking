@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using BeautyBooking.Models;
+using System.Linq.Expressions;
 
 namespace BeautyBooking.Data.Base
 {

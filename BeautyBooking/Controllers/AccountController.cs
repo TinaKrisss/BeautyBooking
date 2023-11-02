@@ -62,12 +62,24 @@ namespace BeautyBooking.Controllers
 		public IActionResult Register() => View(new Client());
 
 		[HttpPost]
-		public async Task<IActionResult> Register(Client client)
+		public async Task<IActionResult> Register([Bind("ProfilePhotoURL,Surname,Name,BirthDate,PhoneNumber,Email,Password")] Client client)
 		{
-			if (!ModelState.IsValid) return View(client);
+			client.ProfilePhotoURL = "test";
+			client.Gender = Data.Enums.Gender.Female;
+			//client.Records = new List<Record>();
+
+			//		var errors = ModelState
+			//.Where(x => x.Value.Errors.Count > 0)
+			//.Select(x => new { x.Key, x.Value.Errors })
+			//.ToArray();
+
+			//		if (!ModelState.IsValid) return View(client);
 
 			//Check if user already exists in db
-			if (_service.GetByEmail(client.Email) != null)
+			//var cl = await _service.GetByEmail(client.Email);
+			var cl = await _service.GetByEmailAsync(client.Email);
+
+			if (cl != null)
 			{
 				TempData["Error"] = "На цю ел. пошту вже було створено обліковий запис!";
 				return View(client);
@@ -79,18 +91,5 @@ namespace BeautyBooking.Controllers
 			}
 			return View("RegisterCompleted");
 		}
-
-		//[HttpPost]
-		//public async Task<IActionResult> Logout()
-		//{
-		//	await _signInManager.SignOutAsync();
-		//	return RedirectToAction("Index", "Movies");
-		//}
-
-		//public IActionResult AccessDenied(string ReturnUrl)
-		//{
-		//	return View();
-		//}
-
 	}
 }
