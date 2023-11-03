@@ -3,6 +3,7 @@ using BeautyBooking.Data.Interfaces;
 using BeautyBooking.Data.Static;
 using BeautyBooking.Data.ViewModels;
 using BeautyBooking.Models;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -24,40 +25,25 @@ namespace BeautyBooking.Controllers
 			_service = service;
 		}
 
-		//public async Task<IActionResult> Users()
-		//{
-		//	var users = await _context.Clients.ToListAsync();
-		//	return View(users);
-		//}
+		public IActionResult SignIn() => View(new SignInVM());
 
+		[HttpPost]
+		public async Task<IActionResult> SignIn(SignInVM signInVM)
+		{
+			if (!ModelState.IsValid) return View(signInVM);
 
-		//public IActionResult Login() => View(new LoginVM());
+			//Check user exists
+			var cl = await _service.GetByEmailAsync(signInVM.Email);
 
-		//[HttpPost]
-		//public async Task<IActionResult> Login(LoginVM loginVM)
-		//{
-		//	if (!ModelState.IsValid) return View(loginVM);
-
-		//	var user = await _userManager.FindByEmailAsync(loginVM.EmailAddress);
-		//	if (user != null)
-		//	{
-		//		var passwordCheck = await _userManager.CheckPasswordAsync(user, loginVM.Password);
-		//		if (passwordCheck)
-		//		{
-		//			var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password, false, false);
-		//			if (result.Succeeded)
-		//			{
-		//				return RedirectToAction("Index", "Movies");
-		//			}
-		//		}
-		//		TempData["Error"] = "Wrong credentials. Please, try again!";
-		//		return View(loginVM);
-		//	}
-
-		//	TempData["Error"] = "Wrong credentials. Please, try again!";
-		//	return View(loginVM);
-		//}
-
+			//If user exists and password is correct
+			if (cl != null && cl.Password.Equals(signInVM.Password))
+			{
+				HttpContext.Session.SetInt32("userId", cl.Id);
+				return RedirectToAction("Index", "Services");
+			}
+			TempData["Error"] = "Неправильна адреса ел. пошти або пароль.";
+			return View(signInVM);
+		}
 
 		public IActionResult Register() => View(new Client());
 
@@ -66,17 +52,8 @@ namespace BeautyBooking.Controllers
 		{
 			client.ProfilePhotoURL = "test";
 			client.Gender = Data.Enums.Gender.Female;
-			//client.Records = new List<Record>();
-
-			//		var errors = ModelState
-			//.Where(x => x.Value.Errors.Count > 0)
-			//.Select(x => new { x.Key, x.Value.Errors })
-			//.ToArray();
-
-			//		if (!ModelState.IsValid) return View(client);
 
 			//Check if user already exists in db
-			//var cl = await _service.GetByEmail(client.Email);
 			var cl = await _service.GetByEmailAsync(client.Email);
 
 			if (cl != null)

@@ -14,7 +14,10 @@ builder.Services.AddScoped<IClientsService, ClientsService>();
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
+builder.Services.AddSession();
+
 var app = builder.Build();
+app.UseSession();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -33,7 +36,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
 	name: "default",
-	pattern: "{controller=Account}/{action=Register}");
+	pattern: "{controller=Account}/{action=SignIn}");
 
 //Seed db
 AppDbInitializer.Seed(app);

@@ -6,8 +6,6 @@ jQuery(document).ready(function ($) {
     $form_modal_tab = $(".switcher"),
     $tab_login = $form_modal_tab.children("li").eq(0).children("a"),
     $tab_signup = $form_modal_tab.children("li").eq(1).children("a"),
-    $forgot_password_link = $form_login.find(".form-bottom-message a"),
-    $back_to_login_link = $form_forgot_password.find(".form-bottom-message a"),
     $main_nav = $(".main-nav");
 
   //open modal
@@ -16,36 +14,7 @@ jQuery(document).ready(function ($) {
   $form_modal.addClass("is-visible");
   //show the selected form
   login_selected();
-  //
-  // $main_nav.on('click', function(event){
-
-  //   if( $(event.target).is($main_nav) ) {
-  //     // on mobile open the submenu
-  //     $($main_nav).children('ul').toggleClass('is-visible');
-  //   } else {
-  //     // on mobile close submenu
-  //     $main_nav.children('ul').removeClass('is-visible');
-  //     //show modal layer
-  //     $form_modal.addClass('is-visible');
-  //     //show the selected form
-  //     ( $(event.target).is('.signup') ) ? signup_selected() : login_selected();
-  //   }
-
-  // });
-
-  //close modal
-  // $(".user-modal").on("click", function (event) {
-  //   if ($(event.target).is($form_modal) || $(event.target).is(".close-form")) {
-  //     $form_modal.removeClass("is-visible");
-  //   }
-  // });
-  //close modal when clicking the esc keyboard button
-  // $(document).keyup(function (event) {
-  //   if (event.which == "27") {
-  //     $form_modal.removeClass("is-visible");
-  //   }
-  // });
-
+ 
   //switch from a tab to another
   $form_modal_tab.on("click", function (event) {
     event.preventDefault();
@@ -65,18 +34,6 @@ jQuery(document).ready(function ($) {
     $password_field.putCursorAtEnd();
   });
 
-  //show forgot-password form
-  $forgot_password_link.on("click", function (event) {
-    event.preventDefault();
-    forgot_password_selected();
-  });
-
-  //back to login from the forgot-password form
-  $back_to_login_link.on("click", function (event) {
-    event.preventDefault();
-    login_selected();
-  });
-
   function login_selected() {
     $form_login.addClass("is-selected");
     $form_signup.removeClass("is-selected");
@@ -93,21 +50,15 @@ jQuery(document).ready(function ($) {
     $tab_signup.addClass("selected");
   }
 
-  function forgot_password_selected() {
-    $form_login.removeClass("is-selected");
-    $form_signup.removeClass("is-selected");
-    $form_forgot_password.addClass("is-selected");
-  }
-
   //REMOVE THIS - it's just to show error messages
-  $form_login.find('input[type="submit"]').on("click", function (event) {
-    event.preventDefault();
-    $form_login
-      .find('input[type="email"]')
-      .toggleClass("has-error")
-      .next("span")
-      .toggleClass("is-visible");
-  });
+  //$form_login.find('input[type="submit"]').on("click", function (event) {
+  //  event.preventDefault();
+  //  $form_login
+  //    .find('input[type="email"]')
+  //    .toggleClass("has-error")
+  //    .next("span")
+  //    .toggleClass("is-visible");
+  //});
   // $form_signup.find('input[type="submit"]').on("click", function (event) {
   //   event.preventDefault();
   //   $form_signup

@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;500&display=swap");
+
+body {
+  background: rgb(25, 96, 69);
+  background: linear-gradient(
+    90deg,
+    rgba(25, 96, 69, 1) 0%,
+    rgba(39, 110, 95, 1) 35%,
+    rgba(66, 137, 144, 1) 100%
+  );
+  padding: 2%;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  background: #e3e4e4;
+}
+
+.profile-button {
+  width: 50%;
+  padding: 10px 0;
+  font-size: 12pt;
+  background: rgb(25, 96, 69);
+  box-shadow: none;
+  border: none;
+}
+
+.profile-button:hover {
+  background: #276e5f;
+  cursor: pointer;
+}
+
+.profile-button:focus {
+  background: #276e5f;
+  box-shadow: none;
+}
+
+.profile-button:active {
+  background: #276e5f;
+  box-shadow: none;
+}
+
+.back:hover {
+  background: #276e5f;
+  cursor: pointer;
+}
+
+.labels {
+  font-size: 16px;
+  margin: 2% 0%;
+}
+
+input {
+  /* font-size: 16px; */
+  margin-bottom: 3%;
+}
+.fieldset-sex {
+  display: flex;
+  flex-direction: row;
+  padding: 1%;
+}
+
+.sex {
+  padding: 1%;
+  font-size: 14pt !important;
+}
+
+.radio-btns {
+  display: flex;
+  align-items: center;
+  margin-right: 100px;
+  margin-bottom: 2%;
+}
+.radio-btns label {
+  font-size: 11pt;
+  margin-left: 8px;
+}
+
+.avatar {
+  margin-top: 5%;
+}
+
+.profile-picture {
+  object-fit: cover;
+}
+.change-pass {
+  font-size: 14pt;
+  margin-bottom: -1.3%;
+}
+
+.btn-change {
+  margin-top: 5%;
+}
+
+@media (max-width: 768px) {
+  .fieldset-sex {
+    flex-direction: column;
+  }
+  .radio-btns {
+    margin-right: 0;
+    margin-bottom: 2%;
+    align-items: baseline;
+  }
+
+  .radio-btns label {
+    font-size: 12pt;
+    margin-left: 2;
+  }
+
+  /* .change-password-block {
+    padding-bottom: 10rem !important;
+  } */
+
+  .btn-save {
+    text-align: center;
+  }
+
+  .container {
+    margin-bottom: 17rem !important;
+  }
+}
