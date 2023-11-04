@@ -1,15 +1,10 @@
-﻿using BeautyBooking.Data.Base;
-using BeautyBooking.Data.Enums;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿using BeautyBooking.Data.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace BeautyBooking.Models
+namespace BeautyBooking.Data.ViewModels
 {
-	public class Client:IEntityBase
-	{
-		[Key]
-		public int Id { get; set; }
-
+    public class EditProfileVM
+    {
 		[Display(Name = "Фото профілю")]
 		public string? ProfilePhotoURL { get; set; }
 
@@ -40,15 +35,13 @@ namespace BeautyBooking.Models
 		[RegularExpression("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$", ErrorMessage = "Адреса ел. пошти має відповідати формату example@gmail.com")]
 		public string Email { get; set; }
 
-		[Display(Name = "Пароль")]
+		[Display(Name = "Старий пароль")]
 		[Required(ErrorMessage = "Введіть пароль!")]
 		[RegularExpression("^(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,}$", ErrorMessage = "Пароль повинен містити щонайменше 8 символів, велику букву, цифру та спеціальний символ.")]
-		public string Password { get; set; }
+		public string OldPassword { get; set; }
 
-		//Relationships
-		//Records
-		[BindNever]
-		public List<Record> Records { get; set; }
-
+		[Display(Name = "Новий пароль")]
+		[RegularExpression("^(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,}$", ErrorMessage = "Пароль повинен містити щонайменше 8 символів, велику букву, цифру та спеціальний символ.")]
+		public string NewPassword { get; set; }
 	}
 }

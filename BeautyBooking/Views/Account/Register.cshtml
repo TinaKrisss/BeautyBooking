@@ -1,4 +1,4 @@
-﻿
+﻿@using BeautyBooking.Data.Enums;
 @model Client;
 
 @{
@@ -43,22 +43,23 @@
                     <label class="sex" for="signup-sex">Стать</label>
                     <div class="fieldset-sex">
                         <div class="radio-btns">
-                            <input asp-for="Gender" type="radio" id="male" name="sex" value="male" />
-                            <label asp-for="Gender" for="male">Чоловік</label>
+                            <input type="radio" id="male" name="gender" value="1" />
+                            <label>Чоловік</label>
                         </div>
                         <div class="radio-btns">
-                            <input asp-for="Gender" type="radio" id="female" name="sex" value="female" />
-                            <label asp-for="Gender" for="female">Жінка</label>
+                            <input type="radio" id="female" name="gender" value="2" />
+                            <label>Жінка</label>
                         </div>
                         <div class="radio-btns">
-                            <input asp-for="Gender" type="radio" id="other" name="sex" value="other" />
-                            <label asp-for="Gender" for="other">Інше</label>
+                            <input type="radio" id="other" name="gender" value="3" />
+                            <label>Інше</label>
                         </div>
+                        <input asp-for="Gender" class="selectedGender" style="display: none;"/>
                     </div>
                 </div>
                 <p class="fieldset">
                     <label asp-for="PhoneNumber" class="image-replace phone" for="signup-phone">Номер телефону</label>
-                    <input asp-for="PhoneNumber" class="full-width has-padding has-border" id="signup-phone" type="phone"
+                    <input asp-for="PhoneNumber" class="full-width has-padding has-border" id="phone" type="phone"
                            placeholder="Номер телефону">
                     <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                 </p>
@@ -99,3 +100,4 @@
 </div>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src="~/js/signIn_page_script.js"></script>
+<script src="~/js/registration_page_script.js"></script>

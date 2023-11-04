@@ -46,31 +46,34 @@ body {
   cursor: pointer;
 }
 
+.editForm{
+    display: contents;
+}
+
 .labels {
-  font-size: 16px;
-  margin: 2% 0%;
+    font-size: 16px;
+    margin: 2% 0%;
 }
 
 input {
-  /* font-size: 16px; */
   margin-bottom: 3%;
 }
 .fieldset-sex {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding: 1%;
 }
 
-.sex {
-  padding: 1%;
-  font-size: 14pt !important;
+.gender {
+    padding: 1%;
+    font-size: 12pt !important;
 }
 
 .radio-btns {
-  display: flex;
-  align-items: center;
-  margin-right: 100px;
-  margin-bottom: 2%;
+    display: flex;
+    align-items: baseline;
+    margin-right: 100px;
+    margin-bottom: 2%;
 }
 .radio-btns label {
   font-size: 11pt;
@@ -92,8 +95,21 @@ input {
 .btn-change {
   margin-top: 5%;
 }
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    color: white;
+}
 
 @media (max-width: 768px) {
+
+  .editForm {
+    display: block;
+  }
+
   .fieldset-sex {
     flex-direction: column;
   }
@@ -107,10 +123,6 @@ input {
     font-size: 12pt;
     margin-left: 2;
   }
-
-  /* .change-password-block {
-    padding-bottom: 10rem !important;
-  } */
 
   .btn-save {
     text-align: center;

@@ -1,7 +1,9 @@
 ﻿using BeautyBooking.Data.Base;
 using BeautyBooking.Data.Interfaces;
+using BeautyBooking.Data.ViewModels;
 using BeautyBooking.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 
 namespace BeautyBooking.Data.Services
@@ -19,5 +21,14 @@ namespace BeautyBooking.Data.Services
 		{
 			return await _context.Set<Client>().FirstOrDefaultAsync(c => c.Email == email);
 		}
+
+		public async Task UpdatePasswordAsync(int id, string newPassword)
+		{
+			var cl = await _context.Set<Client>().FirstOrDefaultAsync(c => c.Id == id);		
+			cl.Password = newPassword;
+
+			await _context.SaveChangesAsync();
+		}
+		
 	}
 }

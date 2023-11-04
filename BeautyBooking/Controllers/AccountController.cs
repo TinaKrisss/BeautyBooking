@@ -1,18 +1,7 @@
-﻿using BeautyBooking.Data;
-using BeautyBooking.Data.Interfaces;
-using BeautyBooking.Data.Static;
+﻿using BeautyBooking.Data.Interfaces;
 using BeautyBooking.Data.ViewModels;
 using BeautyBooking.Models;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNetCore.Cors.Infrastructure;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BeautyBooking.Controllers
 {
@@ -39,7 +28,8 @@ namespace BeautyBooking.Controllers
 			if (cl != null && cl.Password.Equals(signInVM.Password))
 			{
 				HttpContext.Session.SetInt32("userId", cl.Id);
-				return RedirectToAction("Index", "Services");
+				return RedirectToAction("Details", new { id = 1 });
+				//return RedirectToAction("Index", "Services");
 			}
 			TempData["Error"] = "Неправильна адреса ел. пошти або пароль.";
 			return View(signInVM);
@@ -48,10 +38,10 @@ namespace BeautyBooking.Controllers
 		public IActionResult Register() => View(new Client());
 
 		[HttpPost]
-		public async Task<IActionResult> Register([Bind("ProfilePhotoURL,Surname,Name,BirthDate,PhoneNumber,Email,Password")] Client client)
+		public async Task<IActionResult> Register([Bind("ProfilePhotoURL,Surname,Name,BirthDate,Gender,PhoneNumber,Email,Password")] Client client)
 		{
+			//FOR TEST
 			client.ProfilePhotoURL = "test";
-			client.Gender = Data.Enums.Gender.Female;
 
 			//Check if user already exists in db
 			var cl = await _service.GetByEmailAsync(client.Email);
@@ -67,6 +57,61 @@ namespace BeautyBooking.Controllers
 				await _service.AddAsync(client);
 			}
 			return View("RegisterCompleted");
+		}
+
+		//Get: Account/Details/1
+		public async Task<IActionResult> Details(int id)
+		{
+			var clientDetails = await _service.GetByIdAsync(id);
+
+			if (clientDetails == null) return View("NotFound");
+			return View(clientDetails);
+		}
+
+		//Get: Account/Edit/1
+		public async Task<IActionResult> Edit(int id)
+		{
+			var clientDetails = await _service.GetByIdAsync(id);
+			if (clientDetails == null) return View("NotFound");
+			return View(new EditProfileVM { 
+				ProfilePhotoURL = clientDetails.ProfilePhotoURL,
+				Surname = clientDetails.Surname,
+				Name = clientDetails.Name,
+				BirthDate = clientDetails.BirthDate,
+				Gender = clientDetails.Gender,
+				PhoneNumber = clientDetails.PhoneNumber,
+				Email = clientDetails.Email,
+				OldPassword = clientDetails.Password
+			});
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Edit(int id, [Bind("ProfilePhotoURL,Surname,Name,BirthDate,PhoneNumber,Email")] EditProfileVM editProfileVM)
+		{
+			//Gender
+
+			var cl = new Client
+			{
+				Id = id,
+				ProfilePhotoURL = editProfileVM.ProfilePhotoURL,
+				Name = editProfileVM.Name,
+				Surname = editProfileVM.Surname,
+				BirthDate = editProfileVM.BirthDate,
+				Gender = editProfileVM.Gender,
+				PhoneNumber = editProfileVM.PhoneNumber,
+				Email = editProfileVM.Email,
+				Password = editProfileVM.OldPassword
+			};
+
+			await _service.UpdateAsync(id, cl);
+			return RedirectToAction(nameof(Index));
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> ChangePassword(int id, [Bind("OldPassword,NewPassword")] EditProfileVM editProfileVM)
+		{
+			await _service.UpdatePasswordAsync(id, editProfileVM.NewPassword);
+			return View("Edit");
 		}
 	}
 }
