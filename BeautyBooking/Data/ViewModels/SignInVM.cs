@@ -6,11 +6,11 @@ namespace BeautyBooking.Data.ViewModels
 	public class SignInVM
 	{
 		[Display(Name = "Ел. пошта")]
-		[Required(ErrorMessage = "Введіть електронну пошту!")]
+		[Required(ErrorMessage = "Не знайдено облікового запису з цією ел. поштою.")]
 		public string Email { get; set; }
 
 		[Display(Name = "Пароль")]
-		[Required(ErrorMessage = "Введіть пароль!")]
+		[Required(ErrorMessage = "Неправильний пароль.")]
 		[DataType(DataType.Password)]
 		public string Password { get; set; }
 	}

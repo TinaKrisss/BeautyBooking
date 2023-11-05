@@ -24,7 +24,7 @@
                     <label asp-for="Email" class="image-replace email" for="signin-email">Ел. пошта</label>
                     <input asp-for="Email" class="full-width has-padding has-border" id="signin-email" type="email"
                            placeholder="Ел. пошта">
-                    <span class="error-message">Не знайдено облікового запису з цією ел. поштою</span>
+                    <span asp-validation-for="Email" class="text-danger"></span>
                 </p>
 
                 <p class="fieldset">
@@ -32,7 +32,7 @@
                     <input asp-for="Password" class="full-width has-padding has-border" id="signin-password" type="password"
                            placeholder="Пароль">
                     <a href="#0" class="hide-password">Показати</a>
-                    <span asp-validation-for="Password" class="error-message">Неправильний пароль</span>
+                    <span asp-validation-for="Password" class="text-danger"></span>
                 </p>
 
                 <p class="fieldset">
@@ -46,5 +46,5 @@
     </div>
 </div>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src="./js/signIn_page_script.js"></script>
+<script src="~/js/signIn_page_script.js"></script>
 

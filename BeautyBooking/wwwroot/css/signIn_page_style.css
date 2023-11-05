@@ -247,7 +247,7 @@ body {
   border-radius: 0.25em;
   /* prevent click and touch events */
   pointer-events: none;
-  visibility: hidden;
+  visibility: visible;
   opacity: 0;
   -webkit-transition: opacity 0.2s 0, visibility 0 0.2s;
   transition: opacity 0.2s 0, visibility 0 0.2s;

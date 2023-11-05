@@ -36,7 +36,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
 	name: "default",
-	pattern: "{controller=Account}/{action=Register}");
+	pattern: "{controller=Account}/{action=SignIn}");
 
 //Seed db
 AppDbInitializer.Seed(app);

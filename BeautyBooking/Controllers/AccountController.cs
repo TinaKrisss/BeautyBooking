@@ -28,35 +28,52 @@ namespace BeautyBooking.Controllers
 			if (cl != null && cl.Password.Equals(signInVM.Password))
 			{
 				HttpContext.Session.SetInt32("userId", cl.Id);
-				return RedirectToAction("Details", new { id = 1 });
+				return RedirectToAction("Details", new { id = cl.Id });
 				//return RedirectToAction("Index", "Services");
 			}
-			TempData["Error"] = "Неправильна адреса ел. пошти або пароль.";
+			ModelState.AddModelError("Password", "Неправильна адреса ел. пошти або пароль.");
 			return View(signInVM);
 		}
 
-		public IActionResult Register() => View(new Client());
+		public IActionResult Register() => View(new RegisterVM());
 
 		[HttpPost]
-		public async Task<IActionResult> Register([Bind("ProfilePhotoURL,Surname,Name,BirthDate,Gender,PhoneNumber,Email,Password")] Client client)
+		public async Task<IActionResult> Register([Bind("ProfilePhotoURL,Surname,Name,BirthDate,Gender,PhoneNumber,Email,Password,ConfirmPassword")] RegisterVM registerVM)
 		{
 			//FOR TEST
-			client.ProfilePhotoURL = "test";
+			registerVM.ProfilePhotoURL = "test";
+
+			if (!ModelState.IsValid)
+			{
+				return View("Register");
+			}
 
 			//Check if user already exists in db
-			var cl = await _service.GetByEmailAsync(client.Email);
+			var cl = await _service.GetByEmailAsync(registerVM.Email);
 
 			if (cl != null)
 			{
-				TempData["Error"] = "На цю ел. пошту вже було створено обліковий запис!";
-				return View(client);
+				ModelState.AddModelError("Email", "На цю ел. пошту вже було створено обліковий запис.");
+				return View(registerVM);
 			}
 			else
 			{
 				//Add new user
-				await _service.AddAsync(client);
+				var newClient = new Client
+				{ 
+					ProfilePhotoURL = registerVM.ProfilePhotoURL,
+					Surname = registerVM.Surname,
+					Name = registerVM.Name,
+					BirthDate = registerVM.BirthDate,
+					Gender = registerVM.Gender,
+					PhoneNumber = registerVM.PhoneNumber,
+					Email = registerVM.Email,
+					Password = registerVM.Password
+				};
+
+				await _service.AddAsync(newClient);
 			}
-			return View("RegisterCompleted");
+			return RedirectToAction("SignIn");
 		}
 
 		//Get: Account/Details/1
@@ -73,7 +90,8 @@ namespace BeautyBooking.Controllers
 		{
 			var clientDetails = await _service.GetByIdAsync(id);
 			if (clientDetails == null) return View("NotFound");
-			return View(new EditProfileVM { 
+			return View(new EditProfileVM {
+				Id = clientDetails.Id,
 				ProfilePhotoURL = clientDetails.ProfilePhotoURL,
 				Surname = clientDetails.Surname,
 				Name = clientDetails.Name,
@@ -86,10 +104,8 @@ namespace BeautyBooking.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Edit(int id, [Bind("ProfilePhotoURL,Surname,Name,BirthDate,PhoneNumber,Email")] EditProfileVM editProfileVM)
+		public async Task<IActionResult> Edit(int id, [Bind("Id,ProfilePhotoURL,Surname,Name,BirthDate,Gender,PhoneNumber,Email,OldPassword")] EditProfileVM editProfileVM)
 		{
-			//Gender
-
 			var cl = new Client
 			{
 				Id = id,
@@ -104,14 +120,14 @@ namespace BeautyBooking.Controllers
 			};
 
 			await _service.UpdateAsync(id, cl);
-			return RedirectToAction(nameof(Index));
+			return RedirectToAction("Details", new {id});
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> ChangePassword(int id, [Bind("OldPassword,NewPassword")] EditProfileVM editProfileVM)
+		public async Task<IActionResult> ChangePassword(int id, [Bind("Id,OldPassword,NewPassword")] EditProfileVM editProfileVM)
 		{
 			await _service.UpdatePasswordAsync(id, editProfileVM.NewPassword);
-			return View("Edit");
+			return RedirectToAction("Edit", new { id });
 		}
 	}
 }

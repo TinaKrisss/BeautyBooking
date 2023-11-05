@@ -3,10 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BeautyBooking.Data.ViewModels
 {
-    public class EditProfileVM
+    public class RegisterVM
     {
-		public int Id { get; set; }
-
 		[Display(Name = "Фото профілю")]
 		public string? ProfilePhotoURL { get; set; }
 
@@ -37,13 +35,15 @@ namespace BeautyBooking.Data.ViewModels
 		[RegularExpression("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$", ErrorMessage = "Адреса ел. пошти має відповідати формату example@gmail.com")]
 		public string Email { get; set; }
 
-		[Display(Name = "Старий пароль")]
+		[Display(Name = "Пароль")]
 		[Required(ErrorMessage = "Введіть пароль!")]
 		[RegularExpression("^(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,}$", ErrorMessage = "Пароль повинен містити щонайменше 8 символів, велику букву, цифру та спеціальний символ.")]
-		public string OldPassword { get; set; }
+		public string Password { get; set; }
 
-		[Display(Name = "Новий пароль")]
+		[Display(Name = "Повторіть пароль")]
+		[Required(ErrorMessage = "Введіть пароль!")]
 		[RegularExpression("^(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,}$", ErrorMessage = "Пароль повинен містити щонайменше 8 символів, велику букву, цифру та спеціальний символ.")]
-		public string NewPassword { get; set; }
+		[Compare("Password", ErrorMessage = "Пароль та підтвердження паролю не співпадають.")]
+		public string ConfirmPassword { get; set; }
 	}
 }
