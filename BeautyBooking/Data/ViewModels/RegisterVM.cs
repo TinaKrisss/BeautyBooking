@@ -27,7 +27,7 @@ namespace BeautyBooking.Data.ViewModels
 
 		[Display(Name = "Номер телефону")]
 		[Required(ErrorMessage = "Введіть номер телефону!")]
-		[RegularExpression("^\\+380\\d{9}$", ErrorMessage = "Номер телефону повинен мати 13 символів та починатися з +380")]
+		[RegularExpression("^\\+380 \\(\\d{2}\\) \\d{3} \\d{4}$", ErrorMessage = "Номер телефону повинен мати 13 цифр та починатися з +380")]
 		public string PhoneNumber { get; set; }
 
 		[Display(Name = "Ел. пошта")]
@@ -41,8 +41,7 @@ namespace BeautyBooking.Data.ViewModels
 		public string Password { get; set; }
 
 		[Display(Name = "Повторіть пароль")]
-		[Required(ErrorMessage = "Введіть пароль!")]
-		[RegularExpression("^(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,}$", ErrorMessage = "Пароль повинен містити щонайменше 8 символів, велику букву, цифру та спеціальний символ.")]
+		[Required(ErrorMessage = "Повторіть пароль!")]
 		[Compare("Password", ErrorMessage = "Пароль та підтвердження паролю не співпадають.")]
 		public string ConfirmPassword { get; set; }
 	}
