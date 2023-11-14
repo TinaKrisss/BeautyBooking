@@ -1,4 +1,5 @@
 ﻿using BeautyBooking.Data.Interfaces;
+using BeautyBooking.Data.Static;
 using BeautyBooking.Data.ViewModels;
 using BeautyBooking.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +21,8 @@ namespace BeautyBooking.Controllers
 		public async Task<IActionResult> SignIn(SignInVM signInVM)
 		{
 			if (!ModelState.IsValid) return View(signInVM);
+
+			if (signInVM.Email.Equals(AdminData.Username) && signInVM.Password.Equals(AdminData.Password)) return View("Error");
 
 			//Check user exists
 			var cl = await _service.GetByEmailAsync(signInVM.Email);

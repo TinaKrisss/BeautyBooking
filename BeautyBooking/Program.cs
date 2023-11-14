@@ -2,6 +2,7 @@ using BeautyBooking.Data;
 using Microsoft.EntityFrameworkCore;
 using BeautyBooking.Data.Interfaces;
 using BeautyBooking.Data.Services;
+using BeautyBooking.Data.Static;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,5 +41,7 @@ app.MapControllerRoute(
 
 //Seed db
 AppDbInitializer.Seed(app);
+AdminData.Username = builder.Configuration["Admin:Username"];
+AdminData.Password = builder.Configuration["Admin:Password"];
 
 app.Run();
