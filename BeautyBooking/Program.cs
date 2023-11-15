@@ -13,7 +13,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(buil
 //Services configuration
 builder.Services.AddScoped<IClientsService, ClientsService>();
 builder.Services.AddScoped<IServicesService, ServicesService>();
-
+builder.Services.AddScoped<IMastersService, MastersService>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();//.AddRazorRuntimeCompilation();
 
