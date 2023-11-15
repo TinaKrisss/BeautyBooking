@@ -20,5 +20,12 @@ namespace BeautyBooking.Controllers
             var data = await _service.GetAllAsync();
             return View(data);
         }
+        public async Task<IActionResult> Details(int id)
+        {
+            var masterDetails = await _service.GetByIdAsync(id);
+
+            if (masterDetails == null) return View("NotFound");
+            return View(masterDetails);
+        }
     }
 }
