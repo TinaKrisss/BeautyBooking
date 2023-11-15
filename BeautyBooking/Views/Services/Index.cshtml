@@ -1,1 +1,62 @@
-﻿SERVICES
+﻿@model IEnumerable<Service>
+
+@{
+    ViewData["Title"] = "Наші послуги";
+}
+<link rel="stylesheet" href="~/css/services_page_styles.css">
+
+<section class="header">
+    <div style="padding: 1% 5%">
+        <a href="/" class="header-text" style="font-size: 24pt; color: white; text-decoration: none;">
+            <span class="icon-g-bar-logo" width="130px">BeautyBooking</span>
+        </a>
+    </div>
+</section>
+
+<section class="content pt70">
+        <div class="error-message center-align" style="display: none;"></div>
+
+        <form action="" id="services_form" method="get" class="choose-item" data-gtm-form-interact-id="0">
+
+            <input type="hidden" name="_token" value="UL8fVEcsiRUHLth4qpTxJfTc2wGjZ1D9543c92Jj">
+
+            <div class="clear-both"></div>
+            <input type="hidden" name="category_names[2494]" value="NAILS">
+
+            <span class="title center-align FuturaDemiC header-titile">Наші послуги</span>
+<div class="group-type">
+    @foreach (var item in Model)
+    {
+         <div class="label-wrapper">
+            <input type="checkbox" name="durations[2494][24939]" value="60" class="service-duration hide">
+            <label class="service-item" data-top="0">
+                <input type="checkbox" data-is-package="0" data-id="24939" name="services[24939]"
+                   class="service-checkbox hide">
+            <table class="select-type" style="margin-bottom: 40px;">
+                <tbody>
+                    <tr>
+                        <td class="type-title CeraCYBold">@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td class="style-default CeraCYLight">
+                            <input disabled="" type="hidden" name="duration" value="">
+                            @Html.DisplayFor(modelItem => item.Duration) хв.
+                        </td>
+                        <td class="style-default CeraCYLight">
+                            <div class="price-wrapper">
+                                <span class="price" style="padding-right: 0">@Html.DisplayFor(modelItem => item.Price)</span> грн
+                            </div>
+                        </td>
+                        <td>
+                           <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id">Деталі</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </label>
+         </div>
+    }
+</div>
+</form>
+</section>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src="~/js/services_page_script.js"></script>

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using BeautyBooking.Data.Interfaces;
 using BeautyBooking.Data.Services;
 using BeautyBooking.Data.Static;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,9 +12,10 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(buil
 
 //Services configuration
 builder.Services.AddScoped<IClientsService, ClientsService>();
+builder.Services.AddScoped<IServicesService, ServicesService>();
 
 // Add services to the container.
-builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+builder.Services.AddControllersWithViews();//.AddRazorRuntimeCompilation();
 
 builder.Services.AddSession();
 
@@ -37,7 +39,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
 	name: "default",
-	pattern: "{controller=Account}/{action=SignIn}");
+	pattern: "{controller=Services}/{action=Index}");
 
 //Seed db
 AppDbInitializer.Seed(app);
