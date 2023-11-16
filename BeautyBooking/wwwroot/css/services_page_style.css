@@ -202,14 +202,19 @@ textarea::placeholder {
 /*header style*/
 
 .header {
-  background: #f19fc1;
-  height: 70px;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 99999;
+    background: #175248;
+    height: 70px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999;
 }
+
+.header div {
+    padding: 1% 5%
+}
+
 .pt70 {
   padding-top: 70px;
 }
@@ -2055,9 +2060,7 @@ body {
 section {
   display: block;
 }
-.header {
-  background-color: #175248;
-}
+
 video {
   display: inline-block;
   vertical-align: baseline;

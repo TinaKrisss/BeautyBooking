@@ -9,7 +9,7 @@ namespace BeautyBooking.Models
 		[Key]
 		public int Id { get; set; }
 
-		[Display(Name = "Фото профілю")]
+		[Display(Name = "Фото профіля")]
 		public string? ProfilePhotoURL { get; set; }
 
 		[Display(Name = "Прізвище")]

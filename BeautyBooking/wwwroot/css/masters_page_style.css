@@ -1,0 +1,142 @@
+﻿@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;500&display=swap");
+
+*,
+*:after,
+*:before {
+	box-sizing: border-box;
+	font-family: "Nunito", sans-serif;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	color: #0b0b0b;
+}
+
+
+/*header style*/
+
+.header {
+	background: #175248;
+	height: 70px;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 99999;
+}
+
+.header div {
+	padding: 1% 5%
+}
+
+.pt70 {
+	padding-top: 70px;
+}
+
+.header h1 {
+	font-size: 16px;
+	letter-spacing: 0.89px;
+	color: #fff;
+	text-transform: uppercase;
+	line-height: 70px;
+}
+
+.header .back-button {
+	transform: rotate(-45deg);
+	position: absolute;
+	left: 18px;
+	top: 0;
+	bottom: 0;
+	cursor: pointer;
+	margin: auto;
+	width: 12px;
+	height: 12px;
+	border-top: 2px solid #fff;
+	border-left: 2px solid #fff;
+}
+
+.header .close-button {
+	opacity: 1;
+	position: absolute;
+	right: 18px;
+	top: 0;
+	bottom: 0;
+	cursor: pointer;
+	margin: auto;
+	width: 16px;
+	height: 16px;
+}
+
+	.header .close-button:before,
+	.header .close-button:after {
+		opacity: 1;
+		content: "";
+		width: 16px;
+		height: 2px;
+		position: absolute;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		margin: auto;
+		background: #fff;
+	}
+
+	.header .close-button:before {
+		transform: rotate(-45deg);
+	}
+
+	.header .close-button:after {
+		transform: rotate(45deg);
+	}
+/*header style*/
+
+.row
+{
+	margin-top: 10%;
+}
+
+.button {
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+.text {
+	margin-top: 10%;
+	text-align: center !important;
+}
+
+.row {
+	text-align: left;
+}
+
+.btn-show-all {
+	width: 70%;
+	padding: 2%;
+	font-size: 14pt;
+	margin-top: 7%;
+	background-color: #175248;
+	color: #ffffff !important;
+}
+
+.btn-outline-info,
+.btn-show-all {
+	border-color: #175248;
+	color: #000000;
+}
+
+	.btn-outline-info:hover,
+	.btn-outline-info:active,
+	.btn-show-all:hover,
+	.btn-show-all:active {
+		background-color: #175248;
+		border-color: #175248;
+		color: #ffffff;
+	}
+
+.form-group:last-child {
+	text-align: center;
+}

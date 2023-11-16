@@ -17,7 +17,7 @@ namespace BeautyBooking.Models
 		[StringLength(500, MinimumLength = 1, ErrorMessage = "Текст опису не має перевищувати 500 символів!")]
 		public string? Description { get; set; }
 
-		[Display(Name = "Тривалість")]
+		[Display(Name = "Тривалість, хв.")]
 		[Required(ErrorMessage = "Введіть тривалість процедури!")]
 		public int Duration { get; set; }
 
