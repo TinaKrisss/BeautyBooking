@@ -25,15 +25,40 @@ body {
   text-decoration: none;
 }
 
-.btn-outline-info {
+.text {
+    margin-top: 10%;
+    text-align: center !important;
+}
+
+.row {
+    text-align: left;
+}
+
+.btn-show-all {
+    width: 70%;
+    padding: 2%;
+    font-size: 14pt;
+    margin-top: 7%;
+    background-color: #175248;
+    color: #ffffff !important;
+}
+
+.btn-outline-info,
+.btn-show-all {
     border-color: #175248;
 }
 
-.btn-outline-info:hover,
-.btn-outline-info:active {
-    background-color: #175248;
-    border-color: #175248;
-    color: white;
+    .btn-outline-info:hover,
+    .btn-outline-info:active,
+    .btn-show-all:hover,
+    .btn-show-all:active {
+        background-color: #175248;
+        border-color: #175248;
+        color: white;
+    }
+
+.form-group:last-child {
+    text-align: center;
 }
 
 .hide {
