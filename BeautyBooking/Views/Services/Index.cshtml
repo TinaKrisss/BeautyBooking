@@ -45,8 +45,9 @@
                                 <span class="price" style="padding-right: 0">@Html.DisplayFor(modelItem => item.Price)</span> грн
                             </div>
                         </td>
-                        <td>
+                        <td class="service-actions-btns">
                            <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id">Деталі</a>
+                           <a class="btn btn-outline-info mt-2" asp-action="Delete" asp-route-id="@item.Id">Видалити</a>
                         </td>
                     </tr>
                 </tbody>

@@ -34,14 +34,23 @@ body {
     text-align: left;
 }
 
-.btn-show-all {
-    width: 70%;
-    padding: 2%;
-    font-size: 14pt;
-    margin-top: 7%;
-    background-color: #175248;
-    color: #ffffff !important;
+.service-actions-btns
+{
+    text-align: center;
 }
+    .service-actions-btns a
+    {
+        width: 60%;
+    }
+
+    .btn-show-all {
+        width: 70%;
+        padding: 2%;
+        font-size: 14pt;
+        margin-top: 7%;
+        background-color: #175248;
+        color: #ffffff !important;
+    }
 
 .btn-outline-info,
 .btn-show-all {
@@ -277,9 +286,22 @@ textarea::placeholder {
 
 /*header style*/
 
+.delete-btns form
+{
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+.delete-btns a,
+.delete-btns input
+{
+    width: 30%;
+}
+
 /*content default style*/
 .content {
-  background: #fff;
+    background: #fff;
 }
 
 .form-user {
@@ -990,7 +1012,7 @@ textarea::placeholder {
 }
 
 .choose-item .group-type {
-  width: 650px;
+  width: 800px;
   margin: auto;
 }
 
