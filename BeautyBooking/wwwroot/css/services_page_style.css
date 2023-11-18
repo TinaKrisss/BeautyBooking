@@ -70,6 +70,25 @@ body {
     text-align: center;
 }
 
+.service-actions-btns {
+    text-align: center;
+}
+
+    .service-actions-btns a {
+        width: 60%;
+    }
+
+.delete-btns form {
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+.delete-btns a,
+.delete-btns input {
+    width: 30%;
+}
+
 .hide {
     display: none;
 }
