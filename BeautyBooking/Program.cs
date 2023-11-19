@@ -14,6 +14,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(buil
 builder.Services.AddScoped<IClientsService, ClientsService>();
 builder.Services.AddScoped<IServicesService, ServicesService>();
 builder.Services.AddScoped<IMastersService, MastersService>();
+builder.Services.AddScoped<IPasswordCreator, PasswordCreator>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();//.AddRazorRuntimeCompilation();
 

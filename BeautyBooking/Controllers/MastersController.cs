@@ -10,10 +10,12 @@ namespace BeautyBooking.Controllers
     public class MastersController : Controller
     {
         private readonly IMastersService _service;
+		private readonly IPasswordCreator _creator;
 
-        public MastersController(IMastersService service)
+        public MastersController(IMastersService service, IPasswordCreator creator)
         {
             _service = service;
+            _creator = creator;
         }
 
         public async Task<IActionResult> Index()
@@ -68,7 +70,7 @@ namespace BeautyBooking.Controllers
 				Surname = masterCreateVM.Surname,
 				Info = masterCreateVM.Info,
 				Email = masterCreateVM.Email,
-				Password = "",
+				Password = await _creator.CreatePassword(),
 			};
 			try
 			{
