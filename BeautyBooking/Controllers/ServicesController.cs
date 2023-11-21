@@ -70,6 +70,37 @@ namespace BeautyBooking.Controllers
 			return View(serviceDetails);
 		}
 
+		//Get: Service/Edit/1
+		public async Task<IActionResult> Edit(int id)
+		{
+			var serviceDetails = await _service.GetByIdAsync(id);
+			if (serviceDetails == null) return View("NotFound");
+			return View(new EditServiceVM
+			{
+				Id = serviceDetails.Id,
+				Name = serviceDetails.Name,
+				Description = serviceDetails.Description,
+				Duration = serviceDetails.Duration,
+				Price = serviceDetails.Price,
+			});
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Edit(int id, EditServiceVM editServiceVM)
+		{
+			var serv = new Service
+			{
+				Id = editServiceVM.Id,
+				Name = editServiceVM.Name,
+				Description = editServiceVM.Description,
+				Duration = editServiceVM.Duration,
+				Price = editServiceVM.Price,
+			};
+
+			await _service.UpdateAsync(id, serv);
+			return RedirectToAction("Details", new { id });
+		}
+
 		public async Task<IActionResult> Delete(int id)
 		{
 			var serviceDetails = await _service.GetByIdAsync(id);

@@ -40,7 +40,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
 	name: "default",
-	pattern: "{controller=Masters}/{action=Index}");
+	pattern: "{controller=Services}/{action=Index}");
 
 //Seed db
 AppDbInitializer.Seed(app);
