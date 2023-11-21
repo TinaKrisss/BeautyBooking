@@ -41,7 +41,8 @@
                     <input asp-for="Price" class="form-control" value="@Model.Price грн" readonly />
                     <span asp-validation-for="Price" class="text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group details-btns">
+                    <a class="btn btn-outline-info btn-edit" asp-action="Edit" asp-route-id="@Model.Id">Редагувати</a>
                     <a class="btn btn-outline-secondary btn-show-all" asp-action="Index">Всі послуги</a>
                 </div>
             </div>

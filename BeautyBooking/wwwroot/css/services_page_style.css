@@ -44,10 +44,7 @@ body {
     }
 
     .btn-show-all {
-        width: 70%;
-        padding: 2%;
-        font-size: 14pt;
-        margin-top: 7%;
+        margin-top: 3%;
         background-color: #175248;
         color: #ffffff !important;
     }
@@ -335,6 +332,13 @@ textarea::placeholder {
         
     background-color: #175248;
     color: #fff;
+}
+
+/*details-btns*/
+.details-btns
+{
+    display: flex;
+    flex-direction: column;
 }
 
 /*content default style*/
