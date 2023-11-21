@@ -115,7 +115,7 @@ body {
 .btn-show-all {
     width: 50%;
     font-size: 14pt;
-    margin-top: 7%;
+    margin-top: 5%;
     background-color: #175248;
     color: #ffffff !important;
 }
@@ -142,9 +142,6 @@ body {
         border-color: none;
     }
 
-.form-group:last-child {
-    text-align: center;
-}
 
 .master-info {
     width: 75%;
@@ -165,4 +162,10 @@ body {
 .add-btn {
     width: 40%;
     font-family: "Nunito", sans-serif;
+}
+
+/*details btns*/
+.btns-container
+{
+    text-align: center;
 }
