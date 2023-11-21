@@ -1,0 +1,57 @@
+﻿@using BeautyBooking.Data.ViewModels
+
+@model CreateServiceVM
+
+@{
+    ViewData["Title"] = "Редагування послуги";
+}
+
+<link rel="stylesheet" href="~/css/services_page_style.css">
+
+<section class="header">
+    <div style="padding: 1% 5%">
+        <a href="/" class="header-text" style="font-size: 24pt; color: white; text-decoration: none;">
+            <span class="icon-g-bar-logo" width="130px">BeautyBooking</span>
+        </a>
+    </div>
+</section>
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1 details-header>Редагування послуги</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" value="@Model.Name" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" value="@Model.Description" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Duration" class="control-label"></label>
+                        <input asp-for="Duration" class="form-control" value="@Model.Duration" />
+                        <span asp-validation-for="Duration" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Price" class="control-label"></label>
+                        <input asp-for="Price" class="form-control" value="@Model.Price грн" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                    <div class="form-group add-btns">                    
+                        <a class="btn btn-outline-info" asp-action="Index">Скасувати</a>
+                        <input type="submit" value="Зберегти" class="btn btn-add float-right" />                       
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
