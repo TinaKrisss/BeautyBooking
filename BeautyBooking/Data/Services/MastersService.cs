@@ -1,6 +1,7 @@
 ﻿using BeautyBooking.Data.Base;
 using BeautyBooking.Data.Interfaces;
 using BeautyBooking.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BeautyBooking.Data.Services
 {
@@ -12,5 +13,9 @@ namespace BeautyBooking.Data.Services
 		{
 			_context = context;
 		}
-    }
+		public async Task<Master> GetByEmailAsync(string email)
+		{
+			return await _context.Set<Master>().FirstOrDefaultAsync(c => c.Email == email);
+		}
+	}
 }

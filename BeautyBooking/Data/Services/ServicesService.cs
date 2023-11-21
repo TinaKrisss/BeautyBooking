@@ -1,6 +1,7 @@
 ﻿using BeautyBooking.Data.Base;
 using BeautyBooking.Data.Interfaces;
 using BeautyBooking.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BeautyBooking.Data.Services
 {
@@ -12,5 +13,9 @@ namespace BeautyBooking.Data.Services
 		{
 			_context = context;
 		}
-    }
+		public async Task<Service> GetByNameAsync(string name)
+		{
+			return await _context.Set<Service>().FirstOrDefaultAsync(s => s.Name == name);
+		}
+	}
 }
