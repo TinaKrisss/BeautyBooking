@@ -48,6 +48,12 @@ namespace BeautyBooking.Controllers
 			return RedirectToAction(nameof(Index));
 		}
 
+		//Get: Masters/Create
+		public IActionResult Create()
+		{
+			return View();
+		}
+
 		[HttpPost]
 		public async Task<IActionResult> Create(CreateMasterVM masterCreateVM)
 		{

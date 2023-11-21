@@ -120,6 +120,10 @@ body {
     color: #ffffff !important;
 }
 
+.btn-outline-info {
+    width: 100%;
+}
+
 .btn-outline-info,
 .btn-show-all {
     border-color: #175248;
@@ -144,4 +148,21 @@ body {
 
 .master-info {
     width: 75%;
+}
+
+/*add btns*/
+.add-btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.cancel-btn {
+    width: 40%;
+    padding-top: 2.3%;
+}
+
+.add-btn {
+    width: 40%;
+    font-family: "Nunito", sans-serif;
 }

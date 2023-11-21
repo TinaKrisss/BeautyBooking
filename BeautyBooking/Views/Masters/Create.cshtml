@@ -1,0 +1,75 @@
+﻿@using BeautyBooking.Data.ViewModels;
+
+@model CreateMasterVM;
+
+@{
+    ViewData["Title"] = "Додавання майстра";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css'>
+<link rel="stylesheet" type="text/css" href="~/css/registration_page_style.css">
+<link rel="stylesheet" type="text/css" href="~/css/masters_page_style.css">
+
+<section class="header">
+    <div style="padding: 1% 5%">
+        <a href="/" class="header-text" style="font-size: 24pt; color: white; text-decoration: none;">
+            <span class="icon-g-bar-logo" width="130px">BeautyBooking</span>
+        </a>
+    </div>
+</section>
+
+<div class="user-modal is-visible">
+    <div class="user-modal-container">
+        <ul class="switcher">
+            <li><a href="#0">Додавання майстра</a></li>
+        </ul>
+
+        <div id="signup">
+            <form class="form" asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <p class="fieldset avatar">
+                    <label asp-for="ProfilePhotoURL" for="avatar">Оберіть фото профілю:</label>
+                    <input asp-for="ProfilePhotoURL" type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
+                </p>
+                <p class="fieldset">
+                    <label asp-for="Surname" class="image-replace username" for="signup-surname">Прізвище</label>
+                    <input asp-for="Surname" class="full-width has-padding has-border" id="signup-surname" type="text"
+                           placeholder="Прізвище">
+                    <span asp-validation-for="Surname" class="text-danger"></span>
+                </p>
+                <p class="fieldset">
+                    <label asp-for="Name" class="image-replace username" for="signup-name">Ім'я</label>
+                    <input asp-for="Name" class="full-width has-padding has-border" id="signup-name" type="text"
+                           placeholder="Ім'я">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </p>
+                
+                <p class="fieldset">
+                    <div class="col-md-12">
+                        <label asp-for="Info" class="labels">Інформація про себе</label><textarea asp-for="Info" 
+                                                                                       class="form-control"></textarea>
+                    </div>
+                </p>
+                <p class="fieldset">
+                    <label asp-for="Email" class="image-replace email" for="signup-email">Ел. пошта</label>
+                    <input asp-for="Email" class="full-width has-padding has-border" id="signup-email" type="email"
+                           placeholder="Ел. пошта">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </p>
+
+                <p class="fieldset">
+                    <input type="checkbox" id="accept-terms">
+                    <label for="accept-terms">Я даю згоду на збір та обробку персональної інформації.</label>
+                </p>
+
+                <p class="fieldset add-btns">
+                    <a class="btn btn-outline-info cancel-btn" asp-action="Index">Скасувати</a>
+                    <input class="has-padding add-btn" type="submit" value="Додати">   
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/js/signIn_page_script.js"></script>
+<script src="~/js/registration_page_script.js"></script>
