@@ -2,7 +2,7 @@
 
 namespace BeautyBooking.Data.ViewModels
 {
-    public class MasterCreateVM
+    public class CreateMasterVM
     {
 		[Display(Name = "Фото профілю")]
 		public string? ProfilePhotoURL { get; set; }

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 namespace BeautyBooking.Data.ViewModels
 {
-    public class ServiceCreateVM
+    public class CreateServiceVM
     {
 		[Display(Name = "Назва")]
 		[Required(ErrorMessage = "Введіть назву процедури!")]

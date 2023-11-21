@@ -318,6 +318,25 @@ textarea::placeholder {
     width: 30%;
 }
 
+/*add btns*/
+.add-btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.add-btns a,
+.add-btns .btn-add {
+    width: 30%;
+}
+
+.btn-add,
+.btn-add:hover{
+        
+    background-color: #175248;
+    color: #fff;
+}
+
 /*content default style*/
 .content {
     background: #fff;

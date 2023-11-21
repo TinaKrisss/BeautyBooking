@@ -49,7 +49,7 @@ namespace BeautyBooking.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Create(MasterCreateVM masterCreateVM)
+		public async Task<IActionResult> Create(CreateMasterVM masterCreateVM)
 		{
 			if (!ModelState.IsValid)
 			{
