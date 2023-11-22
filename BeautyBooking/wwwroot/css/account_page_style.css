@@ -9,7 +9,6 @@ body {
     rgba(39, 110, 95, 1) 35%,
     rgba(66, 137, 144, 1) 100%
   );
-  padding: 2%;
 }
 
 .form-control:focus {

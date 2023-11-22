@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using BeautyBooking.Data.Interfaces;
 using BeautyBooking.Data.Services;
 using BeautyBooking.Data.Static;
+using BeautyBooking.Data.Enums;
 using Microsoft.AspNetCore.Mvc.Razor;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -40,11 +41,14 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
 	name: "default",
-	pattern: "{controller=Masters}/{action=Create}");
+	pattern: "{controller=Services}/{action=Index}");
 
 //Seed db
 AppDbInitializer.Seed(app);
 AdminData.Username = builder.Configuration["Admin:Username"];
 AdminData.Password = builder.Configuration["Admin:Password"];
+
+//temp
+CurrentUser.User = UserRole.Admin;
 
 app.Run();

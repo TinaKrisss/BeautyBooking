@@ -1,29 +1,24 @@
-﻿@model IEnumerable<Service>
+﻿@using BeautyBooking.Data.Static;
+@using BeautyBooking.Data.Enums;
+
+@model IEnumerable<Service>
 
 @{
     ViewData["Title"] = "Наші послуги";
 }
 <link rel="stylesheet" href="~/css/services_page_style.css">
 
-<section class="header">
-    <div>
-        <a href="/" class="header-text" style="font-size: 24pt; color: white; text-decoration: none;">
-            <span class="icon-g-bar-logo" width="130px">BeautyBooking</span>
-        </a>
-    </div>
-</section>
-
 <section class="content pt70">
         <div class="error-message center-align" style="display: none;"></div>
 
         <form action="" id="services_form" method="get" class="choose-item" data-gtm-form-interact-id="0">
 
-            <input type="hidden" name="_token" value="UL8fVEcsiRUHLth4qpTxJfTc2wGjZ1D9543c92Jj">
+           @* <input type="hidden" name="_token" value="UL8fVEcsiRUHLth4qpTxJfTc2wGjZ1D9543c92Jj">
 
             <div class="clear-both"></div>
-            <input type="hidden" name="category_names[2494]" value="NAILS">
+            <input type="hidden" name="category_names[2494]" value="NAILS">*@
 
-            <span class="title center-align FuturaDemiC header-titile">Наші послуги</span>
+            <span class="title center-align FuturaDemiC header-title">Наші послуги</span>
 <div class="group-type">
     @foreach (var item in Model)
     {
@@ -47,7 +42,10 @@
                         </td>
                         <td class="service-actions-btns">
                            <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id">Деталі</a>
-                           <a class="btn btn-outline-info mt-2" asp-action="Delete" asp-route-id="@item.Id">Видалити</a>
+                           @if (CurrentUser.User.Equals(UserRole.Admin))
+                           {
+                                <a class="btn btn-outline-info mt-2" asp-action="Delete" asp-route-id="@item.Id">Видалити</a>
+                           } 
                         </td>
                     </tr>
                 </tbody>
@@ -55,6 +53,12 @@
             </label>
          </div>
     }
+@if (CurrentUser.User.Equals(UserRole.Admin))
+{
+     <div class="label-wrapper add-btn-container">
+    <a class="btn btn-outline-secondary btn-show-all btn-add-service" asp-action="Create">Додати нову послугу</a>
+    </div>
+}
 </div>
 </form>
 </section>

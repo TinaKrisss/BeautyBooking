@@ -19,83 +19,46 @@ body {
 
 /*header style*/
 
-.header {
-    background: #175248;
-    height: 70px;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 99999;
-}
-
-    .header div {
-        padding: 1% 5%
-    }
-
-.pt70 {
-    padding-top: 70px;
-}
-
-.header h1 {
-    font-size: 16px;
-    letter-spacing: 0.89px;
-    color: #fff;
-    text-transform: uppercase;
-    line-height: 70px;
-}
-
-.header .back-button {
-    transform: rotate(-45deg);
-    position: absolute;
-    left: 18px;
-    top: 0;
-    bottom: 0;
-    cursor: pointer;
-    margin: auto;
-    width: 12px;
-    height: 12px;
-    border-top: 2px solid #fff;
-    border-left: 2px solid #fff;
-}
-
-.header .close-button {
-    opacity: 1;
-    position: absolute;
-    right: 18px;
-    top: 0;
-    bottom: 0;
-    cursor: pointer;
-    margin: auto;
-    width: 16px;
-    height: 16px;
-}
-
-    .header .close-button:before,
-    .header .close-button:after {
-        opacity: 1;
-        content: "";
-        width: 16px;
-        height: 2px;
-        position: absolute;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        margin: auto;
-        background: #fff;
-    }
-
-    .header .close-button:before {
-        transform: rotate(-45deg);
-    }
-
-    .header .close-button:after {
-        transform: rotate(45deg);
-    }
 /*header style*/
 
+.title {
+    text-align: center;
+    display: block;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 1.25;
+    color: #0b0b0b;
+    margin: 30px 0px 50px 0px;
+}
+
+/*header a*/
+a.logo {
+    margin-right: 75px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 18pt;
+}
+
+a.services,
+a.master {
+    margin-right: 50px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 15pt;
+}
+
+a.signin {
+    margin-left: auto;
+    padding: 8px 16px;
+    border: 1px solid #ffffff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
 .row {
-    margin-top: 10%;
+    margin-top: 3%;
+    padding-bottom: 3%;
 }
 
 .button {
@@ -164,8 +127,19 @@ body {
     font-family: "Nunito", sans-serif;
 }
 
+.add-btn-container {
+    margin-top: 5%;
+    text-align: center;
+}
+
+.btn-add-master {
+    margin-top: 0%;
+    padding: 1%;
+    width: 40%;
+    font-size: 14pt;
+}
+
 /*details btns*/
-.btns-container
-{
+.btns-container {
     text-align: center;
 }

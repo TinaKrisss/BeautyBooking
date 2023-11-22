@@ -26,7 +26,7 @@ body {
 }
 
 .text {
-    margin-top: 10%;
+    margin-top: 5%;
     text-align: center !important;
 }
 
@@ -224,83 +224,20 @@ textarea::placeholder {
   font-size: 14px;
 }
 
+.container
+{
+    padding-bottom: 2%;
+}
+
 /*header style*/
 
-.header {
-    background: #175248;
-    height: 70px;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 99999;
-}
-
-.header div {
-    padding: 1% 5%
-}
+/*header style*/
 
 .pt70 {
-  padding-top: 70px;
+  padding-top: 40px;
+  padding-bottom: 20px;
 }
 
-.header h1 {
-  font-size: 16px;
-  letter-spacing: 0.89px;
-  color: #fff;
-  text-transform: uppercase;
-  line-height: 70px;
-}
-
-.header .back-button {
-  transform: rotate(-45deg);
-  position: absolute;
-  left: 18px;
-  top: 0;
-  bottom: 0;
-  cursor: pointer;
-  margin: auto;
-  width: 12px;
-  height: 12px;
-  border-top: 2px solid #fff;
-  border-left: 2px solid #fff;
-}
-
-.header .close-button {
-  opacity: 1;
-  position: absolute;
-  right: 18px;
-  top: 0;
-  bottom: 0;
-  cursor: pointer;
-  margin: auto;
-  width: 16px;
-  height: 16px;
-}
-
-.header .close-button:before,
-.header .close-button:after {
-  opacity: 1;
-  content: "";
-  width: 16px;
-  height: 2px;
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  background: #fff;
-}
-
-.header .close-button:before {
-  transform: rotate(-45deg);
-}
-
-.header .close-button:after {
-  transform: rotate(45deg);
-}
-
-/*header style*/
 
 .delete-btns form
 {
@@ -334,9 +271,21 @@ textarea::placeholder {
     color: #fff;
 }
 
-/*details-btns*/
-.details-btns
+.add-btn-container
 {
+    text-align: center;
+}
+
+.btn-add-service
+{
+    margin-top: 0%;
+    padding: 1%;
+    width: 40%;
+    font-size: 14pt;
+}
+
+/*details-btns*/
+.details-btns {
     display: flex;
     flex-direction: column;
 }
@@ -6301,4 +6250,29 @@ a.btn-order {
     -webkit-transform: rotate(15deg) scale(1) skew(1deg);
     transform: rotate(15deg) scale(1) skew(1deg);
   }
+}
+
+/*header a*/
+a.logo {
+    margin-right: 75px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 18pt;
+}
+
+a.services,
+a.master {
+    margin-right: 50px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 15pt;
+}
+
+a.signin {
+    margin-left: auto;
+    padding: 8px 16px;
+    border: 1px solid #ffffff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
 }

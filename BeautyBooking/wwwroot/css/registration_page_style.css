@@ -461,3 +461,15 @@ body {
 #reset-password.is-selected {
   display: block;
 }
+
+/*header*/
+.header {
+    width: 100%;
+    height: 70px;
+    background-color: #175248;
+    color: #fff;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
