@@ -2,7 +2,7 @@
 
 namespace BeautyBooking.Data.Static
 {
-	public static class ApplicationUser
+	public static class CurrentUser
 	{
 		public static UserRole User;
 	}

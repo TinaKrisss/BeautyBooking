@@ -3,7 +3,7 @@ using BeautyBooking.Data.Static;
 using BeautyBooking.Data.ViewModels;
 using BeautyBooking.Models;
 using Microsoft.AspNetCore.Mvc;
-
+using BeautyBooking.Data.Static;
 namespace BeautyBooking.Controllers
 {
 	public class AccountController : Controller
@@ -22,14 +22,18 @@ namespace BeautyBooking.Controllers
 		{
 			if (!ModelState.IsValid) return View(signInVM);
 
-			if (signInVM.Email.Equals(AdminData.Username) && signInVM.Password.Equals(AdminData.Password)) return View("Error");
-
+			if (signInVM.Email.Equals(AdminData.Username) && signInVM.Password.Equals(AdminData.Password))
+			{
+				CurrentUser.User = Data.Enums.UserRole.Admin;
+				return View("Error");
+			}
 			//Check user exists
 			var cl = await _service.GetByEmailAsync(signInVM.Email);
 
 			//If user exists and password is correct
 			if (cl != null && cl.Password.Equals(signInVM.Password))
 			{
+				CurrentUser.User = Data.Enums.UserRole.Client;
 				HttpContext.Session.SetInt32("userId", cl.Id);
 				return RedirectToAction("Details", new { id = cl.Id });
 				//return RedirectToAction("Index", "Services");
