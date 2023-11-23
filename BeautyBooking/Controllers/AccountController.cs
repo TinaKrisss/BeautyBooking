@@ -1,6 +1,7 @@
 ﻿using BeautyBooking.Data.Interfaces;
 using BeautyBooking.Data.Static;
 using BeautyBooking.Data.ViewModels;
+using BeautyBooking.Data.Enums;
 using BeautyBooking.Models;
 using Microsoft.AspNetCore.Mvc;
 using BeautyBooking.Data.Static;
@@ -21,11 +22,11 @@ namespace BeautyBooking.Controllers
 		public async Task<IActionResult> SignIn(SignInVM signInVM)
 		{
 			if (!ModelState.IsValid) return View(signInVM);
-
+			
 			if (signInVM.Email.Equals(AdminData.Username) && signInVM.Password.Equals(AdminData.Password))
 			{
-				CurrentUser.User = Data.Enums.UserRole.Admin;
-				return View("Error");
+				CurrentUser.User = UserRole.Admin;
+				return RedirectToAction("Index", "Services");
 			}
 			//Check user exists
 			var cl = await _service.GetByEmailAsync(signInVM.Email);
@@ -33,7 +34,7 @@ namespace BeautyBooking.Controllers
 			//If user exists and password is correct
 			if (cl != null && cl.Password.Equals(signInVM.Password))
 			{
-				CurrentUser.User = Data.Enums.UserRole.Client;
+				CurrentUser.User = UserRole.Client;
 				HttpContext.Session.SetInt32("userId", cl.Id);
 				return RedirectToAction("Details", new { id = cl.Id });
 				//return RedirectToAction("Index", "Services");
@@ -48,7 +49,7 @@ namespace BeautyBooking.Controllers
 		public async Task<IActionResult> Register([Bind("ProfilePhotoURL,Surname,Name,BirthDate,Gender,PhoneNumber,Email,Password,ConfirmPassword")] RegisterVM registerVM)
 		{
 			//FOR TEST
-			registerVM.ProfilePhotoURL = "test";
+			registerVM.ProfilePhotoURL = "~/img/360_F_97000908_wwH2goIihwrMoeV9QF3BW6HtpsVFaNVM.jpg";
 
 			if (!ModelState.IsValid)
 			{
@@ -113,6 +114,7 @@ namespace BeautyBooking.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Edit(int id, [Bind("Id,ProfilePhotoURL,Surname,Name,BirthDate,Gender,PhoneNumber,Email,OldPassword")] EditProfileVM editProfileVM)
 		{
+			if (!ModelState.IsValid) return View(editProfileVM);
 			var cl = new Client
 			{
 				Id = id,

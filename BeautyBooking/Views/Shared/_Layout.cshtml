@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using BeautyBooking.Data.Enums;
+@using BeautyBooking.Data.Static;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -15,7 +18,15 @@
             <a asp-controller="Services" asp-action="Index" class="services">Послуги</a>
             <a asp-controller="Masters" asp-action="Index" class="master">Майстри</a>
         </div>
-        <a asp-controller="Account" asp-action="SignIn" class="signin">Увійти</a>
+
+        @if (CurrentUser.User.Equals(UserRole.UnauthorizedUser))
+        {
+            <a asp-controller="Account" asp-action="SignIn" class="signin">Увійти</a>
+        }
+        else if(!CurrentUser.User.Equals(UserRole.Admin))
+        {
+            <a asp-controller="Account" asp-action="Details" class="signin">Особистий кабінет</a>
+        }
     </section>
     
     <div class="container">

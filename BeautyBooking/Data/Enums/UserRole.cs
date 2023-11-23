@@ -4,6 +4,7 @@
 	{
 		Admin,
 		Master,
-		Client
+		Client,
+		UnauthorizedUser
 	}
 }

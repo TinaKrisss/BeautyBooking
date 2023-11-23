@@ -21,7 +21,7 @@ namespace BeautyBooking.Models
 		[Required(ErrorMessage = "Введіть тривалість процедури!")]
 		public int Duration { get; set; }
 
-		[Display(Name = "Ціна")]
+		[Display(Name = "Ціна, грн")]
 		[Required(ErrorMessage = "Введіть ціну процедури!")]
 		public decimal Price { get; set; }
 

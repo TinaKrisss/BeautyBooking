@@ -48,7 +48,5 @@ AppDbInitializer.Seed(app);
 AdminData.Username = builder.Configuration["Admin:Username"];
 AdminData.Password = builder.Configuration["Admin:Password"];
 
-//temp
-CurrentUser.User = UserRole.Admin;
 
 app.Run();

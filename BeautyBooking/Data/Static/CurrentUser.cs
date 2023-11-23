@@ -4,6 +4,6 @@ namespace BeautyBooking.Data.Static
 {
 	public static class CurrentUser
 	{
-		public static UserRole User;
+		public static UserRole User = UserRole.UnauthorizedUser;
 	}
 }

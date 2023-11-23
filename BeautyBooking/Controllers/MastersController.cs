@@ -57,11 +57,8 @@ namespace BeautyBooking.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Create(CreateMasterVM masterCreateVM)
 		{
-			if (!ModelState.IsValid)
-			{
-				//RETURN MASTER CREATE VIEW
-				//return View("Register");
-			}
+			if (!ModelState.IsValid) return View(masterCreateVM);
+
 			//Check if master already exists in db
 			var mast = _service.GetByEmailAsync(masterCreateVM.Email);
 			if (await mast != null)
@@ -71,7 +68,7 @@ namespace BeautyBooking.Controllers
 			}
 			var newMaster = new Master
 			{
-				ProfilePhotoURL = masterCreateVM.ProfilePhotoURL,
+				ProfilePhotoURL = "~/img/360_F_97000908_wwH2goIihwrMoeV9QF3BW6HtpsVFaNVM.jpg",
 				Name = masterCreateVM.Name,
 				Surname = masterCreateVM.Surname,
 				Info = masterCreateVM.Info,

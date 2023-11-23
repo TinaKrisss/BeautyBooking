@@ -86,8 +86,9 @@ namespace BeautyBooking.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Edit(int id, EditServiceVM editServiceVM)
+		public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Duration,Price")] EditServiceVM editServiceVM)
 		{
+			if (!ModelState.IsValid) return View(editServiceVM);
 			var serv = new Service
 			{
 				Id = editServiceVM.Id,
@@ -96,9 +97,16 @@ namespace BeautyBooking.Controllers
 				Duration = editServiceVM.Duration,
 				Price = editServiceVM.Price,
 			};
-
-			await _service.UpdateAsync(id, serv);
-			return RedirectToAction("Details", new { id });
+			try
+			{
+				await _service.UpdateAsync(id, serv);
+				return RedirectToAction("Details", new { id });
+			}
+            catch(Exception ex)
+            {
+				ModelState.AddModelError("Name", "Помилка редагування. Спробуйте ще раз.");
+				return View(editServiceVM);
+			}
 		}
 
 		public async Task<IActionResult> Delete(int id)
