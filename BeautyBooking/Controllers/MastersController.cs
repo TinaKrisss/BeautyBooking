@@ -30,7 +30,13 @@ namespace BeautyBooking.Controllers
             if (masterDetails == null) return View("NotFound");
             return View(masterDetails);
         }
+		public async Task<IActionResult> FreeTimeDetails(int id)
+		{
+			var master = await _service.GetByIdAsync(id);
 
+			if (master == null) return View("NotFound");
+			return View(master);
+		}
 		public async Task<IActionResult> Delete(int id)
 		{
 			var masterDetails = await _service.GetByIdAsync(id);
