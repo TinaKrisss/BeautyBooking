@@ -1,0 +1,106 @@
+﻿@using BeautyBooking.Data.Static;
+
+@model Master;
+
+@{
+    ViewData["Title"] = "Про майстра";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css'>
+<link rel="stylesheet" type="text/css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js">
+<link rel="stylesheet" type="text/css" href="~/css/account_page_style.css">
+<link rel="stylesheet" type="text/css" href="~/css/masters_page_style.css">
+    <link rel="stylesheet" type="text/css" href="~/css/masters_freetime_page_style.css">
+
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <img class="rounded-circle mt-5 profile-picture" width="150px"
+                    src="~/img/360_F_97000908_wwH2goIihwrMoeV9QF3BW6HtpsVFaNVM.jpg">
+                <span class="font-weight-bold">@Model.Surname @Model.Name</span>
+                <p class="fieldset avatar">
+
+                </p>
+            </div>
+        </div>
+        <div class="col-md-5 border-right master-info">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Вільні години майстра</h4>
+                </div>
+                <!-- add -->
+                <div class="calendar-form">
+                    <div id="calendar" lang="uk" theme="default-theme" class="default-theme range-calendar">
+                        <div class="wrapper">
+                            <div class="calendar ui-draggable ui-draggable-handle">
+                                @if (Model.FreeTimes.Count != 0)
+                                {
+                                    @foreach (var item in Model.FreeTimes.GroupBy(f => f.DateAndTime.Date))
+                                    {
+                                        <div class="cal-cell cell full">
+                                            <div class="cell-content">
+                                                <div class="day-number">@(item.Key.Day).@(item.Key.Month)</div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    @if (Model.FreeTimes.Count != 0)
+                    {
+                        @foreach (var item in Model.FreeTimes.GroupBy(f => f.DateAndTime.Date))
+                        {
+                            <div class="times CeraCYBold slick-initialized slick-slider"><button
+                            class="slick-prev slick-arrow slick-disabled" aria-label="Previous" type="button"
+                            aria-disabled="true" style="display: block;">Previous</button>
+                                <div class="slick-list draggable">
+                                    <div class="slick-track"
+                                style="opacity: 1; width: 5660px; transform: translate3d(0px, 0px, 0px);">
+                                        @foreach (var timeItem in Model.FreeTimes.GroupBy(f => f.DateAndTime))
+                                        {
+                                            if (item.Key.Date == timeItem.Key.Date)
+                                            {
+                                                <div class="slick-slide slick-active" data-slick-index="1" aria-hidden="false"
+                                            >
+                                                    <div>
+                                                        <div class="time-item" style="width: 100%; display: inline-block;">
+                                                            <span class="label">
+                                                                <input class="radio" type="radio" name=""
+                                                       value=""
+                                                       tabindex="0">@(timeItem.Key.ToString("HH:mm"))
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                break;
+                                            }
+                                        }                                
+                                    </div>
+                                </div><button class="slick-next slick-arrow" aria-label="Next" type="button"
+                            style="display: block;" aria-disabled="false">Next</button>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+
+                    }
+                </div>
+                <!-- add-end -->
+                <div class="form-group">
+                    <a class="btn btn-outline-secondary btn-show-all" asp-action="Index">Далі</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
