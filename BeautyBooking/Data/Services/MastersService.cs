@@ -17,5 +17,11 @@ namespace BeautyBooking.Data.Services
 		{
 			return await _context.Set<Master>().FirstOrDefaultAsync(c => c.Email == email);
 		}
+		public async Task<Master> GetWithTime(int id)
+		{
+			return await _context.Set<Master>().Include(m => m.FreeTimes.Where(ft => ft.Record == null).OrderBy(ft => ft.DateAndTime))
+			.FirstOrDefaultAsync(c => c.Id == id); 
+		}
+
 	}
 }
