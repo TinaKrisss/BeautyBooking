@@ -42,7 +42,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
 	name: "default",
-	pattern: "{controller=Services}/{action=Index}");
+	pattern: "{controller=Masters}/{action=FreeTimeDetails}/{id?}");
 
 //Seed db
 AppDbInitializer.Seed(app);
