@@ -42,57 +42,55 @@
                                 {
                                     @foreach (var item in Model.FreeTimes.GroupBy(f => f.DateAndTime.Date))
                                     {
-                                        <div class="cal-cell cell full">
+                                        <div class="cal-cell cell full free-date" id="@(item.Key.Day)-@(item.Key.Month)-@(item.Key.Year)">
                                             <div class="cell-content">
                                                 <div class="day-number">@(item.Key.Day).@(item.Key.Month)</div>
                                             </div>
                                         </div>
                                     }
                                 }
+                                else
+                                {
+                                    <div><span style="color: grey; font-size: 14pt">Вибачте, у обраного майстра немає вільних годин :(</span></div>
+                                }
                             </div>
                         </div>
                     </div>
                     @if (Model.FreeTimes.Count != 0)
                     {
+                        <div class="times CeraCYBold slick-initialized slick-slider">
+                            <button class="slick-prev slick-arrow slick-disabled" aria-label="Previous" type="button"
+                                aria-disabled="true" style="display: block;">
+                                Previous
+                            </button>
+                            <div class="slick-list draggable">
+                                <div class="slick-track"
+                                 style="opacity: 1; width: 5660px; transform: translate3d(0px, 0px, 0px);">
                         @foreach (var item in Model.FreeTimes.GroupBy(f => f.DateAndTime.Date))
                         {
-                            <div class="times CeraCYBold slick-initialized slick-slider"><button
-                            class="slick-prev slick-arrow slick-disabled" aria-label="Previous" type="button"
-                            aria-disabled="true" style="display: block;">Previous</button>
-                                <div class="slick-list draggable">
-                                    <div class="slick-track"
-                                style="opacity: 1; width: 5660px; transform: translate3d(0px, 0px, 0px);">
-                                        @foreach (var timeItem in Model.FreeTimes.GroupBy(f => f.DateAndTime))
-                                        {
-                                            if (item.Key.Date == timeItem.Key.Date)
-                                            {
-                                                <div class="slick-slide slick-active" data-slick-index="1" aria-hidden="false"
-                                            >
-                                                    <div>
-                                                        <div class="time-item" style="width: 100%; display: inline-block;">
-                                                            <span class="label">
-                                                                <input class="radio" type="radio" name=""
-                                                       value=""
-                                                       tabindex="0">@(timeItem.Key.ToString("HH:mm"))
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            }
-                                            else
-                                            {
-                                                break;
-                                            }
-                                        }                                
-                                    </div>
-                                </div><button class="slick-next slick-arrow" aria-label="Next" type="button"
-                            style="display: block;" aria-disabled="false">Next</button>
-                            </div>
-                        }
-                    }
-                    else
-                    {
+                            IEnumerable<FreeTime> freeTimesInGroup = item;
 
+                            foreach (FreeTime freeTime in freeTimesInGroup)
+                            {
+                                <div class="slick-slide slick-active free-time @(item.Key.Day)-@(item.Key.Month)-@(item.Key.Year) hidden">
+                                    <div>
+                                        <div class="time-item" style="width: 100%; display: inline-block;">
+                                            <span class="label">
+                                                <input class="radio" type="radio" name=""
+                                            value=""
+                                                       tabindex="0">@(freeTime.DateAndTime.ToString("HH:mm"))
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            }                                
+                        }
+                                </div>
+                            </div><button class="slick-next slick-arrow" aria-label="Next" type="button"
+                                      style="display: block;" aria-disabled="false">
+                                Next
+                            </button>
+                        </div>
                     }
                 </div>
                 <!-- add-end -->
@@ -104,3 +102,4 @@
     </div>
 </div>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script src="~/js/freetime_page_script.js"></script>

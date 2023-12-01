@@ -151,7 +151,7 @@
   min-height: 1px;
 }
 .slick-initialized .slick-slide {
-  display: block;
+  /*display: block;*/
 }
 /*! CSS Used from: http://127.0.0.1:5500/G.Bar%20-%20%D1%86%D0%B5%20%D1%8F%D0%BA%20%D1%81%D0%B0%D0%BB%D0%BE%D0%BD%20%D0%BA%D1%80%D0%B0%D1%81%D0%B8,%20%D1%82%D1%96%D0%BB%D1%8C%D0%BA%D0%B8%20%D0%BD%D0%B0%D0%B1%D0%B0%D0%B3%D0%B0%D1%82%D0%BE%20%D0%BA%D1%80%D0%B0%D1%89%D0%B5!_files/rangecalendar.css */
 .range-calendar {
@@ -821,4 +821,24 @@ input::placeholder {
   color: #0b0b0b;
   font-family: FontAwesome;
   font-size: 15px;
+}
+
+.free-time
+{
+    display: block;
+}
+
+.hidden
+{
+    display: none !important;
+}
+
+.date-selected,
+.time-selected .label {
+    background-color: #175248 !important;
+}
+
+.date-selected .day-number,
+.time-selected .label {
+    color: #ffffff !important;
 }
