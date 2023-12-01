@@ -30,11 +30,7 @@ namespace BeautyBooking.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Create(CreateServiceVM serviceCreateVM)
 		{
-			if (!ModelState.IsValid)
-			{
-				//RETURN SERVICE CREATE VIEW
-				//return View("Register");
-			}
+			if (!ModelState.IsValid) return View(serviceCreateVM);
 			//Check if service already exists in db
 			var serv = await _service.GetByNameAsync(serviceCreateVM.Name);
 

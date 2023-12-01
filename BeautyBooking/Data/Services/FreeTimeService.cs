@@ -16,5 +16,9 @@ namespace BeautyBooking.Data.Services
 		{
 			_context = context;
 		}
+		public async Task<FreeTime> GetByMaster(int masterId, DateTime dateTime)
+        {
+			return await _context.Set<FreeTime>().FirstOrDefaultAsync(t => t.DateAndTime == dateTime && t.MasterId == masterId);
+		}
 	}
 }
