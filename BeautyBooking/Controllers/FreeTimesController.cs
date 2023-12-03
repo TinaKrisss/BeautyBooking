@@ -7,12 +7,14 @@ namespace BeautyBooking.Controllers
 {
     public class FreeTimesController : Controller
     {
-		private readonly IFreeTimeService _service;
+		private readonly IFreeTimeService _serviceF;
+        private readonly IMastersService _serviceM;
 
-		public FreeTimesController(IFreeTimeService service)
+        public FreeTimesController(IFreeTimeService serviceF, IMastersService serviceM)
 		{
-			_service = service;
-		}
+            _serviceF = serviceF;
+            _serviceM = serviceM;
+        }
 
 		//public IActionResult Index()
 		//{
@@ -21,7 +23,6 @@ namespace BeautyBooking.Controllers
 
 		public IActionResult Create(CreateFreeTimeVM createFreeTimeVM)
 		{
-			// надо во вью кидать айди? - приходит
 			// TODO: надо сделать так чтобы отображалось имя фамилия мастера AND PHOTOURL
 			return View(createFreeTimeVM);
 		}
@@ -34,32 +35,61 @@ namespace BeautyBooking.Controllers
 
 			return View(editFreeTimeVM);
 		}
-		//public async Task<IActionResult> Create(int masterId, CreateFreeTimeVM freeTimeCreateVM)
-		//{
-		//	if (!ModelState.IsValid) return View(freeTimeCreateVM);
+		public async Task<IActionResult> Create(int masterId, CreateFreeTimeVM createFreeTimeVM)
+		{
+			if (!ModelState.IsValid) return View(createFreeTimeVM);
 
-		//	//Check if free time for the master already exists in db
-		//	var time = await _service.GetByMaster(masterId, freeTimeCreateVM.DateAndTime);
-		//	if (time != null)
-		//	{
-		//		ModelState.AddModelError("DateAndTime", "Цей час вже існує для цього майстра.");
-		//		return View(freeTimeCreateVM);
-		//	}
-		//	var newFreeTime = new FreeTime
-		//	{
-		//		DateAndTime = freeTimeCreateVM.DateAndTime,
-		//		MasterId = masterId,
-		//	};
-		//	try
-		//	{
-		//		await _service.AddAsync(newFreeTime);
-		//		return RedirectToAction("FreeTimeDetails", "Masters", new { id = masterId });
-		//	}
-		//	catch
-		//	{
-		//		ModelState.AddModelError("DateAndTime", "Помилка додавання. Спробуйте ще раз.");
-		//		return View(freeTimeCreateVM);
-		//	}
-		//}
-	}
+            //Check if free time for the master already exists in db
+            var time = await _serviceF.GetByMaster(masterId, createFreeTimeVM.DateAndTime);
+            if (time != null)
+            {
+                ModelState.AddModelError("DateAndTime", "Цей час вже існує для цього майстра.");
+                return View(createFreeTimeVM);
+            }
+            var newFreeTime = new FreeTime
+            {
+                DateAndTime = createFreeTimeVM.DateAndTime,
+                MasterId = masterId,
+            };
+            try
+            {
+                await _serviceF.AddAsync(newFreeTime);
+                return RedirectToAction("FreeTimeDetails", "Masters", new { id = masterId });
+            }
+            catch
+            {
+                ModelState.AddModelError("DateAndTime", "Помилка додавання. Спробуйте ще раз.");
+                return View(createFreeTimeVM);
+            }
+        }
+        public async Task<IActionResult> Edit(int masterId)
+        {
+            var master = await _serviceM.GetWithTime(masterId);
+            var editFreeTimeVM = new EditFreeTimeVM
+            {
+                Id = masterId,
+                Name = master.Name,
+                Surname = master.Surname,
+                ProfilePhotoURL = master.ProfilePhotoURL,
+                MastersFreeTime = (IEnumerable<DateTime>)master.FreeTimes,
+            };
+            return View(editFreeTimeVM);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> Delete(EditFreeTimeVM editFreeTimeVM)
+        {
+            if (!ModelState.IsValid || editFreeTimeVM.FreeTimeId == null) return View("Edit", editFreeTimeVM);
+            try
+            {
+                await _serviceF.DeleteAsync(Convert.ToInt32(editFreeTimeVM.FreeTimeId));
+                return RedirectToAction("FreeTimeDetails", "Masters", new { id = editFreeTimeVM.Id });
+            }
+            catch
+            {
+                ModelState.AddModelError("DateAndTime", "Помилка видалення. Спробуйте ще раз.");
+                return View("Edit", editFreeTimeVM);
+            }
+        }
+    }
 }

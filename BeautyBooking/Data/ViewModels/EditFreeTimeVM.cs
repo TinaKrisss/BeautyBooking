@@ -7,7 +7,7 @@
 		public string? Surname { get; set; }
 		public string? Name { get; set; }
 		public IEnumerable<DateTime> MastersFreeTime { get; set; }
-		public int FreeTimeId { get; set; } //to edit
-		public DateTime NewDateAndTime { get; set; }
+		public int? FreeTimeId { get; set; } //to edit
+		public DateTime? NewDateAndTime { get; set; }
 	}
 }
