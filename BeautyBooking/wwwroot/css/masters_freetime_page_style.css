@@ -878,3 +878,10 @@ input::placeholder {
 {
     margin-bottom: 5%;
 }
+
+.delete-btn
+{
+    color: #000000;
+    width: 30%;
+    margin-left: 10%;
+}

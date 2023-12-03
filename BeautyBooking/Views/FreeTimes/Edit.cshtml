@@ -35,30 +35,25 @@
                 </div>
                 <form class="form" asp-action="Edit" asp-route-id="@Model.Id">
                     <label for="birthdaytime">Оберіть вільну годину для редагування</label><br />
-                    <select id="freeTimeDropdown"></select><br />
+                    <select id="freeTimeDropdown"></select><button class="btn btn-outline-info add-btn delete-btn" asp-action="Delete" disabled>Видалити</button><br />
                     <label for="NewDateAndTime">Введіть нову дату та час</label><br />
                     <input class="dateTimePicker" type="datetime-local" name="datetime" value="" asp-for="NewDateAndTime">
                     <p class="fieldset add-btns">
                         <a class="btn btn-outline-secondary cancel-btn" asp-controller="Masters" asp-action="FreeTimeDetails" asp-route-id="@Model.Id">Скасувати</a>
-                        <a class="btn btn-outline-info add-btn" asp-action="Edit" asp-route-id="@Model.Id">Зберегти</a>
+                        <a class="btn btn-outline-info add-btn" asp-action="Edit">Зберегти</a>
                     </p>
                 </form>
             </div>
         </div>
     </div>
 </div>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-    // Your IEnumerable source
     var items = @Html.Raw(Json.Serialize(@Model.MastersFreeTime));
 
-    // Reference to the dropdown list
     var dropdown = $("#freeTimeDropdown");
 
-    // Iterate over the items and append <option> elements
     $.each(items, function (index, item) {
-        dropdown.append($("<option>").text(item).val(item));
+        dropdown.append($('<option asp-for="FreeTimeId">').text(item).val(item));
     });
 </script>
