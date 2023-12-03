@@ -842,3 +842,29 @@ input::placeholder {
 .time-selected .label {
     color: #ffffff !important;
 }
+
+.add-btns
+{
+    margin-top: 5%;
+}
+
+.cancel-btn {
+    width: 30% !important;
+}
+
+.add-btn {
+    width: 30%;
+    font-size: 14pt;
+    background-color: #175248;
+    color: #ffffff !important;
+}
+
+.free-time-btns
+{
+    margin-top: 3%;
+}
+
+.next-btn {
+    width: 25%;
+    float: right;
+}

@@ -3,7 +3,7 @@
 @model Master;
 
 @{
-    ViewData["Title"] = "Про майстра";
+    ViewData["Title"] = "Вільні години майстра";
 }
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
@@ -14,7 +14,7 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js">
 <link rel="stylesheet" type="text/css" href="~/css/account_page_style.css">
 <link rel="stylesheet" type="text/css" href="~/css/masters_page_style.css">
-    <link rel="stylesheet" type="text/css" href="~/css/masters_freetime_page_style.css">
+<link rel="stylesheet" type="text/css" href="~/css/masters_freetime_page_style.css">
 
 <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
@@ -94,9 +94,15 @@
                     }
                 </div>
                 <!-- add-end -->
-                <div class="form-group">
-                    <a class="btn btn-outline-secondary btn-show-all" asp-action="Index">Далі</a>
+                <div class="form-group free-time-btns">
+                    <a class="btn btn-outline-secondary btn-show-all next-btn" asp-action="Index">Далі</a>
                 </div>
+                <div class="form-group free-time-btns">
+                    <a class="btn btn-outline-secondary btn-show-all edit-free-time-btn" asp-controller="FreeTimes" asp-action="Edit">Редагувати вільні години</a>
+                </div>
+                @*<div class="form-group free-time-btns">
+                    <a class="btn btn-outline-secondary btn-show-all" asp-controller="FreeTimes" asp-action="Create" asp-route-id="@Model.Id">Додати вільні години</a>
+                </div>*@
             </div>
         </div>
     </div>
