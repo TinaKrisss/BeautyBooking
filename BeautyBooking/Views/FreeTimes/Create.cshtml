@@ -15,7 +15,9 @@
 <link rel="stylesheet" type="text/css" href="~/css/account_page_style.css">
 <link rel="stylesheet" type="text/css" href="~/css/masters_page_style.css">
 <link rel="stylesheet" type="text/css" href="~/css/masters_freetime_page_style.css">
-
+@{
+    var currentDateTime = DateTime.Now;
+}
 <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
         <div class="col-md-3 border-right">
@@ -33,12 +35,12 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">Вільні години майстра</h4>
                 </div>
-                <form class="form" asp-action="Create">
+                <form class="form" asp-action="CreateConfirmed" asp-route-id="@Model.Id">
                 <label for="birthdaytime">Додайте дату та час</label>
-                 <input type="datetime-local" name="datetime" value="2023-12-01" asp-for="DateAndTime">
+                 <input min="@currentDateTime" type="datetime-local" name="DateAndTime" value="@currentDateTime" asp-for="DateAndTime">
                  <p class="fieldset add-btns">
                     <a class="btn btn-outline-secondary cancel-btn" asp-controller="Masters" asp-action="FreeTimeDetails" asp-route-id="@Model.Id">Скасувати</a>
-                    <a class="btn btn-outline-info add-btn" asp-action="Create" asp-route-id="@Model.Id">Додати</a>
+                    <input type="submit" value="Додати" class="btn btn-outline-info add-btn" asp-action="CreateConfirmed" asp-route-id="@Model.Id">
                 </p>
                 </form>
             </div>

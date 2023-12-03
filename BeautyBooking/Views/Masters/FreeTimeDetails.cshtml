@@ -100,12 +100,12 @@
                 @if (CurrentUser.User.Equals(UserRole.Admin))
                 {
                 <div class="form-group free-time-btns edit-btn-container">
-                    <a class="btn btn-outline-secondary btn-show-all edit-free-time-btn" asp-controller="FreeTimes" asp-action="Edit" asp-route-id="@Model.Id">Редагувати вільні години</a>
+                    <a class="btn btn-outline-secondary btn-show-all edit-free-time-btn" asp-controller="FreeTimes" asp-action="Edit" asp-route-masterId="@Model.Id">Редагувати вільні години</a>
                 </div>
                 }
-                @*<div class="form-group free-time-btns">
+                <div class="form-group free-time-btns">
                     <a class="btn btn-outline-secondary btn-show-all" asp-controller="FreeTimes" asp-action="Create" asp-route-id="@Model.Id">Додати вільні години</a>
-                </div>*@
+                </div>
             </div>
         </div>
     </div>

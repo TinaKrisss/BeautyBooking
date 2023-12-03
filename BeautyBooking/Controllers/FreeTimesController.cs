@@ -16,50 +16,36 @@ namespace BeautyBooking.Controllers
             _serviceM = serviceM;
         }
 
-		//public IActionResult Index()
-		//{
-		//	return View();
-		//}
-
 		public IActionResult Create(CreateFreeTimeVM createFreeTimeVM)
 		{
 			// TODO: надо сделать так чтобы отображалось имя фамилия мастера AND PHOTOURL
 			return View(createFreeTimeVM);
 		}
-
-		public IActionResult Edit(EditFreeTimeVM editFreeTimeVM)
+		public async Task<IActionResult> CreateConfirmed([Bind("DateAndTime,Id")] CreateFreeTimeVM createFreeTimeVM)
 		{
-
-			// TODO: editFreeTimeVM.MastersFreeTime = //get fre time-s of master with editFreeTimeVM.Id
-			// TODO: also get master's photoUrl, name and surname
-
-			return View(editFreeTimeVM);
-		}
-		public async Task<IActionResult> Create(int masterId, CreateFreeTimeVM createFreeTimeVM)
-		{
-			if (!ModelState.IsValid) return View(createFreeTimeVM);
+			if (!ModelState.IsValid) return View("Create", createFreeTimeVM);
 
             //Check if free time for the master already exists in db
-            var time = await _serviceF.GetByMaster(masterId, createFreeTimeVM.DateAndTime);
+            var time = await _serviceF.GetByMaster(createFreeTimeVM.Id, createFreeTimeVM.DateAndTime);
             if (time != null)
             {
                 ModelState.AddModelError("DateAndTime", "Цей час вже існує для цього майстра.");
-                return View(createFreeTimeVM);
+                return View("Create", createFreeTimeVM);
             }
             var newFreeTime = new FreeTime
             {
                 DateAndTime = createFreeTimeVM.DateAndTime,
-                MasterId = masterId,
+                MasterId = createFreeTimeVM.Id,
             };
             try
             {
                 await _serviceF.AddAsync(newFreeTime);
-                return RedirectToAction("FreeTimeDetails", "Masters", new { id = masterId });
+                return RedirectToAction("FreeTimeDetails", "Masters", new { id = createFreeTimeVM.Id });
             }
             catch
             {
                 ModelState.AddModelError("DateAndTime", "Помилка додавання. Спробуйте ще раз.");
-                return View(createFreeTimeVM);
+                return View("Create", createFreeTimeVM);
             }
         }
         public async Task<IActionResult> Edit(int masterId)
@@ -71,13 +57,41 @@ namespace BeautyBooking.Controllers
                 Name = master.Name,
                 Surname = master.Surname,
                 ProfilePhotoURL = master.ProfilePhotoURL,
-                MastersFreeTime = (IEnumerable<DateTime>)master.FreeTimes,
+                MastersFreeTime = master.FreeTimes,
             };
             return View(editFreeTimeVM);
         }
-
+        [HttpPost]
+        public async Task<IActionResult> Edit([Bind("FreeTimeId,Id,ProfilePhotoURL,Surname,Name,MastersFreeTime,NewDateAndTime")] EditFreeTimeVM editFreeTimeVM)
+        {
+            if (!ModelState.IsValid || editFreeTimeVM.FreeTimeId == null) return View("Edit", editFreeTimeVM);
+            //Check if free time for the master already exists in db
+            var time = await _serviceF.GetByMaster(editFreeTimeVM.Id, editFreeTimeVM.NewDateAndTime);
+            if (time != null)
+            {
+                ModelState.AddModelError("DateAndTime", "Цей час вже існує для цього майстра.");
+                return View(editFreeTimeVM);
+            }
+            time = new FreeTime
+            {
+                MasterId = editFreeTimeVM.Id,
+                DateAndTime = editFreeTimeVM.NewDateAndTime,
+                Id = Convert.ToInt32(editFreeTimeVM.FreeTimeId)
+            };
+            try
+            {
+                await _serviceF.UpdateAsync(time.Id, time);
+                return RedirectToAction("FreeTimeDetails", "Masters", new { id = editFreeTimeVM.Id });
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("NewDateAndTime", "Помилка редагування. Спробуйте ще раз.");
+                return View(editFreeTimeVM);
+            }
+        }
+        
         [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> Delete(EditFreeTimeVM editFreeTimeVM)
+        public async Task<IActionResult> Delete([Bind("FreeTimeId,Id,ProfilePhotoURL,Surname,Name,MastersFreeTime")] EditFreeTimeVM editFreeTimeVM)
         {
             if (!ModelState.IsValid || editFreeTimeVM.FreeTimeId == null) return View("Edit", editFreeTimeVM);
             try

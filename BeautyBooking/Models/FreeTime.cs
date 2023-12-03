@@ -1,6 +1,7 @@
 ﻿using BeautyBooking.Data.Base;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace BeautyBooking.Models
 {
@@ -16,10 +17,13 @@ namespace BeautyBooking.Models
 		//Relationships
 		//Master
 		public int MasterId { get; set; }
+		
+		[JsonIgnore]
 		[ForeignKey("MasterId")]
 		public Master Master { get; set; }
 
 		//Record
+		[JsonIgnore]
 		public Record Record { get; set; }
 
 	}

@@ -1,4 +1,6 @@
-﻿namespace BeautyBooking.Data.ViewModels
+﻿using BeautyBooking.Models;
+
+namespace BeautyBooking.Data.ViewModels
 {
 	public class EditFreeTimeVM
 	{
@@ -6,8 +8,8 @@
 		public string? ProfilePhotoURL { get; set; }
 		public string? Surname { get; set; }
 		public string? Name { get; set; }
-		public IEnumerable<DateTime> MastersFreeTime { get; set; }
-		public int? FreeTimeId { get; set; } //to edit
-		public DateTime? NewDateAndTime { get; set; }
+		public IEnumerable<FreeTime> MastersFreeTime { get; set; }
+		public int? FreeTimeId { get; set; } //to editF
+		public DateTime NewDateAndTime { get; set; }
 	}
 }

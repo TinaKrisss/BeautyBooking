@@ -35,12 +35,20 @@
                 </div>
                 <form class="form" asp-action="Edit" asp-route-id="@Model.Id">
                     <label for="birthdaytime">Оберіть вільну годину для редагування</label><br />
-                    <select id="freeTimeDropdown"></select><button class="btn btn-outline-info add-btn delete-btn" asp-action="Delete" disabled>Видалити</button><br />
+
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="ProfilePhotoURL" />
+                    <input type="hidden" asp-for="Surname" />
+                    <input type="hidden" asp-for="Name" />
+                    <input type="hidden" asp-for="MastersFreeTime" />
+                     <input type="hidden" id="selectedFreeTimeId" name="FreeTimeId" value="" />
+
+                    <select id="freeTimeDropdown"></select><button type="submit" class="btn btn-outline-info add-btn delete-btn" asp-action="Delete">Видалити</button><br />
                     <label for="NewDateAndTime">Введіть нову дату та час</label><br />
-                    <input class="dateTimePicker" type="datetime-local" name="datetime" value="" asp-for="NewDateAndTime">
+                    <input class="dateTimePicker" type="datetime-local" name="NewDateAndTime" value="" asp-for="NewDateAndTime">
                     <p class="fieldset add-btns">
                         <a class="btn btn-outline-secondary cancel-btn" asp-controller="Masters" asp-action="FreeTimeDetails" asp-route-id="@Model.Id">Скасувати</a>
-                        <a class="btn btn-outline-info add-btn" asp-action="Edit">Зберегти</a>
+                        <input type="submit" class="btn btn-outline-info add-btn" asp-action="Edit" value="Зберегти">
                     </p>
                 </form>
             </div>
@@ -52,8 +60,16 @@
     var items = @Html.Raw(Json.Serialize(@Model.MastersFreeTime));
 
     var dropdown = $("#freeTimeDropdown");
-
+    if(items.length > 0){
+        $("#selectedFreeTimeId").val(items[0].id);
+    }
     $.each(items, function (index, item) {
-        dropdown.append($('<option asp-for="FreeTimeId">').text(item).val(item));
+        dropdown.append($('<option asp-for="FreeTimeId">').text(item.dateAndTime).val(item.id));
     });
+
+
+    $("#freeTimeDropdown").on("change", function() {
+    var selectedFreeTimeId = $(this).val();
+    $("#selectedFreeTimeId").val(selectedFreeTimeId);
+});
 </script>
