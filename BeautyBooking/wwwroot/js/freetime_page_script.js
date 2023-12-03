@@ -3,6 +3,7 @@
 
         $(".free-date").removeClass("date-selected");
         $(".free-time").removeClass("time-selected");
+        $(".edit-btn-container").prop("disabled", true);
 
         $(this).addClass("date-selected");
 
@@ -17,7 +18,7 @@
 
     $(".free-time").click(function () {
         $(".free-time").removeClass("time-selected");
-
+        $(".edit-btn-container").prop("disabled", false);
         $(this).addClass("time-selected");
     });
 });

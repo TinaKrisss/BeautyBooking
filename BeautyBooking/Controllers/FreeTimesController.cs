@@ -22,10 +22,18 @@ namespace BeautyBooking.Controllers
 		public IActionResult Create(CreateFreeTimeVM createFreeTimeVM)
 		{
 			// надо во вью кидать айди? - приходит
-			//надо сделать так чтобы отображалось имя фамилия мастера
+			// TODO: надо сделать так чтобы отображалось имя фамилия мастера AND PHOTOURL
 			return View(createFreeTimeVM);
 		}
 
+		public IActionResult Edit(EditFreeTimeVM editFreeTimeVM)
+		{
+
+			// TODO: editFreeTimeVM.MastersFreeTime = //get fre time-s of master with editFreeTimeVM.Id
+			// TODO: also get master's photoUrl, name and surname
+
+			return View(editFreeTimeVM);
+		}
 		//public async Task<IActionResult> Create(int masterId, CreateFreeTimeVM freeTimeCreateVM)
 		//{
 		//	if (!ModelState.IsValid) return View(freeTimeCreateVM);

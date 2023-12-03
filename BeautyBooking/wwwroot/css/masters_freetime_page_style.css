@@ -868,3 +868,13 @@ input::placeholder {
     width: 25%;
     float: right;
 }
+
+.freeTimeDropdown,
+.dateTimePicker {
+    width: 40%;
+}
+
+.freeTimeDropdown
+{
+    margin-bottom: 5%;
+}

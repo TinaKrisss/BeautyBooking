@@ -1,9 +1,9 @@
 ﻿@using BeautyBooking.Data.ViewModels;
 
-@model CreateFreeTimeVM;
+@model EditFreeTimeVM;
 
 @{
-    ViewData["Title"] = "Додавання вільних годин майстра";
+    ViewData["Title"] = "Редагування вільних годин майстра";
 }
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
@@ -21,7 +21,7 @@
         <div class="col-md-3 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                 <img class="rounded-circle mt-5 profile-picture" width="150px"
-                    src="~/img/360_F_97000908_wwH2goIihwrMoeV9QF3BW6HtpsVFaNVM.jpg">
+                     src="~/img/360_F_97000908_wwH2goIihwrMoeV9QF3BW6HtpsVFaNVM.jpg">
                 <span class="font-weight-bold">@Model.Surname @Model.Name</span>
                 <p class="fieldset avatar">
 
@@ -33,17 +33,32 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">Вільні години майстра</h4>
                 </div>
-                <form class="form" asp-action="Create">
-                <label for="birthdaytime">Додайте дату та час</label>
-                 <input type="datetime-local" name="datetime" value="2023-12-01" asp-for="DateAndTime">
-                 <p class="fieldset add-btns">
-                    <a class="btn btn-outline-secondary cancel-btn" asp-controller="Masters" asp-action="FreeTimeDetails" asp-route-id="@Model.Id">Скасувати</a>
-                    <a class="btn btn-outline-info add-btn" asp-action="Create" asp-route-id="@Model.Id">Додати</a>
-                </p>
+                <form class="form" asp-action="Edit" asp-route-id="@Model.Id">
+                    <label for="birthdaytime">Оберіть вільну годину для редагування</label><br />
+                    <select id="freeTimeDropdown"></select><br />
+                    <label for="NewDateAndTime">Введіть нову дату та час</label><br />
+                    <input class="dateTimePicker" type="datetime-local" name="datetime" value="" asp-for="NewDateAndTime">
+                    <p class="fieldset add-btns">
+                        <a class="btn btn-outline-secondary cancel-btn" asp-controller="Masters" asp-action="FreeTimeDetails" asp-route-id="@Model.Id">Скасувати</a>
+                        <a class="btn btn-outline-info add-btn" asp-action="Edit" asp-route-id="@Model.Id">Зберегти</a>
+                    </p>
                 </form>
             </div>
         </div>
     </div>
 </div>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-<script src="~/js/freetime_page_script.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    // Your IEnumerable source
+    var items = @Html.Raw(Json.Serialize(@Model.MastersFreeTime));
+
+    // Reference to the dropdown list
+    var dropdown = $("#freeTimeDropdown");
+
+    // Iterate over the items and append <option> elements
+    $.each(items, function (index, item) {
+        dropdown.append($("<option>").text(item).val(item));
+    });
+</script>
