@@ -76,9 +76,9 @@ a.signin {
 }
 
 .btn-show-all {
+    margin: 5% auto 0%;
     width: 50%;
     font-size: 14pt;
-    margin-top: 5%;
     background-color: #175248;
     color: #ffffff !important;
 }
@@ -119,7 +119,7 @@ a.signin {
 
 .cancel-btn {
     width: 40%;
-    padding-top: 2.3%;
+/*    padding-top: 2.3%;*/
 }
 
 .add-btn {
@@ -141,5 +141,13 @@ a.signin {
 
 /*details btns*/
 .btns-container {
+    display: flex;
+    flex-direction: column;
     text-align: center;
+}
+
+.btns-container a.free-time-btn
+{
+    color: #175248;
+    font-size: 14pt;
 }

@@ -1,0 +1,49 @@
+﻿@using BeautyBooking.Data.ViewModels;
+
+@model CreateFreeTimeVM;
+
+@{
+    ViewData["Title"] = "Додавання вільних годин майстра";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css'>
+<link rel="stylesheet" type="text/css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js">
+<link rel="stylesheet" type="text/css" href="~/css/account_page_style.css">
+<link rel="stylesheet" type="text/css" href="~/css/masters_page_style.css">
+<link rel="stylesheet" type="text/css" href="~/css/masters_freetime_page_style.css">
+
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <img class="rounded-circle mt-5 profile-picture" width="150px"
+                    src="~/img/360_F_97000908_wwH2goIihwrMoeV9QF3BW6HtpsVFaNVM.jpg">
+                <span class="font-weight-bold">@Model.Surname @Model.Name</span>
+                <p class="fieldset avatar">
+
+                </p>
+            </div>
+        </div>
+        <div class="col-md-5 border-right master-info">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Вільні години майстра</h4>
+                </div>
+                <form class="form" asp-action="Create">
+                <label for="birthdaytime">Додайте дату та час</label>
+                 <input type="datetime-local" name="datetime" value="2023-12-01" asp-for="DateAndTime">
+                 <p class="fieldset add-btns">
+                    <a class="btn btn-outline-secondary cancel-btn" asp-controller="Masters" asp-action="FreeTimeDetails" asp-route-id="@Model.Id">Скасувати</a>
+                    <a class="btn btn-outline-info add-btn" asp-action="Create" asp-route-id="@Model.Id">Додати</a>
+                </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script src="~/js/freetime_page_script.js"></script>
