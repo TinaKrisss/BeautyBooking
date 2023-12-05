@@ -11,17 +11,22 @@ namespace BeautyBooking.Controllers
 		private readonly IServicesService _serviceS;
 		private readonly IRecordsService _serviceR;
 		private readonly IGroupsOfServicesService _serviceG;
+		private readonly IClientsService _serviceC;
+		private readonly IMastersService _serviceM;
 
-		public RecordsController(IServicesService serviceS, IRecordsService serviceR, IGroupsOfServicesService serviceG)
-		{
-			_serviceS = serviceS;
-			_serviceR = serviceR;
-			_serviceG = serviceG;
-		}
+		public RecordsController(IServicesService serviceS, IRecordsService serviceR, IGroupsOfServicesService serviceG, IClientsService serviceC, IMastersService serviceM)
+        {
+            _serviceS = serviceS;
+            _serviceR = serviceR;
+            _serviceG = serviceG;
+            _serviceC = serviceC;
+            _serviceM = serviceM;
+        }
 
-		public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index()
 		{
-			return View();
+			var recordsVMs = await _serviceR.GetRecords();
+			return View(recordsVMs);
 		}
 
 		//Get: Services/Create

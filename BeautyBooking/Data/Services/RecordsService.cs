@@ -1,5 +1,6 @@
 ﻿using BeautyBooking.Data.Base;
 using BeautyBooking.Data.Interfaces;
+using BeautyBooking.Data.ViewModels;
 using BeautyBooking.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,5 +14,25 @@ namespace BeautyBooking.Data.Services
 		{
 			_context = context;
 		}
+        public async Task<List<RecordsVM>> GetRecords()
+        {
+            var records = _context.Records
+                .Include(r => r.FreeTime)
+                    .ThenInclude(ft => ft.Master) 
+                .Include(r => r.Client) 
+                .Select(r => new RecordsVM
+                {
+                    Id = r.Id,
+                    MasterName = r.FreeTime.Master.Name, 
+                    MasterSurname = r.FreeTime.Master.Surname, 
+                    ClientName = r.Client.Name, 
+                    ClientSurname = r.Client.Surname, 
+                    Time = r.FreeTime.DateAndTime, 
+                    Status = r.Status
+                })
+                .ToList();
+
+            return records;
+        }
     }
 }
