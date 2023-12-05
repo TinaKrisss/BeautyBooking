@@ -16,6 +16,8 @@ builder.Services.AddScoped<IClientsService, ClientsService>();
 builder.Services.AddScoped<IServicesService, ServicesService>();
 builder.Services.AddScoped<IMastersService, MastersService>();
 builder.Services.AddScoped<IFreeTimeService, FreeTimeService>();
+builder.Services.AddScoped<IRecordsService, RecordsService>();
+builder.Services.AddScoped<IGroupsOfServicesService, GroupsOfServicesService>();
 builder.Services.AddScoped<IPasswordCreator, PasswordCreator>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();//.AddRazorRuntimeCompilation();
@@ -49,6 +51,6 @@ AppDbInitializer.Seed(app);
 AdminData.Username = builder.Configuration["Admin:Username"];
 AdminData.Password = builder.Configuration["Admin:Password"];
 
-CurrentUser.User = UserRole.Client;
+CurrentUser.User = UserRole.Admin;
 
 app.Run();
