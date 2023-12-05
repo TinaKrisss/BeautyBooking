@@ -1,0 +1,66 @@
+﻿@using BeautyBooking.Data.Static;
+@using BeautyBooking.Data.Enums;
+
+@model IEnumerable<Record>
+
+@{
+    ViewData["Title"] = "Наші майстри";
+}
+
+<link rel="stylesheet" href="~/css/masters_page_style.css">
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <span class="title center-align FuturaDemiC header-title">Всі записи</span>
+        <table class="table">
+            <thead>
+                <tr class="text-left">
+                    <th>Дата і час</th>
+                    <th>Клієнт</th>
+                    <th>Майстер</th>
+                    <th>Статус</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="align-middle">
+                           @Html.DisplayFor(modelItem => item.DateAndTime)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.ClientSurname) @Html.DisplayFor(modelItem => item.ClientName)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.MasterSurname) @Html.DisplayFor(modelItem => item.MasterName)
+                        </td>
+                            <td class="align-middle">
+                                @switch (item.Status)
+                                {
+                                    case NotConfirmed:
+                                    Не підтверджено
+                                    break;
+                                    case Confirmed:
+                                    Підтверджено
+                                    break;
+                                    case Canceled:
+                                    Скасовано
+                                    break;
+                                    default:
+                                    Виконано
+                                    break;
+                                }                         
+                                @if (CurrentUser.User.Equals(UserRole.Admin))
+                                {
+                                    <a class="btn btn-outline-info mt-2" asp-action="Edit" asp-route-id="@item.Id">Редагувати</a>
+                                }
+                            </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src="~/js/cart_script.js"></script>
