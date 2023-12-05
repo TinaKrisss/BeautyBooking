@@ -2,6 +2,7 @@
 let totalPrice = 0;
 let resultString;
 let chooseMode = false;
+var cartArray = [];
 
 $(".select-type").click(function () {
     chooseMode = true;
@@ -19,6 +20,8 @@ $(".select-type").click(function () {
         var minutes = totalDuration % 60;
 
         resultString = hours + ":" + minutes;
+
+        cartArray.push($(this).attr("id"));
     }
     else {
         //remove from cart
@@ -33,6 +36,8 @@ $(".select-type").click(function () {
 
         var resultString = hours + ":" + minutes;
 
+        removeFromCart($(this).attr("id"));
+
         if (totalPrice <= 0) {
             $(".cart").css("display", "none");
             chooseMode = false;
@@ -43,14 +48,28 @@ $(".select-type").click(function () {
     $("#total-time").text(resultString);
 });
 
+function removeFromCart(productId) {
+    var index = cartArray.indexOf(productId);
+
+    if (index !== -1) {
+        cartArray.splice(index, 1);
+    }
+}
+
 function saveCart() {
+    sessionStorage.setItem('Cart', JSON.stringify(cartArray));
     sessionStorage.setItem('chooseMode', chooseMode);
 }
-/*$(document).ready(function () {*/
 
-//    var chooseMode = sessionStorage.getItem('chooseMode');
-//    if (chooseMode) {
-//        $(".master-btns").append('<a class="btn btn-outline-info btn-choose-master" asp-action="FreeTimeDetails" asp-route-id="@item.Id">Обрати</a>');
-//        $(".master-btns .btn-details").remove();
-//    }
-//});
+$(document).ready(function () {
+    var chooseMode = sessionStorage.getItem('chooseMode');
+
+    if (chooseMode) {
+        $(".btn-details").css("display", "none");
+        $(".btn-choose-master").css("display", "block")
+    }
+    else {
+        $(".btn-details").css("display", "block");
+        $(".btn-choose-master").css("display", "none");
+    }
+});

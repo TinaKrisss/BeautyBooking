@@ -35,22 +35,14 @@
                             @Html.DisplayFor(modelItem => item.Info)
                         </td>
                             <td class="align-middle master-btns">
-                            <script>
-                                var chooseMode = sessionStorage.getItem('chooseMode');
-
-                                if (chooseMode) {
-                                    document.write('<a class="btn btn-outline-info btn-choose-master" asp-action="FreeTimeDetails" asp-route-id="@item.Id">Обрати</a>');
-                                } else {
-                                    document.write('<a class="btn btn-outline-info btn-details" asp-action="Details" asp-route-id="@item.Id">Деталі</a>');
-
+                           
+                                <a class="btn btn-outline-info btn-choose-master" asp-action="FreeTimeDetails" asp-route-id="@item.Id">Обрати</a>
+                                <a class="btn btn-outline-info btn-details" asp-action="Details" asp-route-id="@item.Id">Деталі</a>
+                               
                                 @if (CurrentUser.User.Equals(UserRole.Admin))
                                 {
-                                    <text>
-                                            document.write('<a class="btn btn-outline-info mt-2" asp-action="Delete" asp-route-id="@item.Id">Видалити</a>');
-                                    </text>
+                                    <a class="btn btn-outline-info mt-2" asp-action="Delete" asp-route-id="@item.Id">Видалити</a>
                                 }
-                                        }
-                            </script>
                             </td>
                     </tr>
                 }
