@@ -22,3 +22,7 @@
         $(this).addClass("time-selected");
     });
 });
+
+function saveSelection() {
+    sessionStorage.setItem("freeTimeId", $(".time-selected .time-item").attr("id"));
+}

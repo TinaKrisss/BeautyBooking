@@ -75,7 +75,7 @@
                             {
                                 <div class="slick-slide slick-active free-time @(item.Key.Day)-@(item.Key.Month)-@(item.Key.Year) hidden">
                                     <div>
-                                        <div class="time-item" style="width: 100%; display: inline-block;">
+                                        <div id="@freeTime.Id" class="time-item" style="width: 100%; display: inline-block;">
                                             <span class="label">
                                                 <input class="radio" type="radio" name=""
                                                        tabindex="0">@(freeTime.DateAndTime.ToString("HH:mm"))
@@ -95,7 +95,7 @@
                 </div>
                 <!-- add-end -->
                 <div class="form-group free-time-btns">
-                    <a class="btn btn-outline-secondary btn-show-all next-btn" asp-action="Index">Далі</a>
+                    <a class="btn btn-outline-secondary btn-show-all next-btn" onclick="saveSelection()" asp-controller="Records" asp-action="Confirmation">Далі</a>
                 </div>
                 @if (CurrentUser.User.Equals(UserRole.Admin))
                 {
