@@ -6276,3 +6276,86 @@ a.signin {
     text-decoration: none;
     border-radius: 4px;
 }
+
+/*basket*/
+.cart
+{
+    display: none;
+}
+
+.center-align {
+    text-align: center;
+}
+
+input {
+    font-family: CeraCYLight;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid #ede8e8;
+    height: 40px;
+    border-radius: 3px;
+    background-color: #FFF;
+    padding: 0 10px;
+    outline: none;
+}
+
+    input:focus {
+        border-color: rgba(241, 159, 193, 0.9);
+    }
+
+    input::placeholder {
+        opacity: 0.3;
+        font-family: CeraPROLight;
+        font-weight: 600;
+        font-size: 14px;
+        color: #0b0b0b;
+    }
+
+.choose-item .wrap-button {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+}
+
+.choose-item .wrap-button {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+}
+
+    .choose-item .wrap-button .total {
+        background-color: #f8f8f8;
+        height: 70px;
+        padding: 12px 0;
+        font-size: 14px;
+        line-height: 1.71;
+        color: #0b0b0b;
+    }
+
+        .choose-item .wrap-button .total .col-6 {
+            width: 50%;
+            float: left;
+            display: inline-block;
+        }
+
+    .choose-item .wrap-button .button {
+        width: 100%;
+        float: left;
+        display: inline-block;
+        color: #FFF;
+        height: 70px;
+        line-height: 70px;
+    }
+
+    .choose-item .wrap-button .button-next {
+        background-color: #175248;
+    }
+
+@media (max-width: 479px) {
+    .choose-item .wrap-button .button {
+        font-size: 14px;
+    }
+}

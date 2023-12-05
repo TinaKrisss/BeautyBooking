@@ -13,29 +13,24 @@
 
         <form action="" id="services_form" method="get" class="choose-item" data-gtm-form-interact-id="0">
 
-           @* <input type="hidden" name="_token" value="UL8fVEcsiRUHLth4qpTxJfTc2wGjZ1D9543c92Jj">
-
-            <div class="clear-both"></div>
-            <input type="hidden" name="category_names[2494]" value="NAILS">*@
-
             <span class="title center-align FuturaDemiC header-title">Наші послуги</span>
 <div class="group-type">
     @foreach (var item in Model)
     {
          <div class="label-wrapper">
-            <input type="checkbox" name="durations[2494][24939]" value="60" class="service-duration hide">
+            <input type="checkbox" name="" value="60" class="service-duration hide">
             <label class="service-item" data-top="0">
-                <input type="checkbox" data-is-package="0" data-id="24939" name="services[24939]"
+                <input type="checkbox" data-is-package="0" data-id="" name=""
                    class="service-checkbox hide">
-            <table class="select-type" style="margin-bottom: 40px;">
+            <table id="@item.Id" class="select-type" style="margin-bottom: 40px;">
                 <tbody>
                     <tr>
-                        <td class="type-title CeraCYBold">@Html.DisplayFor(modelItem => item.Name)</td>
-                        <td class="style-default CeraCYLight">
-                            <input disabled="" type="hidden" name="duration" value="">
+                        <td class="type-title">@Html.DisplayFor(modelItem => item.Name)</td>
+                                    <td class="style-default service-duration">
+                                        <input class="duration" disabled="" type="hidden" name="duration" value="">
                             @Html.DisplayFor(modelItem => item.Duration) хв.
                         </td>
-                        <td class="style-default CeraCYLight">
+                        <td class="style-default">
                             <div class="price-wrapper">
                                 <span class="price" style="padding-right: 0">@Html.DisplayFor(modelItem => item.Price)</span> грн
                             </div>
@@ -59,9 +54,32 @@
     <a class="btn btn-outline-secondary btn-show-all btn-add-service" asp-action="Create">Додати нову послугу</a>
     </div>
 }
+else if (CurrentUser.User.Equals(UserRole.Client))
+{
+    <div class="wrap-button center-align cart">
+            <div class="total">
+                <div class="col-6">
+                    <span>Загальний час</span>
+                </div>
+                <div class="col-6">
+                    <span id="total-time">0</span>
+                    <input type="hidden" name="total_time" value="">
+                </div>
+                <div class="col-6">
+                    <span>Загальна сума</span>
+                </div>
+                <div class="col-6">
+                    <span><span id="total-sum">0</span> грн</span>
+                </div>
+                        <a class="button button-next" onclick="saveCart()" asp-controller="Masters" asp-action="Index">Далі</a>
+            </div>
+               
+        </div>
+}
 </div>
 </form>
 </section>
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src="~/js/services_page_script.js"></script>
+<script src="~/js/cart_script.js"></script>
