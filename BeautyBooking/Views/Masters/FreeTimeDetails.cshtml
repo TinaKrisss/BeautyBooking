@@ -95,7 +95,7 @@
                 </div>
                 <!-- add-end -->
                 <div class="form-group free-time-btns">
-                    <a class="btn btn-outline-secondary btn-show-all next-btn" onclick="saveSelection()" asp-controller="Records" asp-action="Confirmation">Далі</a>
+                    <a class="btn btn-outline-secondary btn-show-all next-btn" onclick="saveSelection('@Html.Raw(Model.Id)')">Далі</a>
                 </div>
                 @if (CurrentUser.User.Equals(UserRole.Admin))
                 {

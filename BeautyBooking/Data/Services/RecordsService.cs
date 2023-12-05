@@ -34,5 +34,20 @@ namespace BeautyBooking.Data.Services
 
             return records;
         }
+        public async Task<ConfirmOrderVM> GetRecordConfirmation(int id)
+        {
+            var confirmOrderVM = _context.Records
+            .Include(record => record.FreeTime.Master) 
+            .Include(record => record.GroupOfServices) 
+            .ThenInclude(group => group.Service).Where(record => record.Id == id)
+            .Select(record => new ConfirmOrderVM
+            {
+                MasterName = record.FreeTime.Master.Name,
+                MasterSurname = record.FreeTime.Master.Surname,
+                Services = record.GroupOfServices.Select(group => group.Service).ToList(),
+            })
+            .ToList();
+            return confirmOrderVM[0];
+        }
     }
 }

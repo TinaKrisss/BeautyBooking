@@ -23,6 +23,32 @@
     });
 });
 
-function saveSelection() {
-    sessionStorage.setItem("freeTimeId", $(".time-selected .time-item").attr("id"));
+function saveSelection(masterId) {
+    var cartData = sessionStorage.getItem('Cart');
+    var totalDuration = sessionStorage.getItem('total-duration');
+    var totalPrice = sessionStorage.getItem('total-price');
+    var freeTimeId = $(".time-selected .time-item").attr("id");
+
+    // Отправляем данные на сервер с помощью AJAX
+    $.ajax({
+        url: '/Records/Confirmation',
+        method: 'POST',
+        data: {
+            cartData: cartData,
+            totalDuration: totalDuration,
+            totalPrice: totalPrice,
+            freeTimeIdString: freeTimeId,
+            masterIdString: masterId
+        },
+        success: function (response) {
+            // Обработка успешного ответа от сервера
+            console.log('Данные успешно отправлены на сервер');
+            // Добавьте здесь код, который нужно выполнить после успешной отправки данных на сервер
+        },
+        error: function (error) {
+            // Обработка ошибок
+            console.error('Произошла ошибка при отправке данных на сервер');
+        }
+    });
+    //sessionStorage.setItem("freeTimeId", $(".time-selected .time-item").attr("id"));
 }
