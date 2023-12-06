@@ -80,11 +80,12 @@ namespace BeautyBooking.Controllers
             {
 				record.Status = editRecordVM.Status;
 				await _serviceR.UpdateAsync(recordId, record);
+				return RedirectToAction("Index");
 			}
             catch
             {
+				return RedirectToAction("Edit", recordId);
 			}
-			return RedirectToAction("Index");
 		}
 
 		[HttpPost]
@@ -93,12 +94,12 @@ namespace BeautyBooking.Controllers
 			try
 			{
 				await _serviceR.DeleteAsync(recordId);
+				return RedirectToAction("Index");
 			}
 			catch
 			{
-
+				return RedirectToAction("Edit", recordId);
 			}
-			return RedirectToAction("Index");
 		}
 
 		[HttpPost]
@@ -119,11 +120,12 @@ namespace BeautyBooking.Controllers
 				var freeTime = await _serviceF.GetByIdAsync(editRecordVM.FreeTimeId);
 				freeTime.DateAndTime = editRecordVM.DateAndTime;
 				await _serviceF.UpdateAsync(editRecordVM.FreeTimeId, freeTime);
+				return RedirectToAction("Index");
 			}
 			catch
 			{
+				return RedirectToAction("Edit", recordId);
 			}
-			return RedirectToAction("Index");
 		}
 	}
 }
