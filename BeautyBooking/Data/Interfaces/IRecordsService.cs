@@ -6,7 +6,8 @@ namespace BeautyBooking.Data.Interfaces
 {
     public interface IRecordsService : IEntityBaseRepository<Record>
 	{
-        public Task<List<RecordsVM>> GetRecords();
+        public Task<List<RecordVM>> GetRecords();
         public Task<ConfirmOrderVM> GetRecordConfirmation(int id);
+        public Task<EditRecordVM> GetRecordInformation(int id);
     }
 }

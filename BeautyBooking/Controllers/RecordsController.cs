@@ -10,21 +10,15 @@ namespace BeautyBooking.Controllers
 {
 	public class RecordsController : Controller
 	{
-		private readonly IServicesService _serviceS;
 		private readonly IRecordsService _serviceR;
 		private readonly IGroupsOfServicesService _serviceG;
-		private readonly IClientsService _serviceC;
-		private readonly IMastersService _serviceM;
 		private readonly IFreeTimeService _serviceF;
 
-		public RecordsController(IServicesService serviceS, IRecordsService serviceR, IGroupsOfServicesService serviceG, IClientsService serviceC, IMastersService serviceM, IFreeTimeService serviceF)
+		public RecordsController(IRecordsService serviceR, IGroupsOfServicesService serviceG, IFreeTimeService serviceF)
         {
-            _serviceS = serviceS;
             _serviceR = serviceR;
             _serviceG = serviceG;
-            _serviceC = serviceC;
-            _serviceM = serviceM;
-			_serviceF = serviceF;
+            _serviceF = serviceF;
         }
 
         public async Task<IActionResult> Index()
@@ -32,16 +26,16 @@ namespace BeautyBooking.Controllers
 			var recordsVMs = await _serviceR.GetRecords();
 			return View(recordsVMs);
 		}
-        [HttpPost]
+		[HttpPost]
 		public async Task<IActionResult> Confirmation(string cartData, string totalDuration, string totalPrice, string freeTimeIdString, string masterIdString)
 		{
-            int[] serviceIds = JsonConvert.DeserializeObject<string[]>(cartData).Select(int.Parse).ToArray();
+			int[] serviceIds = JsonConvert.DeserializeObject<string[]>(cartData).Select(int.Parse).ToArray();
 			int freeTimeId = Convert.ToInt32(freeTimeIdString);
 			int masterId = Convert.ToInt32(masterIdString);
 			//int? clientId = HttpContext.Session.GetInt32("UserId");
 			int? clientId = 1;
-            try
-            {
+			try
+			{
 				var record = new Record
 				{
 					Status = Status.NotConfirmed,
@@ -50,23 +44,43 @@ namespace BeautyBooking.Controllers
 				};
 				await _serviceR.AddAsync(record);
 				foreach (int serviceId in serviceIds)
-                {
+				{
 					var group = new GroupOfServices
 					{
 						RecordId = record.Id,
 						ServiceId = serviceId,
 					};
 					await _serviceG.AddAsync(group);
-                }
+				}
 				ConfirmOrderVM confirmOrderVM = await _serviceR.GetRecordConfirmation(record.Id);
 				confirmOrderVM.Price = Convert.ToInt32(totalPrice);
 				confirmOrderVM.Time = totalDuration;
 				return View(confirmOrderVM);
 			}
-            catch
-            {
+			catch
+			{
 				return View("NotFound");
 			}
 		}
+
+		[HttpPost]
+		public async Task<IActionResult> Confirm(int recordId, EditRecordVM editRecordVM)
+		{
+			var record = await _serviceR.GetByIdAsync(recordId);
+			if (record == null)
+            {
+				return RedirectToAction("", editRecordVM);
+            }
+            try
+            {
+				record.Status = editRecordVM.Status;
+				await _serviceR.UpdateAsync(recordId, record);
+			}
+            catch
+            {
+			}
+			return RedirectToAction("", editRecordVM);
+		}
+
 	}
 }
