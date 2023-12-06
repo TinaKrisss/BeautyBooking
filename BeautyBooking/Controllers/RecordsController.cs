@@ -81,6 +81,18 @@ namespace BeautyBooking.Controllers
 			}
 			return RedirectToAction("", editRecordVM);
 		}
+		[HttpPost]
+		public async Task<IActionResult> Delete(int recordId)
+		{
+			try
+			{
+				await _serviceR.DeleteAsync(recordId);
+			}
+			catch
+			{
 
+			}
+			return RedirectToAction("Index");
+		}
 	}
 }
