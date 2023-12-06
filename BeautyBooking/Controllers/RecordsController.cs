@@ -26,6 +26,11 @@ namespace BeautyBooking.Controllers
 			var recordsVMs = await _serviceR.GetRecords();
 			return View(recordsVMs);
 		}
+		public async Task<IActionResult> Edit(int recordId)
+		{
+			var editRecordVM = await _serviceR.GetRecordInformation(recordId);
+			return View(editRecordVM);
+		}
 		[HttpPost]
 		public async Task<IActionResult> Confirmation(string cartData, string totalDuration, string totalPrice, string freeTimeIdString, string masterIdString)
 		{
@@ -69,7 +74,7 @@ namespace BeautyBooking.Controllers
 			var record = await _serviceR.GetByIdAsync(recordId);
 			if (record == null)
             {
-				return RedirectToAction("", editRecordVM);
+				return RedirectToAction("Edit", recordId);
             }
             try
             {
@@ -79,7 +84,7 @@ namespace BeautyBooking.Controllers
             catch
             {
 			}
-			return RedirectToAction("", editRecordVM);
+			return RedirectToAction("Index");
 		}
 
 		[HttpPost]
@@ -102,12 +107,12 @@ namespace BeautyBooking.Controllers
 			var time = await _serviceF.GetByMaster(editRecordVM.MasterId, editRecordVM.DateAndTime);
 			if (time != null)
 			{
-				return RedirectToAction("", editRecordVM);
+				return RedirectToAction("Edit", recordId);
 			}
 			var record = await _serviceR.GetByIdAsync(recordId);
 			if (record == null)
 			{
-				return RedirectToAction("", editRecordVM);
+				return RedirectToAction("Edit", recordId);
 			}
 			try
 			{
@@ -118,7 +123,7 @@ namespace BeautyBooking.Controllers
 			catch
 			{
 			}
-			return RedirectToAction("", editRecordVM);
+			return RedirectToAction("Index");
 		}
 	}
 }
