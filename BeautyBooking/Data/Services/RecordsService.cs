@@ -58,12 +58,14 @@ namespace BeautyBooking.Data.Services
             .ThenInclude(group => group.Service).Where(record => record.Id == id)
             .Select(record => new EditRecordVM
             {
+                FreeTimeId = record.FreeTime.Id,
+                MasterId = record.FreeTime.MasterId,
                 ClientName = record.Client.Name,
                 ClientSurname = record.Client.Surname,
                 MasterName = record.FreeTime.Master.Name,
                 MasterSurname = record.FreeTime.Master.Surname,
                 Services = record.GroupOfServices.Select(group => group.Service).ToList(),
-                FreeTime = record.FreeTime,
+                DateAndTime = record.FreeTime.DateAndTime,
                 Status = record.Status
             })
             .ToList();

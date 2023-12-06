@@ -5,12 +5,14 @@ namespace BeautyBooking.Data.ViewModels
 {
     public class EditRecordVM
     {
+        public int FreeTimeId { get; set; }
+        public int MasterId { get; set; }
         public string ClientName { get; set; }
         public string ClientSurname { get; set; }
         public string MasterName { get; set; }
         public string MasterSurname { get; set; }
         public List<Service> Services { get; set; }
-        public FreeTime FreeTime { get; set; }
+        public DateTime DateAndTime { get; set; }
         public Status Status { get; set; }
     }
 }

@@ -81,6 +81,7 @@ namespace BeautyBooking.Controllers
 			}
 			return RedirectToAction("", editRecordVM);
 		}
+
 		[HttpPost]
 		public async Task<IActionResult> Delete(int recordId)
 		{
@@ -93,6 +94,31 @@ namespace BeautyBooking.Controllers
 
 			}
 			return RedirectToAction("Index");
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Edit(int recordId, EditRecordVM editRecordVM)
+		{
+			var time = await _serviceF.GetByMaster(editRecordVM.MasterId, editRecordVM.DateAndTime);
+			if (time != null)
+			{
+				return RedirectToAction("", editRecordVM);
+			}
+			var record = await _serviceR.GetByIdAsync(recordId);
+			if (record == null)
+			{
+				return RedirectToAction("", editRecordVM);
+			}
+			try
+			{
+				var freeTime = await _serviceF.GetByIdAsync(editRecordVM.FreeTimeId);
+				freeTime.DateAndTime = editRecordVM.DateAndTime;
+				await _serviceF.UpdateAsync(editRecordVM.FreeTimeId, freeTime);
+			}
+			catch
+			{
+			}
+			return RedirectToAction("", editRecordVM);
 		}
 	}
 }
