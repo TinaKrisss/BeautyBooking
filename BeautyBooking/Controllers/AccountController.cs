@@ -9,11 +9,13 @@ namespace BeautyBooking.Controllers
 {
 	public class AccountController : Controller
 	{
-		private readonly IClientsService _service;
+		private readonly IClientsService _serviceC;
+		private readonly IMastersService _serviceM;
 
-		public AccountController(IClientsService service)
+		public AccountController(IClientsService serviceC, IMastersService serviceM)
 		{
-			_service = service;
+			_serviceC = serviceC;
+			_serviceM = serviceM;
 		}
 
 		public IActionResult SignIn() => View(new SignInVM());
@@ -28,8 +30,19 @@ namespace BeautyBooking.Controllers
 				CurrentUser.User = UserRole.Admin;
 				return RedirectToAction("Index", "Services");
 			}
+			//Check master exists
+			var master = await _serviceM.GetByEmailAsync(signInVM.Email);
+
+			//If master exists and password is correct
+			if (master != null && master.Password.Equals(signInVM.Password))
+			{
+				CurrentUser.User = UserRole.Master;
+				return RedirectToAction("Details", new { id = master.Id });
+				//return RedirectToAction("Index", "Services");
+			}
+
 			//Check user exists
-			var cl = await _service.GetByEmailAsync(signInVM.Email);
+			var cl = await _serviceC.GetByEmailAsync(signInVM.Email);
 
 			//If user exists and password is correct
 			if (cl != null && cl.Password.Equals(signInVM.Password))
@@ -57,7 +70,7 @@ namespace BeautyBooking.Controllers
 			}
 
 			//Check if user already exists in db
-			var cl = await _service.GetByEmailAsync(registerVM.Email);
+			var cl = await _serviceC.GetByEmailAsync(registerVM.Email);
 
 			if (cl != null)
 			{
@@ -79,7 +92,7 @@ namespace BeautyBooking.Controllers
 					Password = registerVM.Password
 				};
 
-				await _service.AddAsync(newClient);
+				await _serviceC.AddAsync(newClient);
 			}
 			return RedirectToAction("SignIn");
 		}
@@ -87,7 +100,7 @@ namespace BeautyBooking.Controllers
 		//Get: Account/Details/1
 		public async Task<IActionResult> Details(int id)
 		{
-			var clientDetails = await _service.GetByIdAsync(id);
+			var clientDetails = await _serviceC.GetByIdAsync(id);
 
 			if (clientDetails == null) return View("NotFound");
 			return View(clientDetails);
@@ -96,7 +109,7 @@ namespace BeautyBooking.Controllers
 		//Get: Account/Edit/1
 		public async Task<IActionResult> Edit(int id)
 		{
-			var clientDetails = await _service.GetByIdAsync(id);
+			var clientDetails = await _serviceC.GetByIdAsync(id);
 			if (clientDetails == null) return View("NotFound");
 			return View(new EditProfileVM {
 				Id = clientDetails.Id,
@@ -128,14 +141,14 @@ namespace BeautyBooking.Controllers
 				Password = editProfileVM.OldPassword
 			};
 
-			await _service.UpdateAsync(id, cl);
+			await _serviceC.UpdateAsync(id, cl);
 			return RedirectToAction("Details", new {id});
 		}
 
 		[HttpPost]
 		public async Task<IActionResult> ChangePassword(int id, [Bind("Id,OldPassword,NewPassword")] EditProfileVM editProfileVM)
 		{
-			await _service.UpdatePasswordAsync(id, editProfileVM.NewPassword);
+			await _serviceC.UpdatePasswordAsync(id, editProfileVM.NewPassword);
 			return RedirectToAction("Edit", new { id });
 		}
 	}

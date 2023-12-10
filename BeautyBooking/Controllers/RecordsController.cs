@@ -45,8 +45,7 @@ namespace BeautyBooking.Controllers
 			int[] serviceIds = JsonConvert.DeserializeObject<string[]>(cartData).Select(int.Parse).ToArray();
 			int freeTimeId = Convert.ToInt32(freeTimeIdString);
 			int masterId = Convert.ToInt32(masterIdString);
-			//int? clientId = HttpContext.Session.GetInt32("UserId");
-			int? clientId = 1;
+			int? clientId = HttpContext.Session.GetInt32("userId");
 			try
 			{
 				var record = new Record
