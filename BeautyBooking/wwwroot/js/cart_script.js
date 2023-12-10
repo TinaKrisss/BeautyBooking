@@ -68,10 +68,12 @@ $(document).ready(function () {
 
     if (chooseMode) {
         $(".btn-details").css("display", "none");
-        $(".btn-choose-master").css("display", "block")
+        $(".btn-choose-master").css("display", "block");
+        $(".btn-next").css("display", "block");
     }
     else {
         $(".btn-details").css("display", "block");
         $(".btn-choose-master").css("display", "none");
+        $(".btn-next").css("display", "none");
     }
 });

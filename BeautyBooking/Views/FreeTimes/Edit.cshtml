@@ -43,7 +43,8 @@
                     <input type="hidden" asp-for="MastersFreeTime" />
                      <input type="hidden" id="selectedFreeTimeId" name="FreeTimeId" value="" />
 
-                    <select id="freeTimeDropdown"></select><button type="submit" class="btn btn-outline-info add-btn delete-btn" asp-action="Delete">Видалити</button><br />
+                    <select id="freeTimeDropdown" class="mt-2 mb-2"></select>
+                    <button type="submit" class="btn btn-danger delete-btn" asp-action="Delete">Видалити</button><br />
                     <label for="NewDateAndTime">Введіть нову дату та час</label><br />
                     <input class="dateTimePicker" type="datetime-local" name="NewDateAndTime" value="" asp-for="NewDateAndTime">
                     <p class="fieldset add-btns">
@@ -64,9 +65,16 @@
         $("#selectedFreeTimeId").val(items[0].id);
     }
     $.each(items, function (index, item) {
-        dropdown.append($('<option asp-for="FreeTimeId">').text(item.dateAndTime).val(item.id));
-    });
+        var dateTime = new Date(item.dateAndTime);
 
+var formattedDate = ('0' + dateTime.getDate()).slice(-2) + '.' +
+                    ('0' + (dateTime.getMonth() + 1)).slice(-2) + '.' +
+                    dateTime.getFullYear() + ' ' +
+                    ('0' + dateTime.getHours()).slice(-2) + ':' +
+                    ('0' + dateTime.getMinutes()).slice(-2);
+        alert(formattedDate);
+        dropdown.append($('<option asp-for="FreeTimeId">').text(formattedDate).val(item.id));
+    });
 
     $("#freeTimeDropdown").on("change", function() {
     var selectedFreeTimeId = $(this).val();

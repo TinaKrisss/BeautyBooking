@@ -94,17 +94,18 @@
                     }
                 </div>
                 <!-- add-end -->
-                <div class="form-group free-time-btns">
+                <div class="form-group free-time-btns btn-next">
                     <a class="btn btn-outline-secondary btn-show-all next-btn" onclick="saveSelection('@Html.Raw(Model.Id)')">Далі</a>
                 </div>
                 @if (CurrentUser.User.Equals(UserRole.Admin))
                 {
-                <div class="form-group free-time-btns edit-btn-container">
-                    <a class="btn btn-outline-secondary btn-show-all edit-free-time-btn" asp-controller="FreeTimes" asp-action="Edit" asp-route-masterId="@Model.Id">Редагувати вільні години</a>
-                </div>
+                    <div class="form-group free-time-btns edit-btn-container mt-5 mb-3">
+                        <a class="btn btn-outline-secondary btn-show-all edit-free-time-btn" asp-controller="FreeTimes" asp-action="Edit" asp-route-masterId="@Model.Id" disabled>Редагувати</a>
+                        <a class="btn btn-outline-secondary btn-show-all" asp-controller="FreeTimes" asp-action="Create" asp-route-id="@Model.Id">Додати</a>
+                    </div>   
                 }
-                <div class="form-group free-time-btns">
-                    <a class="btn btn-outline-secondary btn-show-all" asp-controller="FreeTimes" asp-action="Create" asp-route-id="@Model.Id">Додати вільні години</a>
+                <div class="form-group">
+                    <a class="btn btn-outline-secondary btn-prev" asp-controller="Masters" asp-action="Details" asp-route-id="@Model.Id">Назад</a>
                 </div>
             </div>
         </div>
@@ -112,3 +113,4 @@
 </div>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 <script src="~/js/freetime_page_script.js"></script>
+<script src="~/js/cart_script.js"></script>

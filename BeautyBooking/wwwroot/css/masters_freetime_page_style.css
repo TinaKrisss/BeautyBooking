@@ -849,6 +849,7 @@ input::placeholder {
 }
 
 .cancel-btn {
+    height: fit-content;
     width: 30% !important;
 }
 
@@ -859,9 +860,19 @@ input::placeholder {
     color: #ffffff !important;
 }
 
-.free-time-btns
-{
-    margin-top: 3%;
+.free-time-btns {
+/*    margin-top: 5%;
+    margin-top: 5%;*/
+}
+
+.free-time-btns .btn-show-all {
+    margin: 0%;
+    width: 25%;
+}
+
+.edit-btn-container{
+    display: flex;
+    justify-content: space-between;
 }
 
 .next-btn {
@@ -881,7 +892,17 @@ input::placeholder {
 
 .delete-btn
 {
-    color: #000000;
-    width: 30%;
-    margin-left: 10%;
+    display: block;
+    width: 25%;
+    font-size: 12pt;
+}
+
+.btn-prev
+{
+    width: 25%;
+}
+
+#freeTimeDropdown
+{
+    width: 25%;
 }
