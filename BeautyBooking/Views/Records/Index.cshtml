@@ -54,9 +54,9 @@
                                 @if (CurrentUser.User.Equals(UserRole.Admin))
                                 {
                                     <td>
-                                    <a class="btn btn-outline-info mt-2" asp-action="Edit" asp-route-id="@item.Id">Редагувати</a>
-                            </td>
-                        }
+                                    <a class="btn btn-outline-info mt-2" asp-action="Edit" asp-route-recordId="@item.Id">Редагувати</a>
+                                    </td>
+                                }
                     </tr>
                 }
             </tbody>

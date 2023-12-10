@@ -44,13 +44,13 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
 	name: "default",
-	pattern: "{controller=Services}/{action=Index}");
+	pattern: "{controller=Records}/{action=Index}");
 
 //Seed db
 AppDbInitializer.Seed(app);
 AdminData.Username = builder.Configuration["Admin:Username"];
 AdminData.Password = builder.Configuration["Admin:Password"];
 
-CurrentUser.User = UserRole.Client;
+CurrentUser.User = UserRole.Admin;
 
 app.Run();

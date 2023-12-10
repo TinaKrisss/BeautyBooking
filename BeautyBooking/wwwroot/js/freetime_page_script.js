@@ -40,14 +40,19 @@ function saveSelection(masterId) {
             freeTimeIdString: freeTimeId,
             masterIdString: masterId
         },
+
         success: function (response) {
+            console.log(response);
             // Обработка успешного ответа от сервера
             console.log('Данные успешно отправлены на сервер');
+            window.location.href = '/Records/Confirmation';
+            console.log(response);
             // Добавьте здесь код, который нужно выполнить после успешной отправки данных на сервер
         },
         error: function (error) {
             // Обработка ошибок
             console.error('Произошла ошибка при отправке данных на сервер');
+            
         }
     });
     //sessionStorage.setItem("freeTimeId", $(".time-selected .time-item").attr("id"));

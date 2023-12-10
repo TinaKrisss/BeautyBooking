@@ -1,0 +1,29 @@
+﻿.fieldset-status .radio-btns {
+	display: flex;
+	margin: 3% 0%;
+}
+
+.radio-btns input
+{
+	width: 20px;
+	height: 20px;
+}
+
+.radio-btns label
+{
+	margin-left: 3%;
+}
+
+.btn-delete
+{
+	width: 30%;
+}
+
+.btn-cancel {
+	width: 100%;
+}
+
+.add-btns
+{
+	margin-top: 3%;
+}

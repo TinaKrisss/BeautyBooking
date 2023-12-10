@@ -6288,7 +6288,6 @@ a.signin {
 }
 
 input {
-    font-family: CeraCYLight;
     display: block;
     box-sizing: border-box;
     width: 100%;
@@ -6306,7 +6305,6 @@ input {
 
     input::placeholder {
         opacity: 0.3;
-        font-family: CeraPROLight;
         font-weight: 600;
         font-size: 14px;
         color: #0b0b0b;

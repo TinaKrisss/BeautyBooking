@@ -1,5 +1,6 @@
-﻿@*@using BeautyBooking.Data.Enums
+﻿@using BeautyBooking.Data.Enums
 @using BeautyBooking.Data.Static;
+@using BeautyBooking.Data.ViewModels;
 
 @model ConfirmOrderVM;
 
@@ -27,7 +28,7 @@
                     <p class="text-left">Послуги:</p>
                     <p class="text-left">Майстер:</p>
                     <p class="text-left">Загальна тривалість:</p>
-                    <p class="text-left">Всього до сплати:</p>
+                    <p class="text-left">Всього до сплати: @Model.Price</p>
                 </div>
                 <div class="form-group free-time-btns edit-btn-container">
                     <a class="btn btn-outline-secondary btn-show-all" asp-controller="Services" asp-action="Index">На головну</a>
@@ -35,4 +36,4 @@
             </div>
         </div>
     </div>
-</div>*@
+</div>

@@ -5,6 +5,7 @@ namespace BeautyBooking.Data.ViewModels
 {
     public class EditRecordVM
     {
+        public int Id { get; set; }
         public int FreeTimeId { get; set; }
         public int MasterId { get; set; }
         public string ClientName { get; set; }
