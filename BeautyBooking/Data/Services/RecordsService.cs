@@ -45,6 +45,8 @@ namespace BeautyBooking.Data.Services
                 MasterName = record.FreeTime.Master.Name,
                 MasterSurname = record.FreeTime.Master.Surname,
                 Services = record.GroupOfServices.Select(group => group.Service).ToList(),
+                Time = record.GroupOfServices.Sum(group => group.Service.Duration).ToString(),
+                Price = record.GroupOfServices.Sum(group => group.Service.Price)
             })
             .ToList();
             return confirmOrderVM[0];

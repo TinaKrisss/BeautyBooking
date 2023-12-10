@@ -25,8 +25,6 @@
 
 function saveSelection(masterId) {
     var cartData = sessionStorage.getItem('Cart');
-    var totalDuration = sessionStorage.getItem('total-duration');
-    var totalPrice = sessionStorage.getItem('total-price');
     var freeTimeId = $(".time-selected .time-item").attr("id");
 
     // Отправляем данные на сервер с помощью AJAX
@@ -35,19 +33,14 @@ function saveSelection(masterId) {
         method: 'POST',
         data: {
             cartData: cartData,
-            totalDuration: totalDuration,
-            totalPrice: totalPrice,
             freeTimeIdString: freeTimeId,
             masterIdString: masterId
         },
 
         success: function (response) {
-            console.log(response);
-            // Обработка успешного ответа от сервера
-            console.log('Данные успешно отправлены на сервер');
-            window.location.href = '/Records/Confirmation';
-            console.log(response);
-            // Добавьте здесь код, который нужно выполнить после успешной отправки данных на сервер
+            window.location.href = '/Records/Confirmation?recordId=' + response;
+            sessionStorage.removeItem('Cart');
+            sessionStorage.removeItem('chooseMode');
         },
         error: function (error) {
             // Обработка ошибок
@@ -55,5 +48,4 @@ function saveSelection(masterId) {
             
         }
     });
-    //sessionStorage.setItem("freeTimeId", $(".time-selected .time-item").attr("id"));
 }

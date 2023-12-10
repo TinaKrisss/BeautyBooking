@@ -26,9 +26,21 @@ namespace BeautyBooking.Controllers
 			var recordsVMs = await _serviceR.GetRecords();
 			return View(recordsVMs);
 		}
+		public async Task<IActionResult> Confirmation(int recordId)
+		{
+			if (recordId != -1)
+            {
+				ConfirmOrderVM confirmOrderVM = await _serviceR.GetRecordConfirmation(recordId);
+				int hours = Convert.ToInt32(confirmOrderVM.Time) / 60;
+				int minutes = Convert.ToInt32(confirmOrderVM.Time) % 60;
+				confirmOrderVM.Time = $"{hours:D2}:{minutes:D2}";
+				return View(confirmOrderVM);
+			}
+			return View("NotFound");
 
+		}
 		[HttpPost]
-		public async Task<IActionResult> Confirmation(string cartData, string totalDuration, string totalPrice, string freeTimeIdString, string masterIdString)
+		public async Task<int> Confirmation(string cartData, string freeTimeIdString, string masterIdString)
 		{
 			int[] serviceIds = JsonConvert.DeserializeObject<string[]>(cartData).Select(int.Parse).ToArray();
 			int freeTimeId = Convert.ToInt32(freeTimeIdString);
@@ -53,34 +65,11 @@ namespace BeautyBooking.Controllers
 					};
 					await _serviceG.AddAsync(group);
 				}
-				ConfirmOrderVM confirmOrderVM = await _serviceR.GetRecordConfirmation(record.Id);
-				confirmOrderVM.Price = Convert.ToInt32(totalPrice);
-				confirmOrderVM.Time = totalDuration;
-				return View("Confirmation", confirmOrderVM);
+				return record.Id;
 			}
 			catch
 			{
-				return View("NotFound");
-			}
-		}
-
-		[HttpPost]
-		public async Task<IActionResult> Confirm(int recordId, EditRecordVM editRecordVM)
-		{
-			var record = await _serviceR.GetByIdAsync(recordId);
-			if (record == null)
-            {
-				return RedirectToAction("Edit", recordId);
-            }
-            try
-            {
-				record.Status = editRecordVM.Status;
-				await _serviceR.UpdateAsync(recordId, record);
-				return RedirectToAction("Index");
-			}
-            catch
-            {
-				return RedirectToAction("Edit", recordId);
+				return -1;
 			}
 		}
 
@@ -121,6 +110,7 @@ namespace BeautyBooking.Controllers
 			{
 				var freeTime = await _serviceF.GetByIdAsync(editRecordVM.FreeTimeId);
 				freeTime.DateAndTime = editRecordVM.DateAndTime;
+				record.Status = editRecordVM.Status;
 				await _serviceF.UpdateAsync(editRecordVM.FreeTimeId, freeTime);
 				return RedirectToAction("Index");
 			}
