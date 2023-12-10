@@ -18,7 +18,10 @@
                 <tr class="text-left">
                     <th>Дата і час</th>
                     <th>Клієнт</th>
-                    <th>Майстер</th>
+                    @if (CurrentUser.User.Equals(UserRole.Admin))
+                    {
+                        <th>Майстер</th>
+                    }                   
                     <th>Статус</th>
                     <th></th>
                 </tr>
@@ -33,9 +36,12 @@
                         <td class="align-middle">
                             @Html.DisplayFor(modelItem => item.ClientSurname) @Html.DisplayFor(modelItem => item.ClientName)
                         </td>
-                        <td class="align-middle">
-                            @Html.DisplayFor(modelItem => item.MasterSurname) @Html.DisplayFor(modelItem => item.MasterName)
-                        </td>
+                        @if (CurrentUser.User.Equals(UserRole.Admin))
+                        {
+                            <td class="align-middle">
+                                @Html.DisplayFor(modelItem => item.MasterSurname) @Html.DisplayFor(modelItem => item.MasterName)
+                            </td>
+                        }
                                 @switch (item.Status)
                                 {
                                     case Status.NotConfirmed:
@@ -55,6 +61,12 @@
                                 {
                                     <td>
                                     <a class="btn btn-outline-info mt-2" asp-action="Edit" asp-route-recordId="@item.Id">Редагувати</a>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <a class="btn btn-outline-info mt-2" asp-action="Edit" asp-route-recordId="@item.Id">Деталі</a>
                                     </td>
                                 }
                     </tr>

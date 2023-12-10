@@ -1,4 +1,6 @@
-﻿@using BeautyBooking.Data.ViewModels
+﻿@using BeautyBooking.Data.Enums
+@using BeautyBooking.Data.Static
+@using BeautyBooking.Data.ViewModels
 
 @model EditRecordVM
 
@@ -17,26 +19,25 @@
         <div class="row">
             <div class="col-md-8 offset-2">
                 <form asp-action="Edit" asp-route-recordId="@Model.Id">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+                    <input id="userType" value="@CurrentUser.User" style="display: none;" />
                     <div class="form-group">
                         <label class="control-label">Клієнт</label>
-                        <input class="form-control" value="@Model.ClientSurname @Model.ClientName" />
+                        <input class="form-control" value="@Model.ClientSurname @Model.ClientName" readonly />
                     </div>
                     <div class="form-group">
                         <label class="control-label">Майстер</label>
-                        <input class="form-control" value="@Model.MasterSurname @Model.MasterName" />
+                        <input class="form-control" value="@Model.MasterSurname @Model.MasterName" readonly />
                     </div>
                     <div class="form-group">
                         <label class="control-label">Процедури:</label>
                         @foreach (var item in @Model.Services)
                         {
-                            <input class="form-control" value=" @item.Name" />     
+                            <input class="form-control" value=" @item.Name" readonly />
                         }
                     </div>
                     <div class="form-group">
                         <label class="control-label">Дата і час</label>
-                        <input class="form-control" id="datetimeinput" type="datetime-local" value="@Model.DateAndTime.ToString("yyyy-MM-ddTHH:mm")" disabled/>
+                        <input class="form-control" id="datetimeinput" asp-for="DateAndTime" type="datetime-local" value="@Model.DateAndTime.ToString("yyyy-MM-ddTHH:mm")"/>
                     </div>
                     <div class="form-group">
                         <label class="status">Статус</label>
@@ -64,12 +65,15 @@
                             <input asp-for="Status" class="selectedStatus" style="display: none;" />
                         </div>
                     </div>
-                    <div class="form-group add-btns">
-                        <input type="submit" value="Видалити" asp-action="Delete" class="btn btn-danger btn-delete float-right" />
-                        <input type="submit" value="Зберегти" asp-action="Edit" class="btn btn-add float-right" />
-                    </div>
-                    <div class="form-group add-btns">
-                        <a class="btn btn-outline-info btn-cancel" asp-action="Index">Скасувати</a>
+                    @if (CurrentUser.User.Equals(UserRole.Admin))
+                    {
+                        <div class="form-group add-btns">
+                            <input type="submit" value="Видалити" asp-action="Delete" class="btn btn-danger btn-delete float-right" />
+                            <input type="submit" value="Зберегти" asp-action="Edit" class="btn btn-add float-right" />
+                        </div>
+                    }
+                    <div class="form-group">
+                        <a class="btn btn-outline-info btn-cancel" asp-action="Index">До всіх записів</a>
                     </div>
                 </form>
             </div>

@@ -4,14 +4,19 @@
 });
 
 $(document).ready(function () {
-    toggleDateTimeInput();
-
-    $('#notConfirmed, #confirmed, #done, #cancelled').change(function () {
+    if (!($("#userType").val() == "Master")) {
         toggleDateTimeInput();
-    });
+
+        $('#notConfirmed, #confirmed, #done, #cancelled').change(function () {
+            toggleDateTimeInput();
+        });
+    }
+    else {
+        $('#notConfirmed, #confirmed, #done, #cancelled').prop('disabled', true);
+	}
 });
 
 function toggleDateTimeInput() {
     var isConfirmed = $('#notConfirmed').prop('checked');
-    $('#datetimeinput').prop('disabled', !(isConfirmed));
+    $('#datetimeinput').prop('readonly', !(isConfirmed));
 }
