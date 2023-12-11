@@ -34,6 +34,27 @@ namespace BeautyBooking.Data.Services
 
             return records;
         }
+        public async Task<List<RecordVM>> GetMasterRecords(int masterId)
+        {
+            var records = _context.Records
+                .Include(r => r.FreeTime)
+                    .ThenInclude(ft => ft.Master)
+                .Include(r => r.Client)
+                .Where(r => r.FreeTime.MasterId == masterId)
+                .Select(r => new RecordVM
+                {
+                    Id = r.Id,
+                    MasterName = r.FreeTime.Master.Name,
+                    MasterSurname = r.FreeTime.Master.Surname,
+                    ClientName = r.Client.Name,
+                    ClientSurname = r.Client.Surname,
+                    DateAndTime = r.FreeTime.DateAndTime,
+                    Status = r.Status
+                })
+                .ToList();
+
+            return records;
+        }
         public async Task<ConfirmOrderVM> GetRecordConfirmation(int id)
         {
             var confirmOrderVM = _context.Records
