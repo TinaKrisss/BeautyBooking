@@ -7,5 +7,6 @@ namespace BeautyBooking.Data.Interfaces
     {
         Task<Master> GetByEmailAsync(string email);
         Task<Master> GetWithTime(int id);
+        Task UpdatePasswordAsync(int id, string newPassword);
     }
 }

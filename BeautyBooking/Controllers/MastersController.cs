@@ -92,5 +92,47 @@ namespace BeautyBooking.Controllers
 				return View(masterCreateVM);
 			}
 		}
+
+		public async Task<IActionResult> Edit(int id)
+		{
+			var masterDetails = await _service.GetByIdAsync(id);
+			if (masterDetails == null) return View("NotFound");
+			return View(new EditMasterVM
+			{
+				Id = masterDetails.Id,
+				ProfilePhotoURL = masterDetails.ProfilePhotoURL,
+				Surname = masterDetails.Surname,
+				Name = masterDetails.Name,
+				Info = masterDetails.Info,
+				Email =masterDetails.Email,
+				OldPassword = masterDetails.Password
+			});
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Edit(int id, [Bind("Id,ProfilePhotoURL,Surname,Name,BirthDate,Gender,PhoneNumber,Email,OldPassword")] EditMasterVM editMasterVM)
+		{
+			if (!ModelState.IsValid) return View(editMasterVM);
+			var master = new Master
+			{
+				Id = id,
+				ProfilePhotoURL = editMasterVM.ProfilePhotoURL,
+				Name = editMasterVM.Name,
+				Surname = editMasterVM.Surname,
+				Info = editMasterVM.Info,
+				Email = editMasterVM.Email,
+				Password = editMasterVM.OldPassword
+			};
+
+			await _service.UpdateAsync(id, master);
+			return RedirectToAction("Details", new { id });
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> ChangePassword(int id, [Bind("Id,OldPassword,NewPassword")] EditMasterVM editMasterVM)
+		{
+			await _service.UpdatePasswordAsync(id, editMasterVM.NewPassword);
+			return RedirectToAction("Edit", new { id });
+		}
 	}
 }
