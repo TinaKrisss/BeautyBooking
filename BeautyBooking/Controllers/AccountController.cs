@@ -37,7 +37,7 @@ namespace BeautyBooking.Controllers
 			if (master != null && master.Password.Equals(signInVM.Password))
 			{
 				CurrentUser.User = UserRole.Master;
-				return RedirectToAction("Details", new { id = master.Id });
+				return RedirectToAction("Details", "Masters", new { id = master.Id });
 				//return RedirectToAction("Index", "Services");
 			}
 
