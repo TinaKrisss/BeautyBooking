@@ -9,37 +9,44 @@ namespace BeautyBooking.Controllers
 {
     public class MastersController : Controller
     {
-        private readonly IMastersService _service;
+        private readonly IMastersService _serviceM;
+		private readonly IRecordsService _serviceR;
 		private readonly IPasswordCreator _creator;
 
-        public MastersController(IMastersService service, IPasswordCreator creator)
+        public MastersController(IMastersService serviceM, IPasswordCreator creator, IRecordsService serviceR)
         {
-            _service = service;
+            _serviceM = serviceM;
             _creator = creator;
+            _serviceR = serviceR;
         }
 
         public async Task<IActionResult> Index()
         {
-            var data = await _service.GetAllAsync();
+            var data = await _serviceM.GetAllAsync();
             return View(data);
         }
-        public async Task<IActionResult> Details(int id)
+		public async Task<IActionResult> Records(int masterId)
+		{
+			var recordsVM = await _serviceR.GetMasterRecords(masterId);
+			return View(recordsVM);
+		}
+		public async Task<IActionResult> Details(int id)
         {
-            var masterDetails = await _service.GetByIdAsync(id);
+            var masterDetails = await _serviceM.GetByIdAsync(id);
 
             if (masterDetails == null) return View("NotFound");
             return View(masterDetails);
         }
 		public async Task<IActionResult> FreeTimeDetails(int id)
 		{
-			var master = await _service.GetWithTime(id);
+			var master = await _serviceM.GetWithTime(id);
 
 			if (master == null) return View("NotFound");
 			return View(master);
 		}
 		public async Task<IActionResult> Delete(int id)
 		{
-			var masterDetails = await _service.GetByIdAsync(id);
+			var masterDetails = await _serviceM.GetByIdAsync(id);
 			if (masterDetails == null) return View("NotFound");
 			return View(masterDetails);
 		}
@@ -47,10 +54,10 @@ namespace BeautyBooking.Controllers
 		[HttpPost, ActionName("Delete")]
 		public async Task<IActionResult> DeleteConfirmed(int id)
 		{
-			var masterDetails = await _service.GetByIdAsync(id);
+			var masterDetails = await _serviceM.GetByIdAsync(id);
 			if (masterDetails == null) return View("NotFound");
 
-			await _service.DeleteAsync(id);
+			await _serviceM.DeleteAsync(id);
 			return RedirectToAction(nameof(Index));
 		}
 
@@ -66,7 +73,7 @@ namespace BeautyBooking.Controllers
 			if (!ModelState.IsValid) return View(masterCreateVM);
 
 			//Check if master already exists in db
-			var mast = _service.GetByEmailAsync(masterCreateVM.Email);
+			var mast = _serviceM.GetByEmailAsync(masterCreateVM.Email);
 			if (await mast != null)
 			{
 				ModelState.AddModelError("Email", "На цю ел. пошту вже було створено майстра.");
@@ -83,7 +90,7 @@ namespace BeautyBooking.Controllers
 			};
 			try
 			{
-				await _service.AddAsync(newMaster);
+				await _serviceM.AddAsync(newMaster);
 				return RedirectToAction("Index");
 			}
 			catch
@@ -91,6 +98,48 @@ namespace BeautyBooking.Controllers
 				ModelState.AddModelError("Name", "Помилка додавання. Спробуйте ще раз.");
 				return View(masterCreateVM);
 			}
+		}
+
+		public async Task<IActionResult> Edit(int id)
+		{
+			var masterDetails = await _serviceM.GetByIdAsync(id);
+			if (masterDetails == null) return View("NotFound");
+			return View(new EditMasterVM
+			{
+				Id = masterDetails.Id,
+				ProfilePhotoURL = masterDetails.ProfilePhotoURL,
+				Surname = masterDetails.Surname,
+				Name = masterDetails.Name,
+				Info = masterDetails.Info,
+				Email =masterDetails.Email,
+				OldPassword = masterDetails.Password
+			});
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Edit(int id, [Bind("Id,ProfilePhotoURL,Surname,Name,BirthDate,Gender,PhoneNumber,Email,OldPassword")] EditMasterVM editMasterVM)
+		{
+			if (!ModelState.IsValid) return View(editMasterVM);
+			var master = new Master
+			{
+				Id = id,
+				ProfilePhotoURL = editMasterVM.ProfilePhotoURL,
+				Name = editMasterVM.Name,
+				Surname = editMasterVM.Surname,
+				Info = editMasterVM.Info,
+				Email = editMasterVM.Email,
+				Password = editMasterVM.OldPassword
+			};
+
+			await _serviceM.UpdateAsync(id, master);
+			return RedirectToAction("Details", new { id });
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> ChangePassword(int id, [Bind("Id,OldPassword,NewPassword")] EditMasterVM editMasterVM)
+		{
+			await _serviceM.UpdatePasswordAsync(id, editMasterVM.NewPassword);
+			return RedirectToAction("Edit", new { id });
 		}
 	}
 }

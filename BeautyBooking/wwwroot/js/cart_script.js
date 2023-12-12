@@ -58,8 +58,6 @@ function removeFromCart(productId) {
 
 function saveCart() {
     sessionStorage.setItem('Cart', JSON.stringify(cartArray));
-    sessionStorage.setItem('total-duration', $("#total-time").text());
-    sessionStorage.setItem('total-price', $("#total-sum").text());
     sessionStorage.setItem('chooseMode', chooseMode);
 }
 

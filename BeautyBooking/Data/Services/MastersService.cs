@@ -22,6 +22,12 @@ namespace BeautyBooking.Data.Services
 			return await _context.Set<Master>().Include(m => m.FreeTimes.Where(ft => ft.Record == null).OrderBy(ft => ft.DateAndTime))
 			.FirstOrDefaultAsync(c => c.Id == id); 
 		}
+		public async Task UpdatePasswordAsync(int id, string newPassword)
+		{
+			var master = await _context.Set<Master>().FirstOrDefaultAsync(m => m.Id == id);
+			master.Password = newPassword;
 
+			await _context.SaveChangesAsync();
+		}
 	}
 }
