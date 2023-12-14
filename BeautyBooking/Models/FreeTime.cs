@@ -12,6 +12,7 @@ namespace BeautyBooking.Models
 
 		[Display(Name = "Дата і час")]
 		[Required(ErrorMessage = "Введіть дату та час!")]
+		[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm}", ApplyFormatInEditMode = true)]
 		public DateTime DateAndTime { get; set; }
 
 		//Relationships

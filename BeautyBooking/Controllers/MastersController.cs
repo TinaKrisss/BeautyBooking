@@ -28,8 +28,9 @@ namespace BeautyBooking.Controllers
 		public async Task<IActionResult> Records(int masterId)
 		{
 			var recordsVM = await _serviceR.GetMasterRecords(masterId);
-			return View(recordsVM);
+			return RedirectToAction("Index", "Records", new { model = recordsVM });
 		}
+
 		public async Task<IActionResult> Details(int id)
         {
             var masterDetails = await _serviceM.GetByIdAsync(id);

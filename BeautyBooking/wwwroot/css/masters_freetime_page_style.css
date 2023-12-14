@@ -530,12 +530,13 @@ input::placeholder {
   width: 75px;
 }
 .calendar-form .wrap-button {
-  width: 100%;
-  margin-top: 50px;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  z-index: 100;
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 5%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
 }
 .calendar-form .wrap-button .button-submit {
   width: 100%;
@@ -849,6 +850,7 @@ input::placeholder {
 }
 
 .cancel-btn {
+    height: fit-content;
     width: 30% !important;
 }
 
@@ -859,9 +861,15 @@ input::placeholder {
     color: #ffffff !important;
 }
 
-.free-time-btns
-{
-    margin-top: 3%;
+
+.free-time-btns .btn-show-all {
+    margin: 0%;
+    width: 25%;
+}
+
+.edit-btn-container{
+    display: flex;
+    justify-content: space-between;
 }
 
 .next-btn {
@@ -881,7 +889,17 @@ input::placeholder {
 
 .delete-btn
 {
-    color: #000000;
-    width: 30%;
-    margin-left: 10%;
+    display: block;
+    width: 25%;
+    font-size: 12pt;
+}
+
+.btn-prev
+{
+    width: 25%;
+}
+
+#freeTimeDropdown
+{
+    width: 25%;
 }
