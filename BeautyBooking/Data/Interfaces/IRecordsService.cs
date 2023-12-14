@@ -10,5 +10,6 @@ namespace BeautyBooking.Data.Interfaces
         public Task<List<RecordVM>> GetMasterRecords(int masterId);
         public Task<ConfirmOrderVM> GetRecordConfirmation(int id);
         public Task<EditRecordVM> GetRecordInformation(int id);
+        public Task<List<RecordVM>> GetClientHistory(int clientId);
     }
 }

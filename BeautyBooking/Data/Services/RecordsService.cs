@@ -95,5 +95,26 @@ namespace BeautyBooking.Data.Services
             .ToList();
             return editRecordVM[0];
         }
+        public async Task<List<RecordVM>> GetClientHistory(int clientId)
+        {
+            var records = _context.Records
+                .Include(r => r.FreeTime)
+                    .ThenInclude(ft => ft.Master)
+                .Include(r => r.Client)
+                .Where(r => r.ClientId == clientId && r.Status == Enums.Status.Done)
+                .Select(r => new RecordVM
+                {
+                    Id = r.Id,
+                    MasterName = r.FreeTime.Master.Name,
+                    MasterSurname = r.FreeTime.Master.Surname,
+                    ClientName = r.Client.Name,
+                    ClientSurname = r.Client.Surname,
+                    DateAndTime = r.FreeTime.DateAndTime,
+                    Status = r.Status
+                })
+                .ToList();
+
+            return records;
+        }
     }
 }
