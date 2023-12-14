@@ -1,0 +1,62 @@
+﻿@using BeautyBooking.Data.Static;
+@using BeautyBooking.Data.Enums;
+
+@model IEnumerable<Client>
+
+@{
+    ViewData["Title"] = "Клієнти";
+}
+
+<link rel="stylesheet" href="~/css/masters_page_style.css">
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <span class="title center-align FuturaDemiC header-title">Клієнти</span>
+        <table class="table">
+            <thead>
+                <tr class="text-left">
+                    <th>@Html.DisplayNameFor(model => model.ProfilePhotoURL)</th>
+                    <th>@Html.DisplayNameFor(model => model.Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.BirthDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.Gender)</th>   
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="align-middle">
+                            <img class="rounded-circle" src="~/img/360_F_97000908_wwH2goIihwrMoeV9QF3BW6HtpsVFaNVM.jpg" alt="@item.Name" style="max-width: 150px" />
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.Surname) @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td class="align-middle">
+                            @item.BirthDate.ToString("dd.MM.yyyy")
+                        </td>
+
+                        @switch (item.Gender)
+                        {
+                                case Gender.Male:
+                            <td class="align-middle">Чоловік</td>
+                                    break;
+                            case Gender.Female:
+                            <td class="align-middle">Жінка</td>
+                                break;
+                            default:
+                            <td class="align-middle">Інше</td>
+                                break;
+                        }
+                        
+                        <td class="align-middle master-btns">                         
+                            <a class="btn btn-outline-info btn-details" asp-controller="Account" asp-action="Details" asp-route-id="@item.Id">Деталі</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src="~/js/cart_script.js"></script>

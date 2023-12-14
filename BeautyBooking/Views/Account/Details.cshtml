@@ -1,4 +1,5 @@
-﻿@using BeautyBooking.Data.ViewModels;
+﻿@using BeautyBooking.Data.Static
+@using BeautyBooking.Data.ViewModels;
 @using BeautyBooking.Data.Enums;
 
 @model Client;
@@ -75,14 +76,48 @@
                                                                                       class="form-control" placeholder="example@gmail.com" value="@Model.Email" readonly>
                     </div>
                 </div>
-                <div class="mt-5 text-center">
-                     <button class="btn btn-primary profile-button"
-                            type="button" >
-                        <a asp-action="Edit" asp-route-id="@Model.Id">Редагувати</a>
-                    </button>
+                <div class="mt-5 text-center client-btns-container">
+                    @if (CurrentUser.User.Equals(UserRole.Client))
+                    {
+                        <button class="btn btn-primary profile-button"
+                            type="button">
+                            <a asp-action="Edit" asp-route-id="@Model.Id">Редагувати</a>
+                        </button>
+                    }
+                    else
+                    {
+                        @if (CurrentUser.User.Equals(UserRole.Admin))
+                        {
+                            <button class="btn btn-danger"
+                            type="button">
+                                <a asp-controller="Clients" asp-action="Delete" asp-route-id="@Model.Id">Видалити</a>
+                            </button>
+
+                        }
+
+                        <button class="btn btn-outline-info"
+                            type="button">
+                            <a asp-controller="Clients" asp-action="Index">До всіх клієнтів</a>
+                        </button>
+                    }
+                    
                 </div>
             </div>
         </div>
     </div>
 </div>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script>
+    $(document).ready(function () {
+        $('.btn-outline-info').hover(
+            function () {
+                // Mouse over - change link color to white
+                $(this).find('a').css('color', '#ffffff');
+            },
+            function () {
+                // Mouse out - revert link color to its original color
+                $(this).find('a').css('color', '#000000');
+            }
+        );
+    });
+</script>
