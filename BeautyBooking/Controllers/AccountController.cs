@@ -151,5 +151,6 @@ namespace BeautyBooking.Controllers
 			await _serviceC.UpdatePasswordAsync(id, editProfileVM.NewPassword);
 			return RedirectToAction("Edit", new { id });
 		}
+
 	}
 }

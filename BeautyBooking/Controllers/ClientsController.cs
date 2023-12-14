@@ -9,32 +9,40 @@ namespace BeautyBooking.Controllers
 {
     public class ClientsController : Controller
     {
-        private readonly IClientsService _service;
-
-        public ClientsController(IClientsService service)
+        private readonly IClientsService _serviceC;
+        private readonly IRecordsService _serviceR;
+        public ClientsController(IClientsService serviceC, IRecordsService serviceR)
         {
-            _service = service;
+            _serviceC = serviceC;
+            _serviceR = serviceR;
         }
         public async Task<IActionResult> Index()
         {
-            var clients = await _service.GetAllAsync();
+            var clients = await _serviceC.GetAllAsync();
             if (clients == null) return View("NotFound");
             return View(clients);
         }
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int clientId)
         {
-            var clientDetails = await _service.GetByIdAsync(id);
+            var clientDetails = await _serviceC.GetByIdAsync(clientId);
 
             if (clientDetails == null) return View("NotFound");
             return View(clientDetails);
         }
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int clientId)
         {
-            var client = await _service.GetByIdAsync(id);
+            var client = await _serviceC.GetByIdAsync(clientId);
             if (client == null) return View("NotFound");
 
-            await _service.DeleteAsync(id);
+            await _serviceC.DeleteAsync(clientId);
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> History(int clientId)
+        {
+            var history = await _serviceR.GetClientHistory(clientId);
+            if (history == null) return View("NotFound");
+            return View(history);
         }
     }
 }
