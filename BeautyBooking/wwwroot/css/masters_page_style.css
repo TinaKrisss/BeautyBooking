@@ -151,3 +151,18 @@ a.signin {
     color: #175248;
     font-size: 14pt;
 }
+
+.to-free-time-btn {
+    text-align: right;
+}
+
+.to-schedule-btn {
+    text-align: left;
+}
+
+.master-records-btns 
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

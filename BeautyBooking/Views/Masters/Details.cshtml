@@ -1,4 +1,6 @@
-﻿@model Master;
+﻿@using BeautyBooking.Data.Enums
+@using BeautyBooking.Data.Static
+@model Master;
 
 @{
     ViewData["Title"] = "Про майстра";
@@ -52,9 +54,23 @@
                                                                                       class="form-control" placeholder="example@gmail.com" value="@Model.Email" readonly>
                     </div>
                 </div>
+                
+                    <div class="form-group btns-container master-records-btns">
+                        @if (CurrentUser.User.Equals(UserRole.Master))
+                        {
+                            <a class="free-time-btn to-schedule-btn" asp-action="Records" asp-route-id="@Model.Id">Мої записи</a>
+                        }
+                        <a class="free-time-btn to-free-time-btn" asp-action="FreeTimeDetails" asp-route-id="@Model.Id">Перейти до вільних годин</a>
+                    </div>
                 <div class="form-group btns-container">
-                    <a class="free-time-btn" asp-action="FreeTimeDetails" asp-route-id="@Model.Id">Перейти до вільних годин майстра</a>
-                    <a class="btn btn-outline-secondary btn-show-all" asp-action="Index">Всі майстри</a>
+                    @if (!CurrentUser.User.Equals(UserRole.Master))
+                    {
+                        <a class="btn btn-outline-secondary btn-show-all" asp-action="Index">Всі майстри</a>
+                    }
+                    else
+                    {
+                    <a class="btn btn-outline-secondary btn-show-all" asp-action="Edit" asp-route-id="@Model.Id">Редагувати</a>
+                    }
                 </div>
             </div>
         </div>

@@ -530,12 +530,13 @@ input::placeholder {
   width: 75px;
 }
 .calendar-form .wrap-button {
-  width: 100%;
-  margin-top: 50px;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  z-index: 100;
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 5%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
 }
 .calendar-form .wrap-button .button-submit {
   width: 100%;
@@ -860,10 +861,6 @@ input::placeholder {
     color: #ffffff !important;
 }
 
-.free-time-btns {
-/*    margin-top: 5%;
-    margin-top: 5%;*/
-}
 
 .free-time-btns .btn-show-all {
     margin: 0%;
