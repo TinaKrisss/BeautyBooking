@@ -164,3 +164,13 @@ a:hover {
     margin-bottom: 17rem !important;
   }
 }
+
+.to-history-btn,
+.to-history-btn:hover,
+.to-history-btn:active 
+{
+    font-size: 14pt;
+    text-align: center;
+    color: #175248;
+    margin-top: 3%;
+}

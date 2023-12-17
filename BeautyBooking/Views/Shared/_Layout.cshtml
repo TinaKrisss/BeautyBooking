@@ -15,9 +15,10 @@
     <section class="header">
         <div>
             <a asp-controller="Services" asp-action="Index" class="logo">BeautyBooking</a>
-            <a asp-controller="Services" asp-action="Index" class="services">Послуги</a>
-            <a asp-controller="Masters" asp-action="Index" class="master">Майстри</a>
-            <a asp-controller="Records" asp-action="Index" class="master">Записи</a>
+            <a asp-controller="Services" asp-action="Index" class="menu-btn">Послуги</a>
+            <a asp-controller="Masters" asp-action="Index" class="menu-btn">Майстри</a>
+            <a asp-controller="Clients" asp-action="Index" class="menu-btn">Клієнти</a>
+            <a asp-controller="Records" asp-action="Index" class="menu-btn">Записи</a>
         </div>
 
         @if (CurrentUser.User.Equals(UserRole.UnauthorizedUser))

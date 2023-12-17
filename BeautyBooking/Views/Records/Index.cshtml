@@ -57,18 +57,9 @@
                                         <td class="align-middle">Виконано</td>
                                     break;
                                 }                        
-                                @if (CurrentUser.User.Equals(UserRole.Admin))
-                                {
-                                    <td>
-                                    <a class="btn btn-outline-info mt-2" asp-action="Edit" asp-route-recordId="@item.Id">Редагувати</a>
-                                    </td>
-                                }
-                                else
-                                {
-                                    <td>
-                                        <a class="btn btn-outline-info mt-2" asp-action="Edit" asp-route-recordId="@item.Id">Деталі</a>
-                                    </td>
-                                }
+                                <td>
+                                    <a class="btn btn-outline-info mt-2" asp-action="Details" asp-route-recordId="@item.Id">Деталі</a>
+                                </td>
                     </tr>
                 }
             </tbody>
