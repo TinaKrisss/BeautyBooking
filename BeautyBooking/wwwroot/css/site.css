@@ -38,4 +38,11 @@ body {
     justify-content: space-between;
     align-items: center;
 }
+
+a.menu-btn {
+    margin-right: 50px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 15pt;
+}
 /*header style*/

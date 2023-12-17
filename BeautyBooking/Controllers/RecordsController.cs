@@ -86,6 +86,12 @@ namespace BeautyBooking.Controllers
 			}
 		}
 
+		public async Task<IActionResult> Details(int recordId)
+		{
+			var recordDetailsVM = await _serviceR.GetRecordInformation(recordId);
+			return View(recordDetailsVM);
+		}
+
 		public async Task<IActionResult> Edit(int recordId)
 		{
 			var editRecordVM = await _serviceR.GetRecordInformation(recordId);

@@ -15,5 +15,6 @@ namespace BeautyBooking.Data.ViewModels
         public List<Service> Services { get; set; }
         public DateTime DateAndTime { get; set; }
         public Status Status { get; set; }
+        public string? Feedback { get; set; }
     }
 }
