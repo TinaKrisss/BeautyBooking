@@ -138,7 +138,7 @@ namespace BeautyBooking.Controllers
 			var record = await _serviceR.GetByIdAsync(recordId);
 			record.Feedback = createFeedbackVM.Feedback;
 			await _serviceR.UpdateAsync(recordId, record);
-			return View();
+			return RedirectToAction("Details", new { recordId = recordId });
 		}
 	}
 }

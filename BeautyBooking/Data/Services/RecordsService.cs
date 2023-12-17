@@ -90,6 +90,7 @@ namespace BeautyBooking.Data.Services
                 MasterSurname = record.FreeTime.Master.Surname,
                 Services = record.GroupOfServices.Select(group => group.Service).ToList(),
                 DateAndTime = record.FreeTime.DateAndTime,
+                Feedback = record.Feedback,
                 Status = record.Status
             })
             .ToList();
