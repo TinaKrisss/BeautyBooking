@@ -26,9 +26,13 @@
                 </div>
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <p class="text-left">Послуги:</p>
-                    <p class="text-left">Майстер:</p>
-                    <p class="text-left">Загальна тривалість:</p>
-                    <p class="text-left">Всього до сплати: @Model.Price</p>
+                    @foreach (var item in Model.Services)
+                    {
+                        <p class="text-left">@item.Name</p>
+                    }<br />
+                    <p class="text-left">Майстер: @Model.MasterSurname @Model.MasterSurname</p><br />
+                    <p class="text-left">Загальна тривалість: @Model.Time</p><br />
+                    <p class="text-left">Всього до сплати: @Model.Price</p><br />
                 </div>
                 <div class="form-group free-time-btns edit-btn-container">
                     <a class="btn btn-outline-secondary btn-show-all" asp-controller="Services" asp-action="Index">На головну</a>

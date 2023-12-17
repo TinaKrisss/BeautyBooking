@@ -12,7 +12,13 @@
 
 <div class="row">
     <div class="col-md-8 offset-md-2">
-        <span class="title center-align header-title">Всі візити</span>
+        <span class="title center-align header-title">Історія візитів</span>
+        @if (Model.Count() == 0)
+        {
+            <span class="title center-align" style="font-weight: lighter">В цього клієнта ще не було візитів.</span>
+        }
+        else
+        {
         <table class="table">
             <thead>
                 <tr class="text-left">
@@ -54,6 +60,7 @@
                 }
             </tbody>
         </table>
+        }
     </div>
 </div>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>

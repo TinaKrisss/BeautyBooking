@@ -73,16 +73,16 @@ namespace BeautyBooking.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Delete(int recordId)
+		public async Task<IActionResult> Delete(int id)
 		{
 			try
 			{
-				await _serviceR.DeleteAsync(recordId);
+				await _serviceR.DeleteAsync(id);
 				return RedirectToAction("Index");
 			}
 			catch
 			{
-				return RedirectToAction("Edit", recordId);
+				return RedirectToAction("Edit", id);
 			}
 		}
 
@@ -99,17 +99,17 @@ namespace BeautyBooking.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Edit(int recordId, EditRecordVM editRecordVM)
+		public async Task<IActionResult> ConfirmEdit(EditRecordVM editRecordVM)
 		{
 			var time = await _serviceF.GetByMaster(editRecordVM.MasterId, editRecordVM.DateAndTime);
 			if (time != null)
 			{
-				return RedirectToAction("Edit", recordId);
+				return RedirectToAction("Edit", editRecordVM.Id);
 			}
-			var record = await _serviceR.GetByIdAsync(recordId);
+			var record = await _serviceR.GetByIdAsync(editRecordVM.Id);
 			if (record == null)
 			{
-				return RedirectToAction("Edit", recordId);
+				return RedirectToAction("Edit", editRecordVM.Id);
 			}
 			try
 			{
@@ -121,19 +121,19 @@ namespace BeautyBooking.Controllers
 			}
 			catch
 			{
-				return RedirectToAction("Edit", recordId);
+				return RedirectToAction("Edit", editRecordVM.Id);
 			}
 		}
 
-		public async Task<IActionResult> CreateFeedback(int recordId)
+		public async Task<IActionResult> CreateFeedback(int id)
         {
 			CreateFeedbackVM createFeedbackVM = new CreateFeedbackVM
 			{
-				Id = recordId,
+				Id = id,
 			};
 			return View(createFeedbackVM);
         }
-		public async Task<IActionResult> CreateFeedback(int recordId, CreateFeedbackVM createFeedbackVM)
+		public async Task<IActionResult> ConfirmFeedback(int recordId, CreateFeedbackVM createFeedbackVM)
 		{
 			var record = await _serviceR.GetByIdAsync(recordId);
 			record.Feedback = createFeedbackVM.Feedback;

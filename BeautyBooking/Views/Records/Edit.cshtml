@@ -18,8 +18,13 @@
         </p>
         <div class="row">
             <div class="col-md-8 offset-2">
-                <form asp-action="Edit" asp-route-recordId="@Model.Id">
+                <form asp-action="ConfirmEdit">
+
                     <input id="userType" value="@CurrentUser.User" style="display: none;" />
+                    <input asp-for="MasterId" value="@Model.MasterId" style="display: none" />
+                    <input asp-for="FreeTimeId" value="@Model.FreeTimeId" style="display: none" />
+                    <input asp-for="Id" value="@Model.Id" style="display: none" />
+
                     <div class="form-group">
                         <label class="control-label">Клієнт</label>
                         <input class="form-control" value="@Model.ClientSurname @Model.ClientName" readonly />
@@ -65,11 +70,12 @@
                             <input asp-for="Status" class="selectedStatus" style="display: none;" />
                         </div>
                     </div>
+
                     @if (CurrentUser.User.Equals(UserRole.Admin))
                     {
                         <div class="form-group add-btns">
                             <input type="submit" value="Видалити" asp-action="Delete" class="btn btn-danger btn-delete float-right" />
-                            <input type="submit" value="Зберегти" asp-action="Edit" class="btn btn-add float-right" />
+                            <input type="submit" value="Зберегти" asp-action="ConfirmEdit" class="btn btn-add float-right" />
                         </div>
                     }
                     <div class="form-group">

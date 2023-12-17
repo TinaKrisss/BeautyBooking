@@ -14,13 +14,13 @@
 <div class="row text">
     <div class="col-md-8 offset-2">
         <p>
-            <h1 details-header>Додайте відгук</h1>
+            <h1 details-header>Додайте відгук про послугу</h1>
         </p>
         <div class="row">
             <div class="col-md-8 offset-2">
-                <form asp-action="">
+                <form asp-action="ConfirmFeedback" asp-route-recordId="@Model.Id">
                     <div class="form-group">
-                        <label class="control-label">Додайте відгук про послугу</label>
+                        <label class="control-label">Введіть текст відгука</label>
                         <textarea asp-for="@Model.Feedback"
                               class="form-control"></textarea>
                     </div>

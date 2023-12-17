@@ -29,12 +29,12 @@ namespace BeautyBooking.Controllers
             if (clientDetails == null) return View("NotFound");
             return View(clientDetails);
         }
-        public async Task<IActionResult> Delete(int clientId)
+        public async Task<IActionResult> Delete(int id)
         {
-            var client = await _serviceC.GetByIdAsync(clientId);
+            var client = await _serviceC.GetByIdAsync(id);
             if (client == null) return View("NotFound");
 
-            await _serviceC.DeleteAsync(clientId);
+            await _serviceC.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
 

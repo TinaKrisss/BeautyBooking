@@ -72,7 +72,6 @@ var formattedDate = ('0' + dateTime.getDate()).slice(-2) + '.' +
                     dateTime.getFullYear() + ' ' +
                     ('0' + dateTime.getHours()).slice(-2) + ':' +
                     ('0' + dateTime.getMinutes()).slice(-2);
-        alert(formattedDate);
         dropdown.append($('<option asp-for="FreeTimeId">').text(formattedDate).val(item.id));
     });
 
