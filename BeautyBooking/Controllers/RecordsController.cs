@@ -102,26 +102,27 @@ namespace BeautyBooking.Controllers
 		public async Task<IActionResult> ConfirmEdit(EditRecordVM editRecordVM)
 		{
 			var time = await _serviceF.GetByMaster(editRecordVM.MasterId, editRecordVM.DateAndTime);
-			if (time != null)
+			if (time != null && editRecordVM.DateAndTime != time.DateAndTime)
 			{
-				return RedirectToAction("Edit", editRecordVM.Id);
+				return RedirectToAction("Edit", new { recordId = editRecordVM.Id });
 			}
 			var record = await _serviceR.GetByIdAsync(editRecordVM.Id);
 			if (record == null)
 			{
-				return RedirectToAction("Edit", editRecordVM.Id);
+				return RedirectToAction("Edit", new { recordId = editRecordVM.Id });
 			}
 			try
 			{
 				var freeTime = await _serviceF.GetByIdAsync(editRecordVM.FreeTimeId);
 				freeTime.DateAndTime = editRecordVM.DateAndTime;
 				record.Status = editRecordVM.Status;
+				await _serviceR.UpdateAsync(editRecordVM.Id, record);
 				await _serviceF.UpdateAsync(editRecordVM.FreeTimeId, freeTime);
 				return RedirectToAction("Index");
 			}
 			catch
 			{
-				return RedirectToAction("Edit", editRecordVM.Id);
+				return RedirectToAction("Edit", new { recordId = editRecordVM.Id });
 			}
 		}
 
