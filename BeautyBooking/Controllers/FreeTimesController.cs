@@ -16,9 +16,12 @@ namespace BeautyBooking.Controllers
             _serviceM = serviceM;
         }
 
-		public IActionResult Create(CreateFreeTimeVM createFreeTimeVM)
+		public async Task<IActionResult> Create(CreateFreeTimeVM createFreeTimeVM)
 		{
-			// TODO: надо сделать так чтобы отображалось имя фамилия мастера AND PHOTOURL
+            var master = await _serviceM.GetByIdAsync(createFreeTimeVM.Id);
+            createFreeTimeVM.Surname = master.Surname;
+            createFreeTimeVM.Name = master.Name;
+            createFreeTimeVM.ProfilePhotoURL = master.ProfilePhotoURL;
 			return View(createFreeTimeVM);
 		}
 		public async Task<IActionResult> CreateConfirmed([Bind("DateAndTime,Id")] CreateFreeTimeVM createFreeTimeVM)
