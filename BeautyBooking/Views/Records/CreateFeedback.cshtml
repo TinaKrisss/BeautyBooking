@@ -1,0 +1,32 @@
+﻿@using BeautyBooking.Data.Enums
+@using BeautyBooking.Data.Static
+@using BeautyBooking.Data.ViewModels
+
+@model CreateFeedbackVM;
+
+@{
+    ViewData["Title"] = "Деталі запису";
+}
+
+<link rel="stylesheet" href="~/css/services_page_style.css">
+<link rel="stylesheet" href="~/css/edit_record_page_style.css">
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1 details-header>Додайте відгук</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="">
+                    <div class="form-group">
+                        <label class="control-label">Додайте відгук про послугу</label>
+                        <textarea asp-for="@Model.Feedback"
+                              class="form-control"></textarea>
+                    </div>
+                    <input class="btn btn-outline-info btn-add text-white edit-record-btn" type="submit" value="Зберегти"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

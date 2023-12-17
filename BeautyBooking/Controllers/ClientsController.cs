@@ -38,9 +38,9 @@ namespace BeautyBooking.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> History(int clientId)
+        public async Task<IActionResult> History(int id)
         {
-            var history = await _serviceR.GetClientHistory(clientId);
+            var history = await _serviceR.GetClientHistory(id);
             if (history == null) return View("NotFound");
             return View(history);
         }

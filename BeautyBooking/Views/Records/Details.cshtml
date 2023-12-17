@@ -69,10 +69,20 @@
                     @if (CurrentUser.User.Equals(UserRole.Admin))
                     {
                         <a class="btn btn-outline-info btn-add text-white edit-record-btn" asp-action="Edit" asp-route-recordId="@Model.Id">Редагувати</a>                          
+                    
+                        <div class="form-group">
+                            <a class="btn btn-outline-info btn-cancel" asp-action="Index">До всіх записів</a>
+                        </div>
                     }
+                    else
+                    {
                     <div class="form-group">
-                        <a class="btn btn-outline-info btn-cancel" asp-action="Index">До всіх записів</a>
+                        <a class="btn btn-outline-info btn-add text-white edit-record-btn" asp-controller="Records" asp-action="CreateFeedback" asp-route-id="@Model.Id">Додати відгук</a>
                     </div>
+                        <div class="form-group">
+                        <a class="btn btn-outline-info btn-cancel" asp-controller="Clients" asp-action="History" asp-route-id="@Model.Id">Назад</a>
+                        </div>
+                    }
             </div>
         </div>
     </div>
