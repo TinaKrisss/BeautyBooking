@@ -103,6 +103,39 @@ a:hover {
     color: white;
 }
 
+.client-btns-container
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.client-btns-container .btn
+{
+    width: 50%;
+    margin: 2% auto;
+}
+
+.btn-outline-info {
+    border-color: #175248;
+    color: #000000;
+    border-color: none;
+}
+
+.btn-outline-info a {
+    color: #000000;
+}
+
+    .btn-outline-info:hover,
+    .btn-outline-info a:hover,
+    .btn-outline-info:active,
+    .btn-outline-info a:active,
+    .btn-outline-info:focus {
+        background-color: #175248;
+        border-color: #175248;
+        color: #ffffff !important;
+        border-color: none;
+    }
+
 @media (max-width: 768px) {
 
   .editForm {
@@ -130,4 +163,14 @@ a:hover {
   .container {
     margin-bottom: 17rem !important;
   }
+}
+
+.to-history-btn,
+.to-history-btn:hover,
+.to-history-btn:active 
+{
+    font-size: 14pt;
+    text-align: center;
+    color: #175248;
+    margin-top: 3%;
 }

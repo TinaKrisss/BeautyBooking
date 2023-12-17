@@ -1,0 +1,81 @@
+﻿@using BeautyBooking.Data.Enums
+@using BeautyBooking.Data.Static
+@using BeautyBooking.Data.ViewModels
+
+@model EditRecordVM
+
+@{
+    ViewData["Title"] = "Деталі запису";
+}
+
+<link rel="stylesheet" href="~/css/services_page_style.css">
+<link rel="stylesheet" href="~/css/edit_record_page_style.css">
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1 details-header>Деталі запису</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                    <input id="userType" value="@CurrentUser.User" style="display: none;" />
+                    <div class="form-group">
+                        <label class="control-label">Клієнт</label>
+                        <input class="form-control" value="@Model.ClientSurname @Model.ClientName" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Майстер</label>
+                        <input class="form-control" value="@Model.MasterSurname @Model.MasterName" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Процедури:</label>
+                        @foreach (var item in @Model.Services)
+                        {
+                            <input class="form-control" value=" @item.Name" readonly />
+                        }
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Дата і час</label>
+                        <input class="form-control" id="datetimeinput" asp-for="DateAndTime" type="datetime-local" value="@Model.DateAndTime.ToString("yyyy-MM-ddTHH:mm")" readonly/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Статус</label>
+                        @switch (Model.Status)
+                        {
+                            case Status.NotConfirmed:
+                                <input class="form-control" value="Не підтверджено" readonly />
+                                break;
+                            case Status.Confirmed:
+                                <input class="form-control" value="Підтверджено" readonly />
+                                break;
+                            case Status.Canceled:
+                                <input class="form-control" value="Скасовано" readonly />
+                                break;
+                            default:
+                                <input class="form-control" value="Виконано" readonly />
+                                break;
+                        }
+                    </div>
+
+                    @if (Model.Feedback != null)
+                    {
+                        <div class="form-group">
+                            <label class="control-label">Відгук клієнта</label>
+                            <textarea asp-for="Feedback"
+                                  class="form-control" value="@Model.Feedback" readonly></textarea>
+                        </div>
+                    }
+                    
+                    @if (CurrentUser.User.Equals(UserRole.Admin))
+                    {
+                        <a class="btn btn-outline-info btn-add text-white edit-record-btn" asp-action="Edit" asp-route-recordId="@Model.Id">Редагувати</a>                          
+                    }
+                    <div class="form-group">
+                        <a class="btn btn-outline-info btn-cancel" asp-action="Index">До всіх записів</a>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src="~/js/edit_record_page_script.js"></script>
