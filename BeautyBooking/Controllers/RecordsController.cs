@@ -124,5 +124,21 @@ namespace BeautyBooking.Controllers
 				return RedirectToAction("Edit", recordId);
 			}
 		}
+
+		public async Task<IActionResult> CreateFeedback(int recordId)
+        {
+			CreateFeedbackVM createFeedbackVM = new CreateFeedbackVM
+			{
+				Id = recordId,
+			};
+			return View(createFeedbackVM);
+        }
+		public async Task<IActionResult> CreateFeedback(int recordId, CreateFeedbackVM createFeedbackVM)
+		{
+			var record = await _serviceR.GetByIdAsync(recordId);
+			record.Feedback = createFeedbackVM.Feedback;
+			await _serviceR.UpdateAsync(recordId, record);
+			return RedirectToAction("Details", new { recordId = recordId });
+		}
 	}
 }
