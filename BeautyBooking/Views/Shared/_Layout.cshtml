@@ -28,9 +28,12 @@
         {
             <a asp-controller="Account" asp-action="SignIn" class="signin">Увійти</a>
         }
-        else if(!CurrentUser.User.Equals(UserRole.Admin))
+        else if(CurrentUser.User.Equals(UserRole.Client))
         {
             <a asp-controller="Account" asp-action="Details" class="signin">Особистий кабінет</a>
+        }
+        else if(CurrentUser.User.Equals(UserRole.Master)){
+            <a asp-controller="Masters" asp-action="Details" class="signin">Особистий кабінет</a>
         }
     </section>
     
