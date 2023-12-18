@@ -83,6 +83,7 @@ namespace BeautyBooking.Data.Services
             {
 				Id = record.Id,
 				FreeTimeId = record.FreeTime.Id,
+                ClientId = record.ClientId,
                 MasterId = record.FreeTime.MasterId,
                 ClientName = record.Client.Name,
                 ClientSurname = record.Client.Surname,
