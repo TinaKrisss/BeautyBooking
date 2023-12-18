@@ -1,4 +1,6 @@
-﻿using BeautyBooking.Data.Interfaces;
+﻿using BeautyBooking.Data.Enums;
+using BeautyBooking.Data.Interfaces;
+using BeautyBooking.Data.Static;
 using BeautyBooking.Data.ViewModels;
 using BeautyBooking.Models;
 using Microsoft.AspNetCore.Cors.Infrastructure;
@@ -31,10 +33,13 @@ namespace BeautyBooking.Controllers
 			return RedirectToAction("Index", "Records", new { model = recordsVM });
 		}
 
-		public async Task<IActionResult> Details(int id)
+		public async Task<IActionResult> Details(int? id)
         {
-            var masterDetails = await _serviceM.GetByIdAsync(id);
-
+			if (CurrentUser.User.Equals(UserRole.Master) && id == null)
+            {
+				id = HttpContext.Session.GetInt32("masterId"); 
+			}
+            var masterDetails = await _serviceM.GetByIdAsync((int)id);
             if (masterDetails == null) return View("NotFound");
             return View(masterDetails);
         }

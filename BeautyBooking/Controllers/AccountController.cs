@@ -37,6 +37,7 @@ namespace BeautyBooking.Controllers
 			if (master != null && master.Password.Equals(signInVM.Password))
 			{
 				CurrentUser.User = UserRole.Master;
+				HttpContext.Session.SetInt32("masterId", master.Id);
 				return RedirectToAction("Details", "Masters", new { id = master.Id });
 				//return RedirectToAction("Index", "Services");
 			}
@@ -98,10 +99,13 @@ namespace BeautyBooking.Controllers
 		}
 
 		//Get: Account/Details/1
-		public async Task<IActionResult> Details(int id)
+		public async Task<IActionResult> Details(int? id)
 		{
-			var clientDetails = await _serviceC.GetByIdAsync(id);
-
+			if (CurrentUser.User.Equals(UserRole.Client))
+			{
+				id = HttpContext.Session.GetInt32("userId");
+			}
+			var clientDetails = await _serviceC.GetByIdAsync((int)id);
 			if (clientDetails == null) return View("NotFound");
 			return View(clientDetails);
 		}
