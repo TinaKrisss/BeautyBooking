@@ -76,7 +76,7 @@
                     }
                     else
                     {
-                        if (CurrentUser.User.Equals(UserRole.Client) && Model.Feedback != null)
+                        if (CurrentUser.User.Equals(UserRole.Client) && Model.Feedback == null)
                         {
                             <div class="form-group">
                                 <a class="btn btn-outline-info btn-add text-white edit-record-btn" asp-action="CreateFeedback" asp-route-id="@Model.Id">Додати відгук</a>
