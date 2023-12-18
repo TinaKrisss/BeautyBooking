@@ -60,7 +60,7 @@
                     @if (Model.Feedback != null)
                     {
                         <div class="form-group">
-                            <label class="control-label">Відгук клієнта</label>
+                            <label class="control-label">Відгук</label>
                             <textarea asp-for="Feedback"
                                   class="form-control" value="@Model.Feedback" readonly></textarea>
                         </div>
@@ -76,7 +76,7 @@
                     }
                     else
                     {
-                        if (CurrentUser.User.Equals(UserRole.Client) && Model.Feedback != null)
+                        if (CurrentUser.User.Equals(UserRole.Client) && Model.Feedback == null)
                         {
                             <div class="form-group">
                                 <a class="btn btn-outline-info btn-add text-white edit-record-btn" asp-action="CreateFeedback" asp-route-id="@Model.Id">Додати відгук</a>
@@ -84,7 +84,7 @@
                         }
                    
                         <div class="form-group">
-                        <a class="btn btn-outline-info btn-cancel" asp-controller="Clients" asp-action="History" asp-route-id="@Model.Id">Назад</a>
+                        <a class="btn btn-outline-info btn-cancel" asp-controller="Clients" asp-action="History" asp-route-id="">Назад</a>
                         </div>
                     }
             </div>
